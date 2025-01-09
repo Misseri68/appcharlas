@@ -9,7 +9,7 @@ import axios from 'axios';
 })
 export class RegisterService {
 
-  url = environment.apiCharlas + '/api/usuarios/';
+  url = environment.apiCharlas + 'api/usuarios/';
 
   constructor() { }
 
