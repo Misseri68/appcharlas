@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from "./components/navbar/navbar.component";
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +10,22 @@ import { RouterModule } from '@angular/router';
   standalone: true
 })
 export class AppComponent {
-  title = 'appcharlas';
+
+  mostrarNav : boolean = false;
+
+  constructor(private _router: Router) {
+
+    this._router.events.subscribe(()=>{
+      let url = this._router.url;
+      if(url.includes('login') || url.includes('register')){
+        this.mostrarNav = false;
+      }else{
+        this.mostrarNav = true;
+      }
+    });
+
+  }
+
+
+
 }
