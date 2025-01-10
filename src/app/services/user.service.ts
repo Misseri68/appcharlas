@@ -9,7 +9,7 @@ import axios from 'axios';
 })
 export class UserService {
 
-  url = environment.apiCharlas + '/api/usuarios/';
+  url = environment.apiCharlas + 'api/usuarios/';
 
   constructor(private _loginService: LoginService) { }
 
@@ -37,6 +37,19 @@ export class UserService {
     }).catch(error => {
       console.log(error);
       return null;
+    })
+  }
+
+  putUsuario(userFormat : Object){
+    console.log(this._loginService.getToken());
+    console.log(environment.apiCharlas + this.url + 'perfil')
+    let headers = {
+			'Authorization': 'Bearer ' + this._loginService.getToken(),
+			'Content-Type': 'application/json'
+		}
+    return axios.put(this.url + 'perfil', userFormat, {headers
+    }).then(response => {
+      return response.status;
     })
   }
 }

@@ -11,14 +11,6 @@ import { LoginService } from '../../services/login.service';
 })
 export class NavbarComponent {
 
-  constructor(private _loginService: LoginService) {}
 
-  ngOnInit(): void {
-
-  }
-
-  cerrarSesion(){
-    this._loginService.clearToken();
-  }
 
 }
