@@ -1,8 +1,24 @@
-<div>
+<!-- <div>
   <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between ps-3 pe-3">
     <a class="navbar-brand" href="#">Tajamar</a>
     <a [routerLink]="['/dashboard']">Dashboard</a>
     <a [routerLink]="['/perfil']">Mi perfil</a>
     <a [routerLink]="['/crearcharla']">Proponer charla</a>
   </nav>
-</div>
+</div> -->
+
+<nav class="navbar">
+  <div class="navbar__logo">
+    <!-- Reemplaza con tu imagen/logo -->
+    <img src="./../../../assets/images/logotajamar.svg" alt="Logo de Tajamar">
+  </div>
+  <ul class="navbar__links">
+    <li><a [routerLink]="['/dashboard']" class="navbar__link">Dashboard</a></li>
+    <li><a [routerLink]="['/perfil']" class="navbar__link">Mi perfil</a></li>
+  </ul>
+  <div class="navbar__profile">
+    <!-- Reemplaza con la imagen del usuario -->
+    <img src="path-to-user-image.png" alt="Foto de usuario">
+  </div>
+</nav>
+

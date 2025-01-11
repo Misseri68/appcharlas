@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { Router, RouterModule } from '@angular/router';
 
@@ -6,6 +6,7 @@ import { Router, RouterModule } from '@angular/router';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
+  encapsulation: ViewEncapsulation.None, // Desactiva el encapsulamiento
   imports: [NavbarComponent, RouterModule],
   standalone: true
 })

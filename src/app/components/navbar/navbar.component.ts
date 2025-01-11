@@ -5,7 +5,7 @@ import { LoginService } from '../../services/login.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css',
+  styleUrl: './navbar.component.scss',
   standalone: true,
   imports: [RouterModule]
 })

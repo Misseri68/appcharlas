@@ -1,0 +1,61 @@
+// Variables (si usas un archivo _variables.scss, estas deberían estar definidas allí)
+$navbar-height: 60px;
+$navbar-bg-color: #101010;
+$navbar-text-color: #ffffff;
+$navbar-link-hover-color: #0cc1f3;
+
+// Estilo de la navbar
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: $navbar-height;
+    padding: 0 1.5rem;
+    background-color: $navbar-bg-color;
+
+    &__logo {
+        img {
+            height: 40px; // Ajusta según el tamaño del logo
+        }
+    }
+
+    &__links {
+        display: flex;
+        gap: 1.5rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        .navbar__link {
+            text-decoration: none;
+            color: $navbar-text-color;
+            font-size: 16px;
+            font-weight: 500;
+            position: relative;
+
+            &:hover,
+            &--active {
+                color: $navbar-link-hover-color;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: -2px;
+                    left: 0;
+                    right: 0;
+                    height: 2px;
+                    background-color: $navbar-link-hover-color;
+                }
+            }
+        }
+    }
+
+    &__profile {
+        img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%; // Imagen redonda
+            border: 2px solid $navbar-link-hover-color;
+        }
+    }
+}
