@@ -14,7 +14,8 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    data: { animation: 'DashboardPage' }
   },
   {
     path: 'prueba',
@@ -22,7 +23,9 @@ export const routes: Routes = [
   },
   {
     path: 'perfil',
-    component: PerfilComponent
+    component: PerfilComponent,
+    data: { animation: 'PerfilPage' }
+    
   },
   {
     path: 'register',

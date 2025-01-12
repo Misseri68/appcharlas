@@ -11,6 +11,16 @@ import { LoginService } from '../../services/login.service';
 })
 export class NavbarComponent {
 
+  showPopup: boolean = false;
 
+  togglePopup(): void {
+    this.showPopup = !this.showPopup; // Alterna la visibilidad del pop-up
+    console.log('Popup visible:', this.showPopup);
+  }
+
+  logout(): void {
+    console.log('Cerrar sesión');
+    // Lógica para cerrar sesión
+  }
 
 }

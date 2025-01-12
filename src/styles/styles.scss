@@ -1,25 +1,14 @@
 @import './variables.scss';
 @import './typography.scss';
 
-.app-container {
+body{
     background-color: $background-color;
     color: $text-regular-color;
-    min-height: 100vh;
-    /* Ocupa al menos la altura completa de la ventana */
-    width: 100%;
-    /* Asegúrate de que ocupe todo el ancho */
-    display: flex;
-    /* Opcional: útil para layouts flexibles */
-    flex-direction: column;
-    /* Opcional: organiza el contenido en columnas */
     font-family: $font-family-regular;
-
-    padding-left: 10vw;
-    /* 10% del ancho de la pantalla */
-    padding-right: 10vw;
-    padding-top: 40px;
-
+    font-weight: 300; // Usa la variante Light
 }
+
+
 
 /*_________________________________ TEXT _________________________________*/
 
@@ -37,16 +26,14 @@
 
 //________________________ SECTION AND CONTAINER __________________________
 .section {
-    background-color: $background-color;
-    color: $text-regular-color;
+    padding: 0px 5vw;
 
 }
 
 .container {
-    margin: 0 auto;
-    padding-top: 2vw;
-    /* Espaciado dinámico */
-  
+
+    padding-top: 3vh;
+
 
     &--small {
         max-width: 60vw;

@@ -1,14 +1,17 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { NavbarComponent } from "./components/navbar/navbar.component";
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { routerTransition } from './animations/animations';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None, // Desactiva el encapsulamiento
-  imports: [NavbarComponent, RouterModule],
-  standalone: true
+  imports: [NavbarComponent, RouterModule, RouterOutlet],
+  standalone: true,
+  animations: [routerTransition]
 })
 export class AppComponent {
 
@@ -25,6 +28,11 @@ export class AppComponent {
       }
     });
 
+  }
+
+  // Método para preparar la animación
+  prepareRoute(outlet: RouterOutlet): boolean {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 
 
