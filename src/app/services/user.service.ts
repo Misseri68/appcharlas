@@ -42,12 +42,13 @@ export class UserService {
 
   putUsuario(userFormat : Object){
     console.log(this._loginService.getToken());
-    console.log(environment.apiCharlas + this.url + 'perfil')
+    console.log( this.url );
+    console.log(userFormat);
     let headers = {
 			'Authorization': 'Bearer ' + this._loginService.getToken(),
 			'Content-Type': 'application/json'
 		}
-    return axios.put(this.url + 'perfil', userFormat, {headers
+    return axios.put(this.url , userFormat, {headers
     }).then(response => {
       return response.status;
     })

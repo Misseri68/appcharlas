@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { Usuario } from '../../models/Usuario';
 import { FormsModule } from '@angular/forms';
+import { CommonModule, NgIf } from '@angular/common';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class PerfilComponent {
       if(usuario != null){
         this.usuario = usuario;
         console.log(this.usuario);
-        console.log(usuario);
+        console.log(usuario.imagen);
       }
     });
   }
@@ -44,13 +45,15 @@ export class PerfilComponent {
       "apellidos": this.cajaApellidos.nativeElement.value,
       "email": this.cajaEmail.nativeElement.value,
       "estadoUsuario": this.usuario?.estadoUsuario,
-      "imagen": this.usuario?.imagen,
-      "password": 12345,
+      "imagen": "https://i.scdn.co/image/ab6761610000e5ebcce32307d0f312e8faf01bae",
+      "password": "12345",
       "idRole": this.usuario?.idRole
     }
     this._userService.putUsuario(usuarioFormat).then(response=>{
       console.log(response);
     });
+
+    console.log(this.usuario?.imagen);
   }
 
   cerrarSesion(){
