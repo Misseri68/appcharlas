@@ -6,6 +6,7 @@
     color: $text-regular-color;
     font-size: 16px;
     line-height: 1.5;
+    
 
     &--small {
         font-size: 14px;
@@ -63,10 +64,12 @@
     font-family: $font-family-detail;
     color: $text-regular-color;
     font-weight: bold;
+    margin-bottom: 4px;
 
     &--h1 {
         font-size: 48px;
         line-height: 1.2;
+        
     }
 
     &--h2 {

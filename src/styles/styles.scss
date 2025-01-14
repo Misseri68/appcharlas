@@ -6,6 +6,10 @@ body{
     color: $text-regular-color;
     font-family: $font-family-regular;
     font-weight: 300; // Usa la variante Light
+    min-height: 100vh;
+
+    //raton
+    cursor: url('./../assets/icons/mouse.svg'), auto;
 }
 
 
@@ -14,13 +18,11 @@ body{
 
 .text-title{
     font-family: $font-family-detail;
-    font-size: 2.5em;
     color: $text-detail-color;
 }
 
 .text-title-big{
     font-family: $font-family-detail;
-    font-size: 5.5em;
     color: $text-detail-color;
 }
 
