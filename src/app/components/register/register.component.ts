@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { AbstractControl, FormsModule, NgForm, ValidatorFn } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { RegisterService } from '../../services/register.service';
-import { Usuario } from '../../models/Usuario';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms'
 
 
 @Component({
@@ -11,12 +12,24 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
-  imports: [FormsModule, RouterLink, CommonModule],
+  imports: [ RouterLink, CommonModule, ReactiveFormsModule],
 })
 export class RegisterComponent {
 
-  onStudentSubmit(formEstudiante: NgForm) {
-    const { nombre, apellido, email, password, confirmPassword, accessCode } = formEstudiante.value;
+  esAlumno: boolean = true;
+  registerForm: FormGroup;
+
+
+  constructor(private fb: FormBuilder, private _router: Router, private _registerServ: RegisterService) {
+    this.registerForm = this.crearFormGroup();
+
+  }
+
+  onSubmit() {
+
+  if(this.registerForm.valid) {
+    let rol = this.esAlumno ? 2 : 1;
+    const { nombre, apellido, email, password, confirmPassword, accessCode } = this.registerForm.value;
 
     const jsonRegister: any = {
       nombre: nombre,
@@ -25,56 +38,51 @@ export class RegisterComponent {
       password: password,
       accessCode: accessCode,
       estadoUsuario: true,
-      idRole: 2,
+      idRole: rol,
       imagen: ""
-  };
+    };
 
-    this._registerServ.createAlumno(
-      jsonRegister, accessCode
-    ).then(statusCode => {
+    this._registerServ.createUsuario(jsonRegister, accessCode, this.esAlumno).then(statusCode => {
       if (statusCode === 200) {
         console.log('Usuario registrado');
         this._router.navigate(['/login']);
       } else {
         console.error('Registration failed with status code:', statusCode);
       }
-    })  }
+    })
+  }else{
+    //TODO ALERTAR DE QUE ES INVALIDO
+  }
 
-    //TODO VALIDACIONES DE CAMPOS
-    //TODO FORM PROFESORES
 
+  }
 
-  onTeacherSubmit(formProfesor: NgForm) {
-    const { nombre, apellido, email, password, confirmPassword, accessCode } = formProfesor.value;
+  crearFormGroup() {
+    return this.registerForm = this.fb.group({
+      nombre: ['', [Validators.required]],
+      apellido: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email, this.emailDomainValidator('.tajamar365.com')]],
+      password: ['', [Validators.required, Validators.minLength(5)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(5)]],
+      accessCode: ['', [Validators.required]]
+    }, { validator: this.passwordMatchValidator });
+  }
 
-    const jsonRegister = {
-      nombre,
-      apellidos: apellido,
-      email,
-      password,
-      accessCode
+  passwordMatchValidator(formGroup: FormGroup) {
+    const password = formGroup.get('password');
+    const confirmPassword = formGroup.get('confirmPassword');
+    return password && confirmPassword && password.value === confirmPassword.value ? null : { mismatch: true };
+  }
+
+  emailDomainValidator(domain: string): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const email = control.value;
+      return email?.endsWith(domain) ? null : { invalidDomain: true };
     };
   }
 
-  esAlumno: boolean = true;
-
-  constructor(private _router: Router, private _registerServ: RegisterService) { }
-
-  onSubmit(form: NgForm) {
-
-  }
 
 
 
-  usuarioPrueba: Usuario = {
-    "idUsuario": 93,
-    "nombre": "string",
-    "apellidos": "string",
-    "email": "string123456@tajamar365.com",
-    "estadoUsuario": true,
-    "password": "string",
-    "imagen": "string",
-    "idRole": 2
-  }
 
 }
