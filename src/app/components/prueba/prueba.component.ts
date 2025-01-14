@@ -23,9 +23,6 @@ export class PruebaComponent {
     "idRole": 2
 }
 
-  createUser(){
-    this._registerService.createUser(this.usuarioPrueba).then( returned => console.log(returned));
-  }
 
   login(){
     this._loginService.login(this.usuarioPrueba.email, this.usuarioPrueba.password).then( returned => console.log(returned));

@@ -16,15 +16,31 @@ export class RegisterService {
   /*Método que devuelve el código 200 si se ha creado el usuaroi de forma correcta.
     @return promesa con el status code de la petición.*/
 
-  createUser (usuario: Usuario):  Promise<number>{
-    return axios.post(this.url, usuario)
+  createAlumno (newUserJson: string, accessCode: number):  Promise<number>{
+    var urlCompleta = this.url + "NewAlumno/" + accessCode;
+    return axios.post(urlCompleta, newUserJson)
     .then(response => {
-      console.log(response);
-      return response.status
+      console.log('Usuario creado correctamente:', response);
+      return response.status;
     })
     .catch(error => {
-      console.log(error);
-      return 500;
+      console.error('Error creando usuario:', error);
+      return error.response?.status || 500; // Return the error status or 500 if unknown
     });
   }
+
+  createProfe  (newUserJson: string, accessCode: number):  Promise<number>{
+    var urlCompleta = this.url + "NewProfesor/" + accessCode;
+    return axios.post(urlCompleta, newUserJson)
+    .then(response => {
+      console.log('Usuario creado correctamente:', response);
+      return response.status;
+    })
+    .catch(error => {
+      console.error('Error creando usuario: ', error);
+      return error.response?.status || 500; // Return the error status or 500 if unknown
+    });
+  }
+
+
 }
