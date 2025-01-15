@@ -46,5 +46,12 @@ export class ServiceCharla {
             });
     }
 
+    getCharlasPorRondaId(idRonda:number){
+        // return axios.get(this.url+"/"+idRonda).then(result=>{
+            
+        // })
+        
+    }
+
     // Método para agregar otras funciones relacionadas con charlas (si es necesario)
 }
