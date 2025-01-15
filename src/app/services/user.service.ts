@@ -21,7 +21,6 @@ export class UserService {
         "Authorization": "Bearer " +  this._loginService.getToken()
       }
     }).then(response=> {
-      console.log(response);
       let datosUsuario = response.data.usuario;
       let usuario = new Usuario(
         datosUsuario.idUsuario,
@@ -41,15 +40,14 @@ export class UserService {
   }
 
   putUsuario(userFormat : Object){
-    console.log(this._loginService.getToken());
-    console.log( this.url );
-    console.log(userFormat);
-    let headers = {
-			'Authorization': 'Bearer ' + this._loginService.getToken(),
-			'Content-Type': 'application/json'
-		}
-    return axios.put(this.url , userFormat, {headers
+
+    return axios.put(this.url , userFormat, {
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": "Bearer " +  this._loginService.getToken()
+      }
     }).then(response => {
+      console.log('Usuario actualizado correctamente:', response);
       return response.status;
     })
   }

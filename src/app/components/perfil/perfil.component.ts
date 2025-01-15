@@ -31,8 +31,6 @@ export class PerfilComponent {
     this._userService.getPerfil().then(usuario => {
       if(usuario != null){
         this.usuario = usuario;
-        console.log(this.usuario);
-        console.log(usuario.imagen);
       }
     });
   }
