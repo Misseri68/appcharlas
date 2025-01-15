@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';  // Necesario para usar directivas comunes como ngIf, ngFor
 import { FormsModule } from '@angular/forms';    // Necesario para usar ngForm
 import { LoginService } from '../../services/login.service'; // Importa el servicio de login
