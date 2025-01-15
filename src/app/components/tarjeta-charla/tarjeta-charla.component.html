@@ -1,0 +1,31 @@
+<div class="tarjeta-charla">
+    <!-- Primera sección: Foto de perfil y nombre -->
+    <div class="layout-horizontal">
+        <img [src]="charla.imagenCharla" alt="Foto de perfil" class="img-round img-round--small" />
+        <div class="charla-info">
+            <p class="charla-autor">
+                {{ usuario?.nombre || 'Cargando...' }} {{ usuario?.apellidos || '' }}
+            </p>
+        </div>
+    </div>
+
+    <!-- Segunda sección: Nombre de la charla -->
+    <div class="charla-titulo">
+        <p class="charla-duracion">{{ charla.tiempo }} min.</p>
+        <h2>{{ charla.titulo }}</h2>
+    </div>
+
+    <!-- Línea divisoria -->
+    <div class="charla-linea"></div>
+
+    <!-- Imagen principal de la charla -->
+    <div class="charla-imagen">
+        <img [src]="imagenMostrar" alt="Imagen de la charla" />
+    </div>
+
+    <!-- Última sección: Ronda y botón -->
+    <div class="layout-horizontal charla-footer">
+        <p class="charla-ronda">Ronda {{ charla.idRonda }}</p>
+        <button class="charla-boton">></button>
+    </div>
+</div>

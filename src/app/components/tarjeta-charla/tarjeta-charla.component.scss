@@ -1,0 +1,116 @@
+@import "./../../../styles/variables.scss";
+
+.tarjeta-charla {
+    background-color: #1f1f1f;
+    /* Fondo oscuro */
+    border-radius: 12px;
+    /* Bordes redondeados */
+    padding: 12px;
+    /* Espaciado interno */
+    color: #ffffff;
+    /* Texto blanco */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Sombra */
+    width: 300px;
+    /* Ancho fijo para las tarjetas pequeñas */
+    display: flex;
+    flex-direction: column;
+    /* Organiza en columnas */
+    gap: 8px;
+    /* Espacio entre las secciones */
+}
+
+.layout-horizontal {
+    display: flex;
+    align-items: center;
+    /* Alineación vertical */
+    gap: 8px;
+    /* Espacio reducido entre elementos */
+}
+
+.charla-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.charla-autor {
+    font-weight: bold;
+    font-size: 14px;
+    color: $neutral-color-100;
+    /* Texto más pequeño */
+    margin: 0;
+}
+
+.charla-duracion {
+    font-size: 12px;
+    color: #b4b4b4;
+    /* Texto secundario */
+    margin: 0;
+}
+
+.charla-titulo h2 {
+    font-size: 16px;
+    /* Título más pequeño */
+    font-weight: bold;
+    margin: 0;
+}
+
+.charla-linea {
+    height: 1px;
+    background-color: #3c3c3c;
+    /* Color de la línea */
+    width: 100%;
+}
+
+.charla-imagen {
+    position: relative;
+    width: 100%; // Ancho ajustable según el contenedor
+    padding-top: 61.8%; // 1.618:1 para la proporción áurea
+    background-color: #f0f0f0; // Color de fondo en caso de que no cargue la imagen
+    overflow: hidden;
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; // Ajusta la imagen para que ocupe el espacio sin deformarse
+    }
+}
+
+
+.charla-footer {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    /* Elementos a los extremos */
+}
+
+.charla-ronda {
+    font-size: 12px;
+    /* Texto más pequeño */
+    color: $primary-color-900;
+    /* Color azul */
+}
+
+.charla-boton {
+    background-color: $primary-color-500;
+    /* Botón azul */
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    /* Botón más pequeño */
+    height: 24px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #0989ad;
+        /* Color de hover */
+    }
+}
