@@ -4,7 +4,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PruebaComponent } from './components/prueba/prueba.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { RegisterComponent } from './components/register/register.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/loginpruebaari/login.component';
 
 export const routes: Routes = [
   {
@@ -25,7 +25,7 @@ export const routes: Routes = [
     path: 'perfil',
     component: PerfilComponent,
     data: { animation: 'PerfilPage' }
-    
+
   },
   {
     path: 'register',

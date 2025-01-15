@@ -17,6 +17,7 @@ export class LoginService {
   //Devuelve "200" si se ha logueado correctamente, devuelve -1 si ha habido algún error.
 
   login(email: string, password: string){
+    console.log(email, password);
     return axios.post(this.url, {
       userName: email, //Por algún motivo se llama userName cuando hay que poner el email realmente.
       password: password
@@ -25,9 +26,8 @@ export class LoginService {
       this.setToken(token);
       return response.status;
     }).catch(error => {
-      console.log("ha habido un error");
       console.log(error);
-      return "-1";
+      return -1;
     });
   }
 
