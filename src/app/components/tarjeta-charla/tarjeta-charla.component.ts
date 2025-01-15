@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Charla } from '../../models/Charla';
 import { UserService } from '../../services/user.service';
+import { RouterModule } from '@angular/router';
 import { Usuario } from '../../models/Usuario';
 
 @Component({
@@ -8,7 +9,8 @@ import { Usuario } from '../../models/Usuario';
   standalone: true,
   templateUrl: './tarjeta-charla.component.html',
   styleUrls: ['./tarjeta-charla.component.scss'],
-  providers: [UserService]
+  providers: [UserService],
+  imports: [RouterModule]
 })
 export class TarjetaCharlaComponent implements OnInit {
   @Input() charla!: Charla; // Recibe la charla como entrada

@@ -1,5 +1,5 @@
+import { Charla } from './../models/Charla';
 import { Injectable } from '@angular/core';
-import { Charla } from '../models/Charla';
 import { environment } from '../../environments/environment.development';
 import { LoginService } from './login.service';
 import axios from 'axios';
@@ -46,5 +46,37 @@ export class ServiceCharla {
             });
     }
 
-    // Método para agregar otras funciones relacionadas con charlas (si es necesario)
+    getCharlaPorId(id: number) {
+        const url = `${this.url}/${id}`;
+        console.log("getCharlasPorId ", url);
+        return axios
+            .get(url, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: 'Bearer ' + this._loginService.getToken(),
+                },
+            })
+            .then((response) => {
+                console.log("response ", response.data.charla);
+                const data = response.data.charla;
+                const charla = new Charla(
+                    data.idCharla,
+                    data.titulo,
+                    data.descripcion,
+                    data.tiempo,
+                    new Date(data.fechaPropuesta),
+                    data.idUsuario,
+                    data.idEstadoCharla,
+                    data.idRonda,
+                    data.imagenCharla
+                );
+                
+                return charla;
+            })
+            .catch((error) => {
+                console.error('Error al obtener la charla por ID:', error);
+                return null;
+            });
+    }
+
 }

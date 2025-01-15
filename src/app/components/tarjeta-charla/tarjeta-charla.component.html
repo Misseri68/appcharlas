@@ -26,6 +26,6 @@
     <!-- Última sección: Ronda y botón -->
     <div class="layout-horizontal charla-footer">
         <p class="charla-ronda">Ronda {{ charla.idRonda }}</p>
-        <button class="charla-boton">></button>
+        <button class="charla-boton" [routerLink]="['/detalle-charla', charla.idCharla]">></button>
     </div>
 </div>

@@ -1,0 +1,31 @@
+<div class="container container--medium ">
+    <p>Duración estimada: {{ charla?.tiempo }} min.</p>
+    <div>
+        <h1>Titulo: {{ charla?.titulo }}</h1>
+    
+    <button class="btn-votar">Votar</button>
+    </div>
+
+    <div>
+        <p>{{ charla?.descripcion }}</p>
+    </div>
+    
+
+    
+
+    <div class="charla-imagen" style="width: 250px;">
+        <img [src]="charla?.imagenCharla || 'assets/images/default-image.png'" alt="{{ charla?.titulo }}" />
+    </div>
+
+    <!-- Sección de comentarios (estática por ahora) -->
+    <div class="comentarios">
+        <h2>1 comentario(s)</h2>
+        <div class="comentario">
+            <img src="assets/images/test.jpg" alt="Perfil" class="img-round img-round--small" />
+            <div class="comentario-texto">
+                <p><strong>Francisco Perez</strong> hace 1 semana</p>
+                <p>Muy buena charla! Sobretodo por tu forma de comunicar. ¡Buen trabajo!</p>
+            </div>
+        </div>
+    </div>
+</div>
