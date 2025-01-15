@@ -1,0 +1,101 @@
+//vale ayudame a generar estilos de clase para los textos y para los titulos
+
+// Text styles
+.text {
+    font-family: $font-family-regular;
+    color: $text-regular-color;
+    font-size: 16px;
+    line-height: 1.5;
+
+    &--small {
+        font-size: 14px;
+    }
+
+    &--medium {
+        font-size: 16px; // Tamaño base
+    }
+
+    &--large {
+        font-size: 18px;
+    }
+
+    &--detail {
+        color: $text-detail-color; // Color detail
+    }
+
+    &--disabled {
+        color: $text-disabled-color; // Color para texto deshabilitado
+    }
+
+    &--hint {
+        color: $text-hint-color; // Color para texto de hint o ayuda
+    }
+
+    &--link {
+        color: $text-link-color;
+        text-decoration: underline;
+
+        &:hover {
+            color: darken($text-link-color, 10%);
+        }
+    }
+
+    &--uppercase {
+        text-transform: uppercase;
+    }
+
+    &--italic {
+        font-style: italic;
+    }
+
+    &--center {
+        text-align: center;
+    }
+
+    &--right {
+        text-align: right;
+    }
+}
+
+
+// Title styles
+.title {
+    font-family: $font-family-detail;
+    color: $text-regular-color;
+    font-weight: bold;
+
+    &--h1 {
+        font-size: 48px;
+        line-height: 1.2;
+    }
+
+    &--h2 {
+        font-size: 36px;
+        line-height: 1.3;
+    }
+
+    &--h3 {
+        font-size: 24px;
+        line-height: 1.4;
+    }
+
+    &--primary {
+        color: $primary-color-500; // Título con color primario
+    }
+
+    &--secondary {
+        color: $primary-color-300; // Título con un tono más suave
+    }
+
+    &--center {
+        text-align: center;
+    }
+
+    &--left {
+        text-align: left;
+    }
+
+    &--right {
+        text-align: right;
+    }
+}

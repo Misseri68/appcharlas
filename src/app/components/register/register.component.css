@@ -1,0 +1,44 @@
+
+.form-control {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #666;
+  border-radius: 0;
+  color: #fff;
+}
+.form-control:focus {
+  border-color: #fff;
+  box-shadow: none;
+}
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+}
+.custom-btn {
+  background-color: #007bff;
+  border-radius: 50px;
+}
+.custom-btn:hover {
+  background-color: #0056b3;
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+input::placeholder {
+  color: #888;  /* Color gris claro para el placeholder */
+}
+
+
+
+
+
+
+
+
+

@@ -1,3 +1,3 @@
 export const environment = {
-  apiCharlas: "https://apicharlasalumnostajamar.azurewebsites.net/"
+  apiCharlas: "https://apicharlasalumnostajamar2025.azurewebsites.net/"
 };

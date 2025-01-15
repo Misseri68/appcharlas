@@ -1,1 +1,11 @@
-<app-prueba></app-prueba>
+<div>
+
+  @if(mostrarNav){
+  <app-navbar></app-navbar>
+  }
+
+  <!-- Contenedor de animación -->
+  <div [@routerTransition]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
+</div>

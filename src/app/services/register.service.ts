@@ -9,22 +9,33 @@ import axios from 'axios';
 })
 export class RegisterService {
 
-  url = environment.apiCharlas + '/api/usuarios/';
 
   constructor() { }
 
-  /*Método que devuelve el código 200 si se ha creado el usuaroi de forma correcta.
-    @return promesa con el status code de la petición.*/
+  /*
+    Método que devuelve el código 200 si se ha creado el usuario de forma correcta.
 
-  createUser (usuario: Usuario):  Promise<number>{
-    return axios.post(this.url, usuario)
+    -    Si es alumno, usará la url del usuario, si no, usará la url del profesor.
+
+    @return promesa con el status code de la petición.
+  */
+
+  createUsuario (userJson: string, accessCode: number, esAlumno: boolean):  Promise<number>{
+    var url = ''
+
+    if(esAlumno) url = environment.apiCharlas + 'api/usuarios/NewAlumno/' + accessCode;
+    else url = environment.apiCharlas + 'api/profesor/NewProfesor/' + accessCode;
+
+    return axios.post(url, userJson)
     .then(response => {
-      console.log(response);
-      return response.status
+      console.log('Usuario creado correctamente:', response);
+      return response.status;
     })
     .catch(error => {
-      console.log(error);
-      return 500;
+      console.error('Error creando usuario:', error);
+      return error.response?.status || 500; // Devuelve el status del error o 500 si no se conoce
     });
   }
+
+
 }

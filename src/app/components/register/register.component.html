@@ -1,0 +1,92 @@
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+  <div class="row no-gutters bg-dark rounded-lg overflow-hidden w-100" style="max-width: 900px;">
+    <div class="col-md-6 d-none d-md-block">
+      <img class="img-fluid h-100" src="https://placehold.co/600x800" />
+    </div>
+    <div class="col-md-6 p-4 d-flex flex-column justify-content-center">
+      <h1 class="font-weight-bold mb-3">
+        Alta de usuario
+      </h1>
+
+      <!-- Tabs de Bootstrap -->
+      <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+          <button class="nav-link" [class.active]="esAlumno" (click)="esAlumno = true">Estudiante</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" [class.active]="!esAlumno" (click)="esAlumno = false">Profesor</button>
+        </li>
+      </ul>
+
+      <!-- Formulario estudiante -->
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="d-flex flex-column justify-content-center">
+        <div class="form-group">
+          <input placeholder="Nombre" class="form-control" id="nombre" formControlName="nombre" type="text" />
+          <small *ngIf="registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched" class="text-danger">
+            Introduzca un nombre.
+          </small>
+        </div>
+        <div class="form-group mt-3">
+          <input placeholder="Apellidos" class="form-control" id="apellido" formControlName="apellido" type="text" />
+          <small *ngIf="registerForm.get('apellido')?.invalid && registerForm.get('apellido')?.touched" class="text-danger">
+            Introduzca unos apellidos.
+          </small>
+        </div>
+        <div class="form-group mt-4 mb-3 text-center">
+          <label>Datos de registro</label>
+        </div>
+        <div class="form-group">
+          <input placeholder="Correo de Tajamar" class="form-control" id="email" formControlName="email" type="email" />
+          <small *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="text-danger">
+            <span *ngIf="registerForm.get('email')?.errors?.['required']">El correo electrónico es requerido.<br/></span>
+            <span *ngIf="registerForm.get('email')?.errors?.['email']">Por favor, introduce un correo electrónico válido.<br/></span>
+            <span *ngIf="registerForm.get('email')?.errors?.['invalidDomain']">El correo debe ser de la organización 	{{ '(@tajamar365.com)' }}.<br/></span>
+          </small>
+        </div>
+        <div class="form-group position-relative mt-3">
+          <input placeholder="Contraseña" class="form-control" id="password" formControlName="password" type="password" />
+          <i class="fas fa-eye eye-icon"></i>
+          <small *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="text-danger">
+            La contraseña debe tener al menos 5 caracteres.
+          </small>
+        </div>
+        <div class="form-group position-relative mt-3">
+          <input placeholder="Confirmar Contraseña" class="form-control" id="confirm-password" formControlName="confirmPassword" type="password" />
+          <i class="fas fa-eye eye-icon"></i>
+          <small *ngIf="registerForm.hasError('mismatch') && registerForm.get('confirmPassword')?.touched" class="text-danger">
+            Las contraseñas no coinciden.
+          </small>
+        </div>
+        @if(esAlumno){
+          <div class="form-group mt-3">
+            <input placeholder="Código de su curso" class="form-control" id="access-code" formControlName="accessCode" type="text" />
+            <small *ngIf="registerForm.get('accessCode')?.invalid && registerForm.get('accessCode')?.touched" class="text-danger">
+              El código de acceso es requerido.
+            </small>
+          </div>
+        }
+        @else{
+          <div class="form-group mt-3">
+            <input placeholder="Clave de profesor" class="form-control" id="access-code" formControlName="accessCode" type="text" />
+            <small *ngIf="registerForm.get('accessCode')?.invalid && registerForm.get('accessCode')?.touched" class="text-danger">
+              La clave de profesor es requerida.
+            </small>
+          </div>
+        }
+
+        <button class="btn custom-btn text-white mt-4 w-50" type="submit">Completar registro</button>
+      </form>
+
+
+      <div class="text-center mt-3">
+        <p class="small">
+          ¿Ya tienes cuenta?
+          <br>
+          <a class="text-primary" [routerLink]="['/login']" href="#">
+            Iniciar sesión
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

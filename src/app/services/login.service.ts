@@ -14,7 +14,7 @@ export class LoginService {
   constructor() { }
 
 
-  //Devuelve "200" si se ha logueado correctamente.
+  //Devuelve "200" si se ha logueado correctamente, devuelve -1 si ha habido algún error.
 
   login(email: string, password: string){
     return axios.post(this.url, {
@@ -27,7 +27,7 @@ export class LoginService {
     }).catch(error => {
       console.log("ha habido un error");
       console.log(error);
-      return "error";
+      return "-1";
     });
   }
 

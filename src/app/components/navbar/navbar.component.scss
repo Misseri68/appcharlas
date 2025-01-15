@@ -1,0 +1,154 @@
+@import '../../../styles/variables.scss';
+
+// Variables (usadas desde _variables.scss)
+$navbar-height: 60px;
+$navbar-bg-color: #101010;
+$navbar-text-color: #ffffff;
+$navbar-link-hover-color: $navbar-text-color; // Cambiado para usar blanco en el hover
+$text-disabled-color: #b4b4b4; // Color para enlaces no activos ni hover
+
+// Estilo de la navbar
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: auto;
+    background-color: $navbar-bg-color;
+    font-weight: 300; // Usa la variante Light
+
+    &__logo {
+        img {
+            height: 48px; // Ajusta según el tamaño del logo
+        }
+    }
+
+    &__links {
+        display: flex;
+        gap: 1.5rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        .navbar__link {
+            text-decoration: none;
+            color: $text-disabled-color; // Por defecto: color deshabilitado
+            font-size: 16px;
+            font-weight: 300; // Usa el peso ligero
+            position: relative; // Necesario para el uso de ::after
+            transition: color 0.3s ease-in-out; // Transición suave del color
+
+            &::after {
+                content: ""; // Elemento vacío para la línea
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 0; // Comienza invisible
+                height: 2px;
+                background-color: $navbar-text-color; // Línea blanca
+                transition: width 0.3s ease-in-out;
+            }
+
+            &:hover {
+                color: $navbar-text-color; // Cambia el texto a blanco
+            }
+
+            &:hover::after {
+                width: 100%; // La línea se extiende completamente
+            }
+
+            &--active {
+                color: $navbar-text-color;
+
+                &::after {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    &__profile {
+        .profile-container {
+            position: relative; // Contexto para el pop-up
+            display: inline-block;
+
+            img {
+                height: 48px;
+                width: 48px;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.05); // Efecto visual al pasar el mouse
+                }
+            }
+
+            .profile-popup {
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background-color: #1F1F1F; // Fondo oscuro elegante
+                color: #ffffff; // Texto blanco
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Sombra sutil
+                border-radius: 12px; // Bordes redondeados
+                padding: 1rem; // Espaciado interno
+                z-index: 9999;
+                opacity: 0; // Oculto por defecto
+                visibility: hidden; // No interactivo por defecto
+                transform: translateY(-10px); // Ligeramente fuera de posición inicial
+                transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s; // Retrasa visibility
+                min-width: 200px;
+
+                ul {
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+
+                    li {
+                        display: flex; // Ícono y texto en línea
+                        align-items: center;
+                        gap: 0.5rem; // Espaciado entre ícono y texto
+                        padding: 0.5rem 0; // Espaciado vertical
+                        font-size: 14px;
+                        cursor: pointer;
+
+                        a {
+                            text-decoration: none;
+                            color: $text-disabled-color; // Color inicial (deshabilitado)
+                            display: flex; // Alinear ícono y texto
+                            align-items: center;
+                            gap: 0.5rem;
+                            transition: color 0.3s ease-in-out; // Transición suave para el color
+
+                            &:hover {
+                                color: #ffffff; // Cambia a blanco al hacer hover
+                            }
+
+                            .popup-icon {
+                                height: 16px; // Tamaño de los íconos
+                                width: 16px;
+                                transition: fill 0.3s ease-in-out; // Transición suave para íconos
+                            }
+                        }
+                    }
+
+                    .divider {
+                        border-top: 1px solid #3c3c3c; // Línea divisora
+                        margin: 0.5rem 0; // Espaciado
+                    }
+                }
+            }
+
+            // Mostrar el pop-up cuando esté activo
+            &.open .profile-popup {
+                opacity: 1; // Totalmente visible
+                visibility: visible; // Hacer interactivo el pop-up
+                transform: translateY(0); // En su posición original
+                transition: opacity 0.3s ease, transform 0.3s ease; // Transición suave
+            }
+        }
+
+
+
+    }
+}

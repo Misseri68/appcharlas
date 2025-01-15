@@ -1,0 +1,64 @@
+/*
+Hello chicos, bienvenidos a la configuración de variables de estilo de Angular.
+
+Aquí podrás configurar los colores, los tamaños, las fuentes y otros estilos de estilo de Angular.
+*/
+
+
+
+
+
+
+/*_________________________________ COLORS _________________________________*/
+
+// Primary Palette
+$primary-color-50: #e7f9fe;
+$primary-color-100: #b4ecfb;
+$primary-color-200: #8fe2f9;
+$primary-color-300: #5cd5f7;
+$primary-color-400: #3dcdf5;
+$primary-color-500: #0cc1f3;
+$primary-color-600: #0bb0dd;
+$primary-color-700: #0989ad;
+$primary-color-800: #076a86;
+$primary-color-900: #055166;
+
+// Neutral Palette
+$neutral-color-50: #e7e7e7; // Gris muy claro
+$neutral-color-100: #d0d0d0; // Ligero ajuste hacia un gris intermedio claro
+$neutral-color-200: #b4b4b4; // Gris claro
+$neutral-color-300: #808080; // Gris medio (Incluido de los grises dados)
+$neutral-color-400: #585858; // Gris oscuro suave (Incluido de los grises dados)
+$neutral-color-500: #3c3c3c; // Gris oscuro intermedio
+$neutral-color-600: #1f1f1f; // Gris casi negro (Incluido de los grises dados)
+$neutral-color-700: #101010; // Gris más oscuro (Incluido de los grises dados)
+$neutral-color-800: #070707; // Gris casi negro total
+$neutral-color-900: #050505; // Gris negro profundo
+
+//Text Palette
+$text-regular-color: #FFFFFF;
+$text-detail-color: $primary-color-800;
+$text-disabled-color: $neutral-color-400;
+$text-hint-color: $neutral-color-300;
+$text-link-color: $primary-color-500;
+
+// Alert Palette
+$alert-success-300: #80E074;
+$alert-success-500: #51A746;
+$alert-danger-800: #961212;
+
+
+// Background Palette
+$background-color: #101010;
+
+// Card Palette
+$card-background-color: #1F1F1F;
+
+/*_________________________________ FONTS _________________________________*/
+
+//como hago para definir las fuentes de los textos, estamos usando Rokkit e Inter
+$font-family-detail: 'Rokkitt', sans-serif;
+$font-family-regular: 'Inter', sans-serif;
+
+
+
