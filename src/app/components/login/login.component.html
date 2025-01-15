@@ -1,13 +1,36 @@
-<p>login works!</p>
-<div>
-  <form>
-    <div class="form-group">
-      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted">Fase de pruebas, no metas datos sensibles.</small>
+<div id="contenedor">
+  <div id="centrado">
+    <div id="izquierda">
+      <h1>Observar</h1>
+      <h1>Aprender</h1>
+      <h1>Crecer</h1>
     </div>
-    <div class="form-group">
-      <input type="password" class="form-control" id="password" placeholder="Password">
+    <div id="formContenedor">
+      <form (ngSubmit)="handleLoginClick()" #loginForm="ngForm">
+        <h1>Iniciar sesión</h1>
+        <div id="entradas">
+          <input
+          type="text"
+          id="cajaEmail"
+          placeholder="Email"
+          name="cajaemail"
+          #cajaemail
+        />
+        <input
+          type="text"
+          id="cajaPass"
+          placeholder="Contraseña"
+          name="cajapass"
+          #cajapass
+        />
+        </div>
+
+      <button (submit)="handleLoginClick()">Iniciar Sesión</button>
+      </form>
+      <div id="registro">
+        <p>¿No tienes cuenta?</p>
+        <a href="/">Registrarme</a>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+    </div>
+  </div>
 </div>
