@@ -1,13 +1,16 @@
+
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { LoginService } from '../../services/login.service';
-import { CommonModule } from '@angular/common';  // Necesario para directivas comunes
+import { CommonModule } from '@angular/common';  // Necesario para usar directivas comunes como ngIf, ngFor
+import { FormsModule } from '@angular/forms';    // Necesario para usar ngForm
+import { LoginService } from '../../services/login.service'; // Importa el servicio de login
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  standalone: true,
-  imports: [CommonModule]  // Importa CommonModule aquí
+  standalone: true,  // Hace que el componente sea standalone
+  imports: [CommonModule, FormsModule]  // Importa los módulos necesarios dentro del componente
 })
 export class LoginComponent {
     @ViewChild("cajaemail") cajaEmail!: ElementRef;
