@@ -22,11 +22,7 @@
         <p style="background-color: yellow; color: red;">aqui el menu este de todas, filtrar por modulo y por rondas xd</p>
     </div>
     <div class="dashboard-container container container--small">
-        <app-tarjeta-charla></app-tarjeta-charla>
-        <app-tarjeta-charla></app-tarjeta-charla>
-        <app-tarjeta-charla></app-tarjeta-charla>
-        <app-tarjeta-charla></app-tarjeta-charla>
-        <app-tarjeta-charla></app-tarjeta-charla>
+        <app-tarjeta-charla *ngFor="let charla of charlas" [charla]="charla"></app-tarjeta-charla>
     </div>
 
 

@@ -62,12 +62,23 @@
     width: 100%;
 }
 
-.charla-imagen img {
-    width: 100%;
-    /* Imagen toma todo el ancho disponible */
-    border-radius: 8px;
-    /* Bordes redondeados */
+.charla-imagen {
+    position: relative;
+    width: 100%; // Ancho ajustable según el contenedor
+    padding-top: 61.8%; // 1.618:1 para la proporción áurea
+    background-color: #f0f0f0; // Color de fondo en caso de que no cargue la imagen
+    overflow: hidden;
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; // Ajusta la imagen para que ocupe el espacio sin deformarse
+    }
 }
+
 
 .charla-footer {
     display: flex;
