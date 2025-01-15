@@ -1,0 +1,82 @@
+
+#contenedor{
+  width: 100%;
+  height: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #101010;
+  color: #FFFFFF;
+}
+#centrado {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  column-gap: 100px;
+  width: 790px;
+  height: 480px;
+  padding: 20px;
+  border-radius: 10px;
+
+}
+
+#izquierda h1{
+  font-size: 64px;
+  font-weight: bold;
+  margin-top: 40px;
+}
+
+form{
+  text-align: center;
+}
+form button{
+  padding: 10px 20px;
+  background-color: #2F90FF;
+  color: #FFFFFF;
+  border-radius: 20px;
+}
+form h1{
+  color: #FFFFFF;
+  font-size: 32px;
+  font-weight: bold;
+}
+#entradas{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+}
+#entradas input{
+  margin-bottom: 20px;
+  background-color: #101010;
+  border: 0px;
+  color:#808080;
+  border-bottom: 2px  solid #808080;
+  padding: 10px 0px;
+  background: none;
+  box-shadow: none;
+  font-size: 12px;
+}
+
+input:focus {
+  background-color: #808080;
+  outline: none;
+  box-shadow: none;
+}
+
+input:hover, input:active {
+  background-color: #808080;
+  border: none;
+  box-shadow: none;
+}
+
+#registro{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+}
+
+a{
+    text-decoration: none;
+    color: #2F90FF;
+}

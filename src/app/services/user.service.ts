@@ -39,6 +39,34 @@ export class UserService {
     })
   }
 
+  getUsuarioPorId(idUsuario: number) {
+    return axios
+      .get(this.url + idUsuario, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this._loginService.getToken(),
+        },
+      })
+      .then((response) => {
+        const datosUsuario = response.data.usuario;
+        return new Usuario(
+          datosUsuario.idUsuario,
+          datosUsuario.nombre,
+          datosUsuario.apellidos,
+          datosUsuario.email,
+          datosUsuario.estadoUsuario,
+          datosUsuario.imagen,
+          datosUsuario.password,
+          datosUsuario.idRole
+        );
+      })
+      .catch((error) => {
+        console.error('Error al obtener el usuario:', error);
+        return null;
+      });
+  }
+  
+
   putUsuario(userFormat : Object){
 
     return axios.put(this.url , userFormat, {

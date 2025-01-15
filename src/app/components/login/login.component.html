@@ -1,0 +1,36 @@
+<div id="contenedor">
+  <div id="centrado">
+    <div id="izquierda">
+      <h1>Observar</h1>
+      <h1>Aprender</h1>
+      <h1>Crecer</h1>
+    </div>
+    <div id="formContenedor">
+      <form (ngSubmit)="handleLoginClick()" #loginForm="ngForm">
+        <h1>Iniciar sesión</h1>
+        <div id="entradas">
+          <input
+          type="text"
+          id="cajaEmail"
+          placeholder="Email"
+          name="cajaemail"
+          #cajaemail
+        />
+        <input
+          type="text"
+          id="cajaPass"
+          placeholder="Contraseña"
+          name="cajapass"
+          #cajapass
+        />
+        </div>
+
+      <button (submit)="handleLoginClick()">Iniciar Sesión</button>
+      </form>
+      <div id="registro">
+        <p>¿No tienes cuenta?</p>
+        <a href="/">Registrarme</a>
+    </div>
+    </div>
+  </div>
+</div>

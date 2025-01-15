@@ -1,26 +1,28 @@
 @import './variables.scss';
 @import './typography.scss';
 
-body{
+body {
     background-color: $background-color;
     color: $text-regular-color;
     font-family: $font-family-regular;
     font-weight: 300; // Usa la variante Light
+    min-height: 100vh;
+
+    //raton
+    cursor: url('./../assets/icons/mouse.svg'), auto;
 }
 
 
 
 /*_________________________________ TEXT _________________________________*/
 
-.text-title{
+.text-title {
     font-family: $font-family-detail;
-    font-size: 2.5em;
     color: $text-detail-color;
 }
 
-.text-title-big{
+.text-title-big {
     font-family: $font-family-detail;
-    font-size: 5.5em;
     color: $text-detail-color;
 }
 
@@ -55,3 +57,29 @@ body{
         /* Ocupa todo el ancho disponible */
     }
 }
+
+.linea {
+    height: 1px;
+    background-color: $neutral-color-500;
+    /* Color de la línea */
+    width: 100%;
+}
+
+//________________________ IMAGES __________________________
+
+
+
+.img-round {
+    border-radius: 50%;
+    /* Hace que los bordes sean redondos */
+    object-fit: cover;
+    /* Asegura que la imagen se recorte correctamente */
+    overflow: hidden;
+    /* Oculta cualquier contenido que sobresalga */
+
+    &--small {
+        width: 48px;
+        height: 48px;
+    }
+}
+
