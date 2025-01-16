@@ -27,8 +27,9 @@ export class LoginService {
       return response.status;
     }).catch(error => {
       console.log(error);
-      return -1;
+      return -1
     });
+
   }
 
   getToken(): string | null {

@@ -3,6 +3,7 @@ import { TarjetaCharlaComponent } from "../tarjeta-charla/tarjeta-charla.compone
 import { ServiceCharla } from '../../services/charla.service';
 import { Charla } from '../../models/Charla';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,11 +17,19 @@ import { CommonModule } from '@angular/common';
 export class DashboardComponent implements OnInit {
 
   public charlas: Charla[] = [];
+  datosUsuario = {
+    nombreUsuario: '',
+    cursoUsuario: '',
+    rolUsuario: '',
 
-  constructor(private serviceCharla: ServiceCharla) { }
+  }
+
+  constructor(private serviceCharla: ServiceCharla, private _usuarioServ : UserService) {
+   }
 
   ngOnInit(): void {
       this.loadCharlas();
+      this.loadDatosUsuario();
   }
 
   private loadCharlas(){
@@ -32,6 +41,21 @@ export class DashboardComponent implements OnInit {
         console.error('No se pudieron cargar las charlas');
       }
     });
+  }
+
+  private loadDatosUsuario(){
+    this._usuarioServ.getPerfil().then( usuario => {
+      if(usuario != null ){
+        this.datosUsuario = {
+          nombreUsuario: usuario.nombre,
+          cursoUsuario: usuario.curso || 'Curso' ,
+          rolUsuario: usuario.role || 'Rol'
+        }
+      }
+
+    }
+
+    )
   }
 
 

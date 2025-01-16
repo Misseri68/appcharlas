@@ -6,23 +6,31 @@
       <h1>Crecer</h1>
     </div>
     <div id="formContenedor">
-      <form (ngSubmit)="handleLoginClick()" #loginForm="ngForm">
+      <form (ngSubmit)="handleLoginClick()" [formGroup]="loginForm">
         <h1>Iniciar sesión</h1>
         <div id="entradas">
           <input
-          type="text"
+          type="email"
           id="cajaEmail"
-          placeholder="Email"
+          placeholder="Correo de Tajamar"
           name="cajaemail"
-          #cajaemail
+          formControlName="email"
         />
+        <small *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger">
+          <span *ngIf="loginForm.get('email')?.errors?.['required']">El correo electrónico es requerido.<br/></span>
+          <span *ngIf="loginForm.get('email')?.errors?.['email']">Por favor, introduzca un correo electrónico válido.<br/></span>
+          <span *ngIf="loginForm.get('email')?.errors?.['invalidDomain']">El correo debe ser de la organización 	{{ '(@tajamar365.com)' }}.<br/></span>
+        </small>
         <input
           type="text"
           id="cajaPass"
           placeholder="Contraseña"
           name="cajapass"
-          #cajapass
+          formControlName="password" type="password"
         />
+        <small *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+          La contraseña debe tener al menos 5 caracteres.
+        </small>
         </div>
 
       <button (submit)="handleLoginClick()">Iniciar Sesión</button>

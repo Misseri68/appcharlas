@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 
 @Component({
@@ -11,6 +11,8 @@ import { LoginService } from '../../services/login.service';
 })
 export class NavbarComponent {
 
+  constructor(private _loginService: LoginService, private _router: Router) { }
+
   showPopup: boolean = false;
 
   togglePopup(): void {
@@ -19,8 +21,8 @@ export class NavbarComponent {
   }
 
   logout(): void {
-    console.log('Cerrar sesión');
-    // Lógica para cerrar sesión
+    this._loginService.clearToken();
+    this._router.navigate(['/login']);
   }
 
 }
