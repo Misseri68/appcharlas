@@ -1,4 +1,100 @@
 @import "./../../../styles/variables.scss";
 
 
+.btn-votar {
+    background-color: transparent; // Fondo transparente
+    color: #ffffff; // Texto blanco
+    font-size: 14px; // Tamaño de texto
+    font-weight: bold; // Texto en negrita
+    padding: 8px 16px; // Espaciado interno
+    border: 1px solid #ffffff; // Borde blanco fino
+    border-radius: 20px; // Bordes redondeados
+    cursor: pointer; // Cambia el cursor al pasar por encima
+    transition: all 0.3s ease; // Transición suave para todos los cambios
 
+    &:hover {
+        background-color: transparent; // Fondo blanco translúcido al pasar el mouse
+        // Mantiene el texto blanco
+        border-color: $primary-color-500; // Cambia el borde a un azul claro en hover
+    }
+
+    &:focus {
+        outline: none; // Elimina el borde de enfoque predeterminado
+        box-shadow: 0 0 4px #0cc1f3; // Resalta el botón con un brillo sutil
+    }
+}
+
+
+.charla-imagen {
+    min-width: 500px;
+    background-color: #f0f0f0; /* Color de fondo para manejar espacios vacíos */
+    display: flex; /* Asegura que la imagen esté centrada */
+    align-items: center; /* Centra la imagen verticalmente */
+    justify-content: center; /* Centra la imagen horizontalmente */
+    border-radius: 8px; /* Opcional: bordes redondeados */
+    overflow: hidden; /* Asegura que la imagen no se desborde */
+
+    img {
+      max-width: 100%; /* Asegura que la imagen no se salga del ancho del contenedor */
+      max-height: 100%; /* Asegura que la imagen no se salga del alto del contenedor */
+      object-fit: cover; /* Ajusta la imagen para que llene el espacio del contenedor */
+    }
+}
+
+
+.layout-horizontal {
+    display: flex;
+    align-items: center;
+    /* Alinea verticalmente los elementos al centro */
+    gap: 16px;
+    /* Espaciado entre elementos */
+
+    &.space-between {
+        justify-content: space-between;
+        /* Distribuye el espacio para que los elementos estén en extremos opuestos */
+    }
+
+    &.align-center {
+        justify-content: center;
+        /* Alinea los elementos al centro horizontalmente */
+    }
+}
+
+
+.comentarios {
+    margin-top: 32px;
+
+    h2 {
+        font-size: 18px;
+        margin-bottom: 16px;
+    }
+
+    .comentario {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 16px;
+
+        img {
+            height: 48px;
+            width: 48px;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .comentario-texto {
+            flex: 1;
+
+            p {
+                margin: 0;
+                font-size: 14px;
+                color: #b4b4b4;
+
+                &:first-of-type {
+                    color: #ffffff;
+                    font-weight: bold;
+                    margin-bottom: 4px;
+                }
+            }
+        }
+    }
+}

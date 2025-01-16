@@ -1,25 +1,29 @@
-<div class="container container--medium ">
-    <p>Duración estimada: {{ charla?.tiempo }} min.</p>
-    <div>
-        <h1>Titulo: {{ charla?.titulo }}</h1>
-    
-    <button class="btn-votar">Votar</button>
+<div class="container container--small">
+    <!-- Duración de la charla -->
+    <p class="text text--small text--disabled">Duración estimada: {{ charla?.tiempo }} min.</p>
+
+
+    <!-- Título y botón votar -->
+    <div class="layout-horizontal space-between">
+        <h1 class="title title--h1">{{ charla?.titulo }}</h1>
+        <button class="btn-votar">Votar</button>
     </div>
 
+    <!-- Descripción de la charla -->
     <div>
-        <p>{{ charla?.descripcion }}</p>
+        <p class="text text--disabled">{{ charla?.descripcion }}</p>
     </div>
-    
 
-    
-
-    <div class="charla-imagen" style="width: 250px;">
+    <!-- Imagen de la charla -->
+    <div class="charla-imagen">
         <img [src]="charla?.imagenCharla || 'assets/images/default-image.png'" alt="{{ charla?.titulo }}" />
     </div>
 
-    <!-- Sección de comentarios (estática por ahora) -->
+    <!-- Sección de comentarios -->
     <div class="comentarios">
         <h2>1 comentario(s)</h2>
+
+        <!-- Comentario -->
         <div class="comentario">
             <img src="assets/images/test.jpg" alt="Perfil" class="img-round img-round--small" />
             <div class="comentario-texto">
