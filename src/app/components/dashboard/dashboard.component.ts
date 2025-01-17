@@ -4,6 +4,8 @@ import { ServiceCharla } from '../../services/charla.service';
 import { Charla } from '../../models/Charla';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,15 +26,16 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  constructor(private serviceCharla: ServiceCharla, private _usuarioServ : UserService) {
-   }
-
-  ngOnInit(): void {
-      this.loadCharlas();
-      this.loadDatosUsuario();
+  constructor(private serviceCharla: ServiceCharla, private _usuarioServ: UserService, private _router: Router, private _loginService: LoginService) {
   }
 
-  private loadCharlas(){
+  ngOnInit(): void {
+    this.redirigirALogin();
+    this.loadCharlas();
+    this.loadDatosUsuario();
+  }
+
+  private loadCharlas() {
     this.serviceCharla.getCharlas().then((data) => {
       if (data) {
         this.charlas = data;
@@ -43,20 +46,21 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  private loadDatosUsuario(){
-    this._usuarioServ.getPerfil().then( usuario => {
-      if(usuario != null ){
+  private loadDatosUsuario() {
+    this._usuarioServ.getPerfil().then(usuario => {
+      if (usuario != null) {
         this.datosUsuario = {
           nombreUsuario: usuario.nombre,
-          cursoUsuario: usuario.curso || 'Curso' ,
+          cursoUsuario: usuario.curso || 'Curso',
           rolUsuario: usuario.role || 'Rol'
         }
       }
-
-    }
-
-    )
+    })
   }
 
-
+  private redirigirALogin() {
+     if(this._loginService.getToken() === null ){
+      this._router.navigate(['/login'])
+     }
+  }
 }
