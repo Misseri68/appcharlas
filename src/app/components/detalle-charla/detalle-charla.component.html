@@ -24,13 +24,13 @@
     <div class="comentarios">
         <!-- Número de comentarios -->
         <div class="comentarios-header">
-            <h2 class="title title--h2">1 comentario(s)</h2>
+            <h2 class="title title--h2">{{ comentariosConUsuarios.length }} comentario(s)</h2>
         </div>
 
         <!-- Campo para añadir comentario -->
         <div class="comentarios-entrada layout-vertical">
             <div class="layout-horizontal">
-                <img src="assets/images/test.jpg" alt="Usuario" class="img-round img-round--small" />
+                <img [src]="fotoPerfilUsuario" alt="Usuario" class="img-round img-round--small" />
                 <input type="text" placeholder="Añade un comentario..." class="comentario-input" />
             </div>
             <button class="btn-comentar">Comentar</button>
@@ -38,30 +38,22 @@
 
         <!-- Comentarios existentes -->
         <div class="comentarios-lista">
-            <!-- Comentario 1 -->
-            <div class="comentario layout-horizontal">
-                <img src="assets/images/francisco.jpg" alt="Francisco Perez" class="img-round img-round--small" />
+            <div *ngFor="let item of comentariosConUsuarios" class="comentario layout-horizontal">
+                <!-- Imagen del usuario -->
+                <img [src]="item.usuario?.imagen || 'assets/images/default-profile.png'"
+                    alt="{{ item.usuario?.nombre || 'Usuario desconocido' }}" class="img-round img-round--small" />
+                <!-- Contenido del comentario -->
                 <div class="comentario-contenido layout-vertical">
                     <p>
-                        <strong>Francisco Perez</strong>
-                        <span class="text text--disabled">hace 1 semana</span>
+                        <strong>{{ item.usuario?.nombre || 'Usuario desconocido' }}</strong>
+                        <span class="text text--disabled">{{ item.comentario.fecha | date: 'short' }}</span>
                     </p>
-                    <p>Muy buena charla! ✅ Sobretodo por tu forma de comunicar. Buen trabajo!</p>
-                </div>
-            </div>
-
-            <!-- Comentario 2 -->
-            <div class="comentario layout-horizontal">
-                <img src="assets/images/maria.jpg" alt="Maria Lopez" class="img-round img-round--small" />
-                <div class="comentario-contenido layout-vertical">
-                    <p>
-                        <strong>Maria Lopez</strong>
-                        <span class="text text--disabled">hace 1 semana</span>
-                    </p>
-                    <p>Gracias, lo aplicaré en mi proyecto! 🤩</p>
+                    <p>{{ item.comentario.contenido }}</p>
                 </div>
             </div>
         </div>
     </div>
+
+
 
 </div>

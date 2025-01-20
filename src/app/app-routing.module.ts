@@ -15,12 +15,12 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    data: { animation: 'DashboardPage' }
+    // data: { animation: 'DashboardPage' }
   },
   {
     path: 'perfil',
     component: PerfilComponent,
-    data: { animation: 'PerfilPage' }
+    // data: { animation: 'PerfilPage' }
 
   },
   {
@@ -30,6 +30,10 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'detalle-charla/:id',
+    component: DetalleCharlaComponent
   }
 
 

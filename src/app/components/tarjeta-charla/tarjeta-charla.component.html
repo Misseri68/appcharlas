@@ -1,7 +1,7 @@
 <div class="tarjeta-charla">
     <!-- Primera sección: Foto de perfil y nombre -->
     <div class="layout-horizontal">
-        <img [src]="charla.imagenCharla" alt="Foto de perfil" class="img-round img-round--small" />
+        <img [src]="usuario?.imagen" alt="Foto de perfil" class="img-round img-round--small" />
         <div class="charla-info">
             <p class="charla-autor">
                 {{ usuario?.nombre || 'Cargando...' }} {{ usuario?.apellidos || '' }}

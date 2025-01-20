@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { LoginService } from './login.service';
 import axios from 'axios';
+import { Comentario } from '../models/Comentario';
 
 @Injectable({
     providedIn: 'root',
@@ -57,7 +58,7 @@ export class ServiceCharla {
                 },
             })
             .then((response) => {
-                console.log("response ", response.data.charla);
+
                 const data = response.data.charla;
                 const charla = new Charla(
                     data.idCharla,
@@ -70,8 +71,21 @@ export class ServiceCharla {
                     data.idRonda,
                     data.imagenCharla
                 );
+
+                // Procesar los comentarios
+            const comentariosData = response.data.comentarios;
+            const comentarios = comentariosData.map((comentario: any) => {
+                return new Comentario(
+                    comentario.idComentario,
+                    comentario.idCharla,
+                    comentario.idUsuario,
+                    comentario.usuario,
+                    comentario.contenido,
+                    new Date(comentario.fecha)
+                );
+            });
                 
-                return charla;
+                return { charla, comentarios };
             })
             .catch((error) => {
                 console.error('Error al obtener la charla por ID:', error);
