@@ -24,22 +24,22 @@ export class PerfilComponent {
 
   constructor(private _loginService: LoginService, private _router: Router, private _userService: UserService) {
 
-   }
+  }
 
   ngOnInit(): void {
     this.redirigirALogin();
     this._userService.getPerfil().then(usuario => {
-      if(usuario != null){
+      if (usuario != null) {
         this.usuario = usuario;
       }
     });
   }
 
-  editarPerfil(){
+  editarPerfil() {
 
     const usuarioFormat = {
       "idUsuario": this.usuario?.idUsuario,
-      "nombre": this.cajaNombre.nativeElement.value ,
+      "nombre": this.cajaNombre.nativeElement.value,
       "apellidos": this.cajaApellidos.nativeElement.value,
       "email": this.cajaEmail.nativeElement.value,
       "estadoUsuario": this.usuario?.estadoUsuario,
@@ -47,21 +47,21 @@ export class PerfilComponent {
       "password": "12345",
       "idRole": this.usuario?.idRole
     }
-    this._userService.putUsuario(usuarioFormat).then(response=>{
+    this._userService.putUsuario(usuarioFormat).then(response => {
       console.log(response);
     });
 
     console.log(this.usuario?.imagen);
   }
 
-  cerrarSesion(){
+  cerrarSesion() {
     this._loginService.clearToken();
     this._router.navigate(['/login']);
   }
 
   private redirigirALogin() {
-    if(this._loginService.getToken() === null ){
-     this._router.navigate(['/login'])
+    if (this._loginService.getToken() === null) {
+      this._router.navigate(['/login'])
     }
- }
+  }
 }

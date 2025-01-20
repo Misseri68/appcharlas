@@ -9,7 +9,7 @@ import { Comentario } from '../models/Comentario';
     providedIn: 'root',
 })
 export class ServiceCharla {
-    private url = environment.apiCharlas + 'api/charlas';
+    private url = environment.apiCharlas + 'api/charlas/charlascurso';
 
     constructor(private _loginService: LoginService) { }
 
