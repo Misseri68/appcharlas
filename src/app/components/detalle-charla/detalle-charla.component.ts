@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ServiceComentario } from '../../services/comentario.service';
 import { ServiceCharla } from '../../services/charla.service';
 import { Charla } from '../../models/Charla';
 import { Comentario } from '../../models/Comentario';
@@ -12,23 +13,26 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   templateUrl: './detalle-charla.component.html',
   styleUrls: ['./detalle-charla.component.scss'],
-  providers: [ServiceCharla, UserService],
+  providers: [ServiceComentario, ServiceCharla, UserService],
   imports: [CommonModule],
 })
 export class DetalleCharlaComponent implements OnInit {
   public charla: Charla | null = null;
   public comentarios: Comentario[] = [];
-  public comentariosConUsuarios: Array<{ comentario: Comentario; usuario: Usuario | null }> = [];
-  fotoPerfilUsuario :string = 'assets/images/test.jpg';
+  public nuevoComentario: string = ''; // Variable para el nuevo comentario
+  public usuarioId: number | null = null; // ID del usuario logueado
+  fotoPerfilUsuario: string = 'assets/images/test.jpg';
 
   constructor(
     private _route: ActivatedRoute,
     private _charlaService: ServiceCharla,
+    private _comentarioService: ServiceComentario,
     private _userService: UserService
   ) {}
 
   async ngOnInit(): Promise<void> {
     const id = this._route.snapshot.paramMap.get('id'); // Obtener el ID de la charla
+    await this.obtenerUsuarioLogueado(); // Obtener el ID del usuario logueado
     this.getImagenPerfil();
 
     if (id) {
@@ -39,29 +43,51 @@ export class DetalleCharlaComponent implements OnInit {
           this.charla = data.charla || null;
           this.comentarios = data.comentarios || [];
         }
-
-        // Obtener detalles de cada usuario asociado a los comentarios
-        this.comentariosConUsuarios = await Promise.all(
-          this.comentarios.map(async (comentario) => {
-            const usuario = await this._userService.getUsuarioPorId(comentario.idUsuario).catch(() => null);
-            return { comentario, usuario };
-          })
-        );
       } catch (error) {
         console.error('Error al cargar los datos:', error);
       }
     }
   }
 
-  getImagenPerfil(){
-    console.log("Hola")
-    this._userService.getPerfil().then(perfil => {
-      if(perfil?.imagen){
-        this.fotoPerfilUsuario = perfil.imagen;
-        console.log(this.fotoPerfilUsuario)
-      }else{
-        this.fotoPerfilUsuario = 'assets/images/userdefault.png'
+  // Método para obtener el ID del usuario logueado
+  async obtenerUsuarioLogueado(): Promise<void> {
+    try {
+      const perfil = await this._userService.getPerfil();
+      this.usuarioId = perfil?.idUsuario || null;
+    } catch (error) {
+      console.error('Error al obtener el usuario logueado:', error);
+    }
+  }
+
+  // Método para enviar un nuevo comentario
+  async enviarComentario(): Promise<void> {
+    if (this.nuevoComentario.trim() && this.charla && this.usuarioId) {
+      const comentario = new Comentario(
+        0, // ID generado por el servidor
+        this.charla.idCharla,
+        this.usuarioId, // ID del usuario logueado
+        '', // Usuario no necesario aquí
+        this.nuevoComentario.trim(),
+        new Date()
+      );
+
+      try {
+        const comentarioGuardado = await this._comentarioService.postComentario(comentario);
+        this.comentarios.push(comentarioGuardado); // Añadir el comentario a la lista
+        this.nuevoComentario = ''; // Limpiar el campo de entrada
+      } catch (error) {
+        console.error('Error al enviar el comentario:', error);
       }
-    })
+    }
+  }
+
+  getImagenPerfil() {
+    this._userService.getPerfil().then((perfil) => {
+      if (perfil?.imagen) {
+        this.fotoPerfilUsuario = perfil.imagen;
+      } else {
+        this.fotoPerfilUsuario = 'assets/images/userdefault.png';
+      }
+    });
   }
 }
