@@ -24,7 +24,7 @@
     <div class="comentarios">
         <!-- Número de comentarios -->
         <div class="comentarios-header">
-            <h2 class="title title--h2">{{ comentariosConUsuarios.length }} comentario(s)</h2>
+            <h2 class="title title--h2">{{ comentarios.length }} comentario(s)</h2>
         </div>
 
         <!-- Campo para añadir comentario -->
@@ -32,28 +32,25 @@
             <div class="layout-horizontal">
                 <img [src]="fotoPerfilUsuario" alt="Usuario" class="img-round img-round--small" />
                 <input type="text" placeholder="Añade un comentario..." class="comentario-input" />
+                <button class="btn-comentar">Comentar</button>
             </div>
-            <button class="btn-comentar">Comentar</button>
+            
         </div>
 
         <!-- Comentarios existentes -->
         <div class="comentarios-lista">
-            <div *ngFor="let item of comentariosConUsuarios" class="comentario layout-horizontal">
-                <!-- Imagen del usuario -->
-                <img [src]="item.usuario?.imagen || 'assets/images/default-profile.png'"
-                    alt="{{ item.usuario?.nombre || 'Usuario desconocido' }}" class="img-round img-round--small" />
-                <!-- Contenido del comentario -->
+            <div *ngFor="let comentario of comentarios" class="comentario layout-horizontal">
                 <div class="comentario-contenido layout-vertical">
                     <p>
-                        <strong>{{ item.usuario?.nombre || 'Usuario desconocido' }}</strong>
-                        <span class="text text--disabled">{{ item.comentario.fecha | date: 'short' }}</span>
+                        <strong>{{ comentario.usuario }}</strong>
+                        <span class="text text--disabled">{{ comentario.fecha |  date: 'dd MMM yyyy' }}</span>
                     </p>
-                    <p>{{ item.comentario.contenido }}</p>
+                    <p>{{ comentario.contenido }}</p>
                 </div>
             </div>
         </div>
+
+        
     </div>
-
-
 
 </div>

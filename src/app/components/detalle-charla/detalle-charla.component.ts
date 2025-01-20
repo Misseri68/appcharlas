@@ -60,7 +60,7 @@ export class DetalleCharlaComponent implements OnInit {
         this.fotoPerfilUsuario = perfil.imagen;
         console.log(this.fotoPerfilUsuario)
       }else{
-        this.fotoPerfilUsuario = ''
+        this.fotoPerfilUsuario = 'assets/images/userdefault.png'
       }
     })
   }

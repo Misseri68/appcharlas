@@ -9,14 +9,14 @@ import { Comentario } from '../models/Comentario';
     providedIn: 'root',
 })
 export class ServiceCharla {
-    private url = environment.apiCharlas + 'api/charlas/charlascurso';
+    private url = environment.apiCharlas + 'api/charlas/';
 
     constructor(private _loginService: LoginService) { }
 
     // Método para obtener las charlas
     getCharlas() {
         return axios
-            .get(this.url, {
+            .get(this.url + "charlascurso", {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: 'Bearer ' + this._loginService.getToken(),
