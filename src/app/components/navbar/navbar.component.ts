@@ -32,7 +32,7 @@ export class NavbarComponent {
         this.imagen = perfil.imagen;
         console.log(this.imagen)
       }else{
-        this.imagen = ''
+        this.imagen = 'assets/images/userdefault.png'
       }
     })
   }
