@@ -20,20 +20,20 @@
     <!-- Foto de perfil -->
     <div class="navbar__profile">
       <div class="profile-container" [class.open]="showPopup">
-        <img src="assets/images/test.jpg" alt="Foto de usuario" (click)="togglePopup()">
+        <img [src]="imagen" alt="Foto de usuario" (click)="togglePopup()">
         <div class="profile-popup">
           <ul>
             <!-- Opción de Ajustes -->
             <li>
               <a>
                 <img src="assets/icons/settings.svg" alt="Icono de ajustes" class="popup-icon">
-                Ajustes
+                Notificaciones
               </a>
             </li>
-    
+
             <!-- Separador -->
             <div class="divider"></div>
-    
+
             <!-- Opción de Cerrar sesión -->
             <li>
               <a (click)="logout()">
@@ -45,7 +45,7 @@
         </div>
       </div>
     </div>
-    
-    
+
+
   </nav>
 </div>

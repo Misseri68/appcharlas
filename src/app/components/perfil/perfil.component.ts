@@ -4,7 +4,6 @@ import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { Usuario } from '../../models/Usuario';
 import { FormsModule } from '@angular/forms';
-import { CommonModule, NgIf } from '@angular/common';
 
 
 @Component({
@@ -28,6 +27,7 @@ export class PerfilComponent {
    }
 
   ngOnInit(): void {
+    this.redirigirALogin();
     this._userService.getPerfil().then(usuario => {
       if(usuario != null){
         this.usuario = usuario;
@@ -58,4 +58,10 @@ export class PerfilComponent {
     this._loginService.clearToken();
     this._router.navigate(['/login']);
   }
+
+  private redirigirALogin() {
+    if(this._loginService.getToken() === null ){
+     this._router.navigate(['/login'])
+    }
+ }
 }

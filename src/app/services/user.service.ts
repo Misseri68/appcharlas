@@ -22,6 +22,7 @@ export class UserService {
       }
     }).then(response=> {
       let datosUsuario = response.data.usuario;
+      console.log(datosUsuario)
       let usuario = new Usuario(
         datosUsuario.idUsuario,
         datosUsuario.nombre,
@@ -30,7 +31,10 @@ export class UserService {
         datosUsuario.estadoUsuario,
         datosUsuario.imagen,
         datosUsuario.password,
-        datosUsuario.idRole
+        datosUsuario.idRole,
+        datosUsuario.role,
+        datosUsuario.curso,
+        datosUsuario.idCurso
       );
       return usuario;
     }).catch(error => {
@@ -65,7 +69,7 @@ export class UserService {
         return null;
       });
   }
-  
+
 
   putUsuario(userFormat : Object){
 

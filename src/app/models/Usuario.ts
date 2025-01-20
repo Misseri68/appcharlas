@@ -7,6 +7,9 @@ export class Usuario {
     public estadoUsuario: boolean,
     public imagen: string,
     public password: string,
-    public idRole: number
+    public idRole: number,
+    public role?: string,
+    public curso?: string,
+    public idCurso?: number
   ) {}
 }
