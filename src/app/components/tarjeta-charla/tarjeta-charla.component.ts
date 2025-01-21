@@ -16,18 +16,22 @@ export class TarjetaCharlaComponent implements OnInit {
   @Input() charla!: Charla; // Recibe la charla como entrada
   public usuario: Usuario | null = null; // Almacena los datos del usuario
   public imagenMostrar!: string; // Imagen que se mostrará en la tarjeta
+  public nombreUsuario: string = '';
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    // Obtener usuario relacionado con la charla
-    if (this.charla) {
-      this.userService.getUsuarioPorId(this.charla.idUsuario).then((data) => {
-        this.usuario = data;
-      });
-
-      // Asignar la imagen a mostrar, usando imagen por defecto si no hay una específica
-      this.imagenMostrar = this.charla.imagenCharla || 'assets/images/default-image.png';
+    if (!this.charla || !this.charla.idUsuario) {
+      console.error('ID de usuario no válido o charla no definida');
+      this.nombreUsuario = this.charla.usuario || 'Usuario Anónimo';
+      
+      return;
     }
+  
+   
+    // Asignar imagen predeterminada si no existe
+    this.imagenMostrar = this.charla.imagenCharla || 'assets/images/default-image.png';
   }
+  
+
 }

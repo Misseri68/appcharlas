@@ -40,6 +40,7 @@ export class DashboardComponent implements OnInit {
       if (data) {
         this.charlas = data;
         console.log('✅Charlas cargadas:', this.charlas);
+        
       } else {
         console.error('No se pudieron cargar las charlas');
       }

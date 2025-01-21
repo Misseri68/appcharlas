@@ -14,83 +14,95 @@ export class ServiceCharla {
     constructor(private _loginService: LoginService) { }
 
     // Método para obtener las charlas
-    getCharlas() {
-        return axios
-            .get(this.url + "charlascurso", {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: 'Bearer ' + this._loginService.getToken(),
-                },
-            })
-            .then((response) => {
-                console.log(response);
-                const datosCharlas = response.data;
-                const charlas: Charla[] = datosCharlas.map(
-                    (item: any) =>
-                        new Charla(
-                            item.idCharla,
-                            item.titulo,
-                            item.descripcion,
-                            item.tiempo,
-                            new Date(item.fechaPropuesta),
-                            item.idUsuario,
-                            item.idEstadoCharla,
-                            item.idRonda,
-                            item.imagenCharla
-                        )
-                );
-                return charlas;
-            })
-            .catch((error) => {
-                console.error('Error al obtener las charlas:', error);
-                return null;
-            });
-    }
+    // Método para obtener las charlas
+getCharlas() {
+    return axios
+        .get(this.url + "charlascurso", {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + this._loginService.getToken(),
+            },
+        })
+        .then((response) => {
+            console.log(response);
+            const datosCharlas = response.data;
+            const charlas: Charla[] = datosCharlas.map(
+                (item: any) =>
+                    new Charla(
+                        item.idCharla, // ID de la charla
+                        item.titulo, // Título de la charla
+                        item.descripcion, // Descripción
+                        item.tiempo, // Tiempo estimado
+                        new Date(item.fechaPropuesta), // Fecha propuesta
+                        item.imagenCharla, // Imagen asociada
+                        item.idUsuario, // ID del usuario
+                        item.usuario, // Nombre del usuario
+                        item.idEstadoCharla, // ID del estado
+                        item.estadoCharla, // Estado textual
+                        item.idRonda, // ID de la ronda
+                        item.idCurso, // ID del curso
+                        item.nombreCurso // Nombre del curso
+                    )
+            );
+            return charlas;
+        })
+        .catch((error) => {
+            console.error('Error al obtener las charlas:', error);
+            return null;
+        });
+}
 
-    getCharlaPorId(id: number) {
-        const url = `${this.url}/${id}`;
-        console.log("getCharlasPorId ", url);
-        return axios
-            .get(url, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: 'Bearer ' + this._loginService.getToken(),
-                },
-            })
-            .then((response) => {
 
-                const data = response.data.charla;
-                const charla = new Charla(
-                    data.idCharla,
-                    data.titulo,
-                    data.descripcion,
-                    data.tiempo,
-                    new Date(data.fechaPropuesta),
-                    data.idUsuario,
-                    data.idEstadoCharla,
-                    data.idRonda,
-                    data.imagenCharla
-                );
+getCharlaPorId(id: number) {
+    const url = `${this.url}/${id}`;
+    console.log("getCharlaPorId ", url);
+    return axios
+        .get(url, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + this._loginService.getToken(),
+            },
+        })
+        .then((response) => {
+            const data = response.data.charla;
 
-                // Procesar los comentarios
+            // Crear instancia de Charla con las nuevas propiedades
+            const charla = new Charla(
+                data.idCharla, // ID de la charla
+                data.titulo, // Título
+                data.descripcion, // Descripción
+                data.tiempo, // Tiempo estimado
+                new Date(data.fechaPropuesta), // Fecha propuesta
+                data.imagenCharla, // Imagen asociada
+                data.idUsuario, // ID del usuario
+                data.usuario, // Nombre del usuario
+                data.idEstadoCharla, // ID del estado
+                data.estadoCharla, // Estado textual
+                data.idRonda, // ID de la ronda
+                data.idCurso, // ID del curso
+                data.nombreCurso // Nombre del curso
+            );
+
+            // Procesar los comentarios
             const comentariosData = response.data.comentarios;
             const comentarios = comentariosData.map((comentario: any) => {
                 return new Comentario(
-                    comentario.idComentario,
-                    comentario.idCharla,
-                    comentario.idUsuario,
-                    comentario.usuario,
-                    comentario.contenido,
-                    new Date(comentario.fecha)
+                    comentario.idComentario, // ID del comentario
+                    comentario.idCharla, // ID de la charla asociada
+                    comentario.idUsuario, // ID del usuario que comentó
+                    comentario.usuario, // Nombre del usuario que comentó
+                    comentario.contenido, // Contenido del comentario
+                    new Date(comentario.fecha) // Fecha del comentario
                 );
             });
-                
-                return { charla, comentarios };
-            })
-            .catch((error) => {
-                console.error('Error al obtener la charla por ID:', error);
-                return null;
-            });
-    }
+
+            return { charla, comentarios };
+        })
+        .catch((error) => {
+            console.error('Error al obtener la charla por ID:', error);
+            return null;
+        });
+}
+
 
 }

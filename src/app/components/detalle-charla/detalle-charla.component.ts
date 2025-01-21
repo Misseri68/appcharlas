@@ -23,8 +23,7 @@ export class DetalleCharlaComponent implements OnInit {
   public nuevoComentario: string = ''; // Variable para el nuevo comentario
   public usuarioId: number | null = null; // ID del usuario logueado
   fotoPerfilUsuario: string = 'assets/images/test.jpg';
-  public nombreUsuario: string = '';
-
+  
 
   constructor(
     private _route: ActivatedRoute,
@@ -57,7 +56,6 @@ export class DetalleCharlaComponent implements OnInit {
     try {
       const perfil = await this._userService.getPerfil();
       this.usuarioId = perfil?.idUsuario || null;
-      this.nombreUsuario = perfil?.nombre || 'Usuario Anónimo';
     } catch (error) {
       console.error('Error al obtener el usuario logueado:', error);
     }
@@ -79,7 +77,7 @@ export class DetalleCharlaComponent implements OnInit {
         const comentarioGuardado = await this._comentarioService.postComentario(comentario);
         this.comentarios.push({
           ...comentarioGuardado,
-          usuario: this.nombreUsuario, // Ajustar si el servidor no devuelve el usuario
+          usuario: 'Tu nombre aquí', // Ajustar si el servidor no devuelve el usuario
         }); // Añadir el comentario a la lista
         this.nuevoComentario = ''; // Limpiar el campo de entrada
       } catch (error) {
