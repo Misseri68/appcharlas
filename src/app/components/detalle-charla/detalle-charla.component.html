@@ -27,15 +27,19 @@
             <h2 class="title title--h2">{{ comentarios.length }} comentario(s)</h2>
         </div>
 
-        <!-- Campo para añadir comentario -->
         <div class="comentarios-entrada layout-vertical">
             <div class="layout-horizontal">
                 <img [src]="fotoPerfilUsuario" alt="Usuario" class="img-round img-round--small" />
-                <input type="text" placeholder="Añade un comentario..." class="comentario-input" />
-                <button class="btn-comentar">Comentar</button>
+                <input 
+                    type="text" 
+                    placeholder="Añade un comentario..." 
+                    class="comentario-input" 
+                    [(ngModel)]="nuevoComentario" 
+                />
+                <button class="btn-comentar" (click)="enviarComentario()">Comentar</button>
             </div>
-            
         </div>
+        
 
         <!-- Comentarios existentes -->
         <div class="comentarios-lista">
