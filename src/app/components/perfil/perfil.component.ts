@@ -4,7 +4,8 @@ import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { Usuario } from '../../models/Usuario';
 import { FormsModule } from '@angular/forms';
-
+import { PostFilesService } from '../../services/post-files.service';
+import { FileModel } from '../../models/FileModel';
 
 @Component({
   selector: 'app-perfil',
@@ -12,19 +13,17 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.css',
   imports: [RouterModule, FormsModule]
-
 })
 export class PerfilComponent {
-
-  @ViewChild('cajanombre') cajaNombre!: ElementRef;
-  @ViewChild('cajaapellidos') cajaApellidos!: ElementRef;
-  @ViewChild('cajaemail') cajaEmail!: ElementRef;
-
+  @ViewChild("cajafile") cajaFileRef!: ElementRef; // Referencia al input de archivo
   usuario: Usuario | null = null;
 
-  constructor(private _loginService: LoginService, private _router: Router, private _userService: UserService) {
-
-  }
+  constructor(
+    private _loginService: LoginService,
+    private _router: Router,
+    private _userService: UserService,
+    private _postFilesService: PostFilesService
+  ) {}
 
   ngOnInit(): void {
     this.redirigirALogin();
@@ -35,33 +34,40 @@ export class PerfilComponent {
     });
   }
 
-  editarPerfil() {
-
-    const usuarioFormat = {
-      "idUsuario": this.usuario?.idUsuario,
-      "nombre": this.cajaNombre.nativeElement.value,
-      "apellidos": this.cajaApellidos.nativeElement.value,
-      "email": this.cajaEmail.nativeElement.value,
-      "estadoUsuario": this.usuario?.estadoUsuario,
-      "imagen": "https://i.scdn.co/image/ab6761610000e5ebcce32307d0f312e8faf01bae",
-      "password": "12345",
-      "idRole": this.usuario?.idRole
-    }
-    this._userService.putUsuario(usuarioFormat).then(response => {
-      console.log(response);
-    });
-
-    console.log(this.usuario?.imagen);
+  // Método para abrir el selector de archivos
+  editarFotoPerfil(): void {
+    this.cajaFileRef.nativeElement.click();
   }
 
-  cerrarSesion() {
-    this._loginService.clearToken();
-    this._router.navigate(['/login']);
+
+  //TODO avisar con un sweetalert o lo que sea al usuario de que tiene que salir y volver a entrar de su cuenta para ver los cambios.
+  subirFichero(event: any): void {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.readAsArrayBuffer(file);
+    reader.onloadend = () => {
+      const buffer = reader.result as ArrayBuffer;
+      const base64 = btoa(
+        new Uint8Array(buffer).reduce((data, byte) => data + String.fromCharCode(byte), '')
+      );
+
+      let idUsuario =   this.usuario?.idUsuario || -1;
+      const newFileModel = new FileModel(file.name, base64);
+      this._postFilesService.postFile(newFileModel, idUsuario).subscribe(response => {
+        console.log("Respuesta del servidor:", response);
+      });
+    };
+    alert("El archivo ha sido subido correctamente. Cierra sesión y vuelve a entrar para visualizar los cambios.");
+  }
+
+  cambiarContrasena() {
+    // Lógica para cambiar la contraseña
   }
 
   private redirigirALogin() {
     if (this._loginService.getToken() === null) {
-      this._router.navigate(['/login'])
+      this._router.navigate(['/login']);
     }
   }
 }

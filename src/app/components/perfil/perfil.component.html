@@ -2,19 +2,29 @@
   <!-- Fila de Información del Perfil -->
   <div class="row mb-4">
     <div class="col-md-4">
-      <div class= "ml-2 mb-4">
-        <img
-          [src]="usuario?.imagen"
-          alt="perfil"
-          class="img-fluid rounded-circle border shadow"
-          style="width: 150px; height: 150px; object-fit: cover;">
-      </div>
+      <div class="ml-2 mb-4">
+        <div id="fotoperfil" class="position-relative" style="width: 150px; height: 150px;">
+          <!-- Input de archivo oculto -->
+          <input #cajafile type="file" (change)="subirFichero($event)" style="display: none;" />
 
+          <!-- Imagen de perfil -->
+          <img
+            (click)="editarFotoPerfil()"
+            alt="perfil"
+            class="img-fluid rounded-circle border shadow"
+            [src]="usuario?.imagen || 'assets/images/logotajamar.png'"
+          >
+
+          <!-- Contenedor del icono del lápiz -->
+          <div class="edit-icon position-absolute d-flex justify-content-center align-items-center">
+            <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
           <h5>{{usuario?.nombre}}</h5>
           <p>{{usuario?.email}}</p>
           <div class="d-grid gap-2">
-            <a class="link-info" (click)="cerrarSesion()">Cambiar contraseña</a>
-            <button class="btn btn-danger">Cerrar sesión</button>
+            <a class="link-info" (click)="cambiarContrasena()">Cambiar contraseña</a>
           </div>
         </div>
 

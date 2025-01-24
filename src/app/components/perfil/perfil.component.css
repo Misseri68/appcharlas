@@ -1,0 +1,37 @@
+#fotoperfil {
+  width: 150px;
+  height: 150px;
+}
+
+#fotoperfil img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+#fotoperfil:hover img {
+  border: 3px solid aqua !important;
+  filter: brightness(50%);
+}
+
+#fotoperfil .edit-icon {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+#fotoperfil:hover .edit-icon {
+  opacity: 1;
+}
