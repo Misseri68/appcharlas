@@ -13,25 +13,51 @@ export class RondaService{
 
     constructor(private _loginService: LoginService){}
 
-    getFechaActual():string{
+    getFechaActual(): string {
       const fecha = new Date();
-      const anio = fecha.getFullYear();
-      const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');  // Asegura que el mes tenga dos dígitos
-      const dia = fecha.getDate().toString().padStart(2, '0');  // Asegura que el día tenga dos dígitos
-      return `${anio}-${mes}-${dia}`;
-    }
-    getRondas(): Promise<Ronda[]>{ 
-    return axios.get(this.url,{headers:{
-      'Content-Type':'application/json',
-        'Authorization':'Bearer '+this._loginService.getToken()
-     }}
-    ).then(response=>{
-        return response.data
-    }).catch(error=>{
-      console.log("Error al obtener rondas" + error)
-    });
-
+      return fecha.toISOString().split('T')[0];
     }
 
+    async getRondas(): Promise<Ronda[]> {
+      try {
+        let response = await axios.get(this.url, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + this._loginService.getToken()
+          },
+        });
+        console.log(response.data)
+        return response.data;
+      } catch (error) {
+        console.error("Error al obtener rondas:", error);
+        throw new Error("No se pudieron cargar las rondas");
+      }
+    }
+
+    async getRondaActiva(): Promise<number | null > {
+      try {
+        // Obtener todas las rondas sin filtrar por clase
+        const response = await axios.get(this.url, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + this._loginService.getToken()
+          }
+        });
+
+        const rondas: Ronda[] = response.data;
+        const fechaActual = this.getFechaActual();
+
+        // Buscar la primera ronda activa según fechas
+        const rondaActiva = rondas.find(ronda =>
+          ronda.fechaPresentacion >= fechaActual
+        );
+
+        return rondaActiva?.idRonda || null ;
+
+      } catch (error) {
+        console.error("Error al obtener ronda activa:", error);
+        return null
+      }
+    }
 
 }
