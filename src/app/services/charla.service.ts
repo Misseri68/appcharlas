@@ -9,7 +9,7 @@ import { Comentario } from '../models/Comentario';
     providedIn: 'root',
 })
 export class ServiceCharla {
-    private url = environment.apiCharlas + 'api/charlas/';
+    private url = environment.apiCharlas + 'api/charlas';
 
     constructor(private _loginService: LoginService) { }
 
@@ -17,7 +17,7 @@ export class ServiceCharla {
     // Método para obtener las charlas
 getCharlas() {
     return axios
-        .get(this.url + "charlascurso", {
+        .get(this.url + "/charlascurso", {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + this._loginService.getToken(),
@@ -51,6 +51,35 @@ getCharlas() {
             return null;
         });
 }
+
+postCharla(charla: {
+    idCharla: number;
+    titulo: string;
+    descripcion: string;
+    tiempo: number;
+    fechaPropuesta: string; // Ahora es un string, no un Date
+    idUsuario: number;
+    idEstadoCharla: number;
+    idRonda: number;
+    imagenCharla: string;
+}) {
+    return axios
+        .post(this.url, charla, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + this._loginService.getToken(),
+            },
+        })
+        .then((response) => {
+            console.log('Charla creada:', response.data);
+            return response.data;
+        })
+        .catch((error) => {
+            console.error('Error al crear la charla:', error);
+            throw error;
+        });
+}
+
 
 
 getCharlaPorId(id: number) {

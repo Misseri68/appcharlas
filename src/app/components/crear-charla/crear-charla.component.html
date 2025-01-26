@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="container-crear-charla">
+        <h1 class="title title--h1">Crear charla</h1>
+        <form class="form text" #crearCharlaForm="ngForm">
+            <input #cajatitulo name="cajatitulo" class="form-input" type="text" placeholder="Título">
+            <textarea #cajadescripcion name="cajadescripcion" class="form-textarea" placeholder="Descripción"></textarea>
+            <input #cajaduracion name="cajaduracion" class="form-input" type="text" placeholder="Duración">
+            <input #cajaimagen name="cajaimagen" class="form-input" type="text" placeholder="Imagen">
+            <button class="form-button" (click)="crearCharla()">Crear</button>
+        </form>
+    </div>
+</div>
+

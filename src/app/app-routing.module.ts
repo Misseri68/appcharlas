@@ -1,3 +1,4 @@
+import { CrearCharlaComponent } from './components/crear-charla/crear-charla.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -34,6 +35,10 @@ export const routes: Routes = [
   {
     path: 'detalle-charla/:id',
     component: DetalleCharlaComponent
+  },
+  {
+    path: 'crear-charla',
+    component: CrearCharlaComponent
   }
 
 
