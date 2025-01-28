@@ -35,3 +35,14 @@
 #fotoperfil:hover .edit-icon {
   opacity: 1;
 }
+
+.popups{
+  background: linear-gradient(159deg, rgba(32, 32, 32, 0.5) 0%, rgba(32, 32, 32, 0.5) 40%, rgba(33, 34, 34, 0.5) 75%, rgba(22, 22, 22, 0.43) 100%);
+  display:block!important;
+  position: fixed!important;
+  z-index: 10!important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

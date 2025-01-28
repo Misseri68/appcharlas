@@ -1,3 +1,9 @@
+
+@if(showPopup){
+  <app-changepwd-modal [user]="usuario"  (closePopup)="togglePopup()" class="popups w-100 h-100" ></app-changepwd-modal>
+}
+
+
 <div class="container mt-5">
   <!-- Fila de Información del Perfil -->
   <div class="row mb-4">
@@ -57,3 +63,6 @@
     </div>
   </div>
 </div>
+
+
+

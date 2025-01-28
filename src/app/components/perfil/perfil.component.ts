@@ -6,17 +6,21 @@ import { Usuario } from '../../models/Usuario';
 import { FormsModule } from '@angular/forms';
 import { PostFilesService } from '../../services/post-files.service';
 import { FileModel } from '../../models/FileModel';
+import { ChangepwdModalComponent } from './changepwd-modal/changepwd-modal.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-perfil',
   standalone: true,
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.css',
-  imports: [RouterModule, FormsModule]
+  imports: [RouterModule, FormsModule, ChangepwdModalComponent, CommonModule]
 })
 export class PerfilComponent {
   @ViewChild("cajafile") cajaFileRef!: ElementRef; // Referencia al input de archivo
   usuario: Usuario | null = null;
+  showPopup:boolean =  false;
+
 
   constructor(
     private _loginService: LoginService,
@@ -62,7 +66,13 @@ export class PerfilComponent {
   }
 
   cambiarContrasena() {
-    // Lógica para cambiar la contraseña
+    this.togglePopup();
+  }
+
+  togglePopup() {
+    console.log("popup toggleado")
+
+    this.showPopup = !this.showPopup;
   }
 
   private redirigirALogin() {
@@ -70,4 +80,5 @@ export class PerfilComponent {
       this._router.navigate(['/login']);
     }
   }
+
 }
