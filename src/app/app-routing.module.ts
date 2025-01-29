@@ -5,6 +5,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { DetalleCharlaComponent } from './components/detalle-charla/detalle-charla.component';
+import { CrearCharlaComponent } from './components/crear-charla/crear-charla.component';
 
 export const routes: Routes = [
   {
@@ -34,6 +35,10 @@ export const routes: Routes = [
   {
     path: 'detalle-charla/:id',
     component: DetalleCharlaComponent
+  },
+  {
+    path: 'crear-charla',
+    component: CrearCharlaComponent
   }
 
 
