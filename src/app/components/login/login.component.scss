@@ -1,0 +1,178 @@
+@import "./../../../styles/variables.scss";
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.95);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.contenedor {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFFFFF;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.centrado {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 100px;
+  width: 900px;
+  height: 480px;
+  padding: 20px;
+  border-radius: 10px;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  animation: scaleUp 0.5s ease-in-out;
+}
+
+.izquierda {
+  text-align: center;
+
+  h1 {
+    font-size: 64px;
+    font-weight: bold;
+    margin-top: 40px;
+    animation: fadeIn 0.8s ease-in-out;
+  }
+}
+
+form {
+  text-align: center;
+}
+
+.entradas {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+
+  .input {
+    margin-bottom: 20px;
+    border: none;
+    color: $neutral-color-400;
+    border-bottom: 1px solid $neutral-color-400;
+    padding: 10px 0px;
+    background: none;
+    box-shadow: none;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+    animation: fadeIn 0.6s ease-in-out;
+
+    &::placeholder {
+      color: rgba(128, 128, 128, 0.8);
+      transition: all 0.3s ease-in-out;
+    }
+
+    &:focus {
+      outline: none;
+      color: white;
+      border-bottom: 1px solid white;
+      box-shadow: none;
+      transform: translateY(-2px);
+      transition: all 0.3s ease-in-out;
+      &::placeholder {
+        opacity: 0.3;
+      }
+    }
+
+    &:hover {
+      color: white;
+      border-bottom: 1px solid white;
+      box-shadow: none;
+      transform: translateY(-2px);
+      transition: all 0.3s ease-in-out;
+      &::placeholder {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+.text-danger {
+  color: red;
+  font-size: 14px;
+  animation: slideIn 0.3s ease-in-out;
+}
+
+.registro {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+a {
+  text-decoration: none;
+  color: $primary-color-500;
+  transition: color 0.3s ease-in-out;
+  &:hover {
+    color: lighten($primary-color-500, 100%);
+  }
+}
+
+.button {
+  background-color: $primary-color-600;
+  color: white;
+  border: none;  // Elimina cualquier borde predeterminado
+  outline: none; // Evita el borde al hacer focus en algunos navegadores
+  border-radius: 20px;
+  padding: 10px 20px;
+  transition: all 0.3s ease-in-out;
+  animation: fadeIn 1s ease-in-out;
+  box-shadow: none; // Elimina sombras raras
+  
+  &:hover {
+    background-color: lighten($primary-color-600, 10%);
+    transform: scale(1.05);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}

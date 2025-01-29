@@ -8,12 +8,13 @@ import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.scss'],
   standalone: true,  // Hace que el componente sea standalone
   imports: [CommonModule, ReactiveFormsModule, RouterLink]  // Importa los módulos necesarios dentro del componente
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  formSubmitted = false;
 
 
   constructor(private _service: LoginService, private fb: FormBuilder, private _router: Router) {
@@ -25,6 +26,7 @@ export class LoginComponent {
 
   //Funcion para controlar el click del logueo
   handleLoginClick() {
+    this.formSubmitted = true;
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
       this._service.login(email, password).then(response => {

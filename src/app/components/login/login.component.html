@@ -1,44 +1,42 @@
-<div id="contenedor">
-  <div id="centrado">
-    <div id="izquierda" class="text-center">
-      <h1>Observar</h1>
-      <h1>Aprender</h1>
-      <h1>Crecer</h1>
+<div class="contenedor">
+  <div class="centrado">
+    <div class="izquierda text-center">
+      <h1 class="title title--h1">Observar <br> Aprender <br> Crecer</h1>
     </div>
-    <div id="formContenedor">
+    <div class="form-contenedor">
       <form (ngSubmit)="handleLoginClick()" [formGroup]="loginForm">
-        <h1>Iniciar sesión</h1>
-        <div id="entradas">
+        <h2 class="title title--h2">Iniciar sesión</h2>
+        <div class="entradas" style="padding: 10px;">
           <input
-          type="email"
-          id="cajaEmail"
-          placeholder="Correo de Tajamar"
-          name="cajaemail"
-          formControlName="email"
-        />
-        <small *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger">
-          <span *ngIf="loginForm.get('email')?.errors?.['required']">El correo electrónico es requerido.<br/></span>
-          <span *ngIf="loginForm.get('email')?.errors?.['email']">Por favor, introduzca un correo electrónico válido.<br/></span>
-          <span *ngIf="loginForm.get('email')?.errors?.['invalidDomain']">El correo debe ser de la organización 	{{ '(@tajamar365.com)' }}.<br/></span>
-        </small>
-        <input
-          type="text"
-          id="cajaPass"
-          placeholder="Contraseña"
-          name="cajapass"
-          formControlName="password" type="password"
-        />
-        <small *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
-          La contraseña debe tener al menos 5 caracteres.
-        </small>
+            type="email"
+            class="input"
+            placeholder="Correo de Tajamar"
+            name="cajaemail"
+            formControlName="email"
+          />
+          <small *ngIf="formSubmitted && loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger">
+            <span *ngIf="formSubmitted && loginForm.get('email')?.errors?.['required']">El correo electrónico es requerido.<br/></span>
+            <span *ngIf="formSubmitted && loginForm.get('email')?.errors?.['email']">Por favor, introduzca un correo electrónico válido.<br/></span>
+            <span *ngIf="formSubmitted && loginForm.get('email')?.errors?.['invalidDomain']">El correo debe ser de la organización {{ '(@tajamar365.com)' }}.<br/></span>
+          </small>
+          <input
+            type="password"
+            class="input"
+            placeholder="Contraseña"
+            name="cajapass"
+            formControlName="password"
+          />
+          <small *ngIf="formSubmitted && loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+            La contraseña debe tener al menos 5 caracteres.
+          </small>
+          
         </div>
-
-      <button (submit)="handleLoginClick()" class="mt-3">Iniciar Sesión</button>
+        <button (submit)="handleLoginClick()" class="button">Iniciar Sesión</button>
       </form>
-      <div id="registro" class="mt-3">
-        <p >¿No tienes cuenta?</p>
+      <div class="registro mt-3">
+        <p style="padding-top: 20px;" class="text text--disabled">¿No tienes cuenta?</p>
         <a [routerLink]="['/register']">Darse de alta</a>
-    </div>
+      </div>
     </div>
   </div>
 </div>
