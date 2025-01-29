@@ -30,11 +30,6 @@ export class AppComponent {
 
   }
 
-  // Método para preparar la animación
-  prepareRoute(outlet: RouterOutlet): boolean {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
-  }
-
 
 
 }

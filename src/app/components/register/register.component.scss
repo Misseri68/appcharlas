@@ -30,7 +30,7 @@
   justify-content: center;
   min-height: 100vh;
   color: #FFFFFF;
-  animation: fadeIn 0.5s ease-in-out;
+  animation: fadeIn 0.9s ease-in-out;
 }
 
 /* Sección del título */
@@ -170,6 +170,11 @@ form {
         opacity: 0.5;
       }
     }
+
+     /* Cuando el input tiene texto, el color se mantiene en blanco */
+  &:not(:placeholder-shown) {
+    color: white;
+  }
   }
 }
 

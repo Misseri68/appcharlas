@@ -1,74 +1,40 @@
 @import "./../../../styles/variables.scss";
 
+/* Animaciones */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes scaleUp {
-  from {
-    transform: scale(0.95);
-  }
-  to {
-    transform: scale(1);
-  }
+  from { transform: scale(0.95); }
+  to { transform: scale(1); }
 }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* Contenedor principal */
 .contenedor {
   width: 100%;
-  height: 100%;
+  height: 100vh; /* Para que ocupe toda la pantalla */
   display: flex;
   justify-content: center;
   align-items: center;
   color: #FFFFFF;
-  animation: fadeIn 0.5s ease-in-out;
+  animation: fadeIn 0.9s ease-in-out;
 }
 
+/* Card centrada */
 .centrado {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  column-gap: 100px;
+  column-gap: 50px;
   width: 900px;
   height: 480px;
   padding: 20px;
   border-radius: 10px;
-  position: absolute;
-  margin: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
   animation: scaleUp 0.5s ease-in-out;
 }
 
+/* Sección izquierda */
 .izquierda {
   text-align: center;
 
@@ -80,10 +46,12 @@
   }
 }
 
+/* Formulario */
 form {
   text-align: center;
 }
 
+/* Inputs */
 .entradas {
   display: flex;
   flex-direction: column;
@@ -129,15 +97,22 @@ form {
         opacity: 0.5;
       }
     }
+
+    /* Cuando el input tiene texto, el color se mantiene en blanco */
+  &:not(:placeholder-shown) {
+    color: white;
+  }
   }
 }
 
+/* Mensajes de error */
 .text-danger {
   color: red;
   font-size: 14px;
-  animation: slideIn 0.3s ease-in-out;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
+/* Sección de registro */
 .registro {
   display: flex;
   flex-direction: column;
@@ -146,17 +121,18 @@ form {
   animation: fadeIn 0.8s ease-in-out;
 }
 
+/* Links */
 a {
   text-decoration: none;
   color: $primary-color-500;
   transition: color 0.3s ease-in-out;
   &:hover {
-    color: lighten($primary-color-500, 100%);
+    color: lighten($primary-color-500, 20%);
   }
 }
 
 .button {
-  background-color: $primary-color-600;
+  background-color: $primary-color-700;
   color: white;
   border: none;  // Elimina cualquier borde predeterminado
   outline: none; // Evita el borde al hacer focus en algunos navegadores
@@ -168,11 +144,20 @@ a {
   
   &:hover {
     background-color: lighten($primary-color-600, 10%);
-    transform: scale(1.05);
   }
 
   &:focus {
     outline: none;
     box-shadow: none;
+  }
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .centrado {
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    padding: 30px;
   }
 }
