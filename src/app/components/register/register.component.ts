@@ -11,13 +11,14 @@ import { ReactiveFormsModule } from '@angular/forms'
   selector: 'app-register',
   standalone: true,
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css',
+  styleUrl: './register.component.scss',
   imports: [ RouterLink, CommonModule, ReactiveFormsModule],
 })
 export class RegisterComponent {
 
   esAlumno: boolean = true;
   registerForm: FormGroup;
+  formSubmitted = false;
 
 
   constructor(private fb: FormBuilder, private _router: Router, private _registerServ: RegisterService) {
@@ -27,6 +28,7 @@ export class RegisterComponent {
 
   onSubmit() {
 
+    this.formSubmitted = true;
   if(this.registerForm.valid) {
     let rol = this.esAlumno ? 2 : 1;
     const { nombre, apellido, email, password, confirmPassword, accessCode } = this.registerForm.value;

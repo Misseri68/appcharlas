@@ -1,0 +1,180 @@
+@import "./../../../styles/variables.scss";
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.95); }
+  to { transform: scale(1); }
+}
+
+/* Contenedor principal */
+.contenedor {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFFFFF;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Card centrada con separación entre izquierda y derecha */
+.centrado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 750px;
+  padding: 40px;
+  border-radius: 12px;
+  animation: scaleUp 0.5s ease-in-out;
+  gap: 40px; /* SEPARACIÓN ENTRE IZQUIERDA Y DERECHA */
+}
+
+/* Sección izquierda */
+.izquierda {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* CENTRADO HORIZONTAL */
+  text-align: center; /* CENTRADO DEL TEXTO */
+  justify-content: center; /* CENTRADO VERTICAL */
+  gap: 20px;
+
+  h1 {
+    font-size: 42px;
+    font-weight: bold;
+    color: white;
+  }
+}
+
+/* Botones Switch */
+.botones-switch {
+  display: flex;
+  gap: 10px;
+
+  .nav-link {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    background-color: $neutral-color-400;
+    color: #fff;
+
+    &.active {
+      background-color: $primary-color-500;
+      transform: scale(1.08);
+    }
+
+    &:hover {
+      background-color: lighten($neutral-color-400, 12%);
+    }
+  }
+}
+
+/* Sección derecha */
+.derecha {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Formulario */
+form {
+  width: 100%;
+}
+
+/* Inputs */
+.entradas {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  label {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .input {
+    margin-bottom: 20px;
+    border: none;
+    color: $neutral-color-400;
+    border-bottom: 1px solid $neutral-color-400;
+    padding: 10px 0px;
+    background: none;
+    box-shadow: none;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+    animation: fadeIn 0.6s ease-in-out;
+
+    &::placeholder {
+      color: rgba(128, 128, 128, 0.8);
+      transition: all 0.3s ease-in-out;
+    }
+
+    &:focus {
+      outline: none;
+      color: white;
+      border-bottom: 1px solid white;
+      box-shadow: none;
+      transform: translateY(-2px);
+      transition: all 0.3s ease-in-out;
+      &::placeholder {
+        opacity: 0.3;
+      }
+    }
+
+    &:hover {
+      color: white;
+      border-bottom: 1px solid white;
+      box-shadow: none;
+      transform: translateY(-2px);
+      transition: all 0.3s ease-in-out;
+      &::placeholder {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+/* Botón */
+.button {
+  background-color: $primary-color-600;
+  color: white;
+  border: none;  // Elimina cualquier borde predeterminado
+  outline: none; // Evita el borde al hacer focus en algunos navegadores
+  border-radius: 20px;
+  padding: 10px 20px;
+  transition: all 0.3s ease-in-out;
+  animation: fadeIn 1s ease-in-out;
+  box-shadow: none; // Elimina sombras raras
+  
+  &:hover {
+    background-color: lighten($primary-color-600, 10%);
+    transform: scale(1.05);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .centrado {
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    padding: 30px;
+  }
+
+  .izquierda, .derecha {
+    align-items: center;
+  }
+}
