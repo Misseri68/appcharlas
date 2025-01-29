@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { RondaService } from '../../services/ronda.service';
 import { LoginService } from '../../services/login.service';
 import { Ronda } from '../../models/Rondas';
+import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,23 +19,31 @@ import { Ronda } from '../../models/Rondas';
 
 })
 export class DashboardComponent implements OnInit {
-  constructor(private _charlaService: ServiceCharla,private _loginService:LoginService ,private _rondaService: RondaService) { }
+  constructor(private serviceCharla: ServiceCharla, private _usuarioServ: UserService, private _router: Router, private _loginService: LoginService,private _rondaService: RondaService) {
+  }
   public charlas: Charla[] = [];
   private rondas: Ronda[] = [];
   private rondaActual: Ronda | undefined;  // Objeto para almacenar la ronda activa
   private isLoading: boolean = true;
-
-  ngOnInit(): void {
-      this.loadCharlas();
-      this.loadCharlasActivas()
+  datosUsuario = {
+    nombreUsuario: '',
+    cursoUsuario: '',
+    rolUsuario: '',
 
   }
+  ngOnInit(): void {
+    this.redirigirALogin();
+    this.loadCharlas();
+    this.loadDatosUsuario();
+    this.loadCharlasActivas()
+  }
 
-  private loadCharlas(){
-    this._charlaService.getCharlas().then((data) => {
+  private loadCharlas() {
+    this.serviceCharla.getCharlas().then((data) => {
       if (data) {
         this.charlas = data;
         console.log('✅Charlas cargadas:', this.charlas);
+        
       } else {
         console.error('No se pudieron cargar las charlas');
       }
@@ -42,10 +52,27 @@ export class DashboardComponent implements OnInit {
   private async  loadCharlasActivas(){
      const idRondaActual  = await this._rondaService.getRondaActiva()
      if(idRondaActual){
-      await  this._charlaService.getCharlasPorRonda(idRondaActual )
+      await  this.serviceCharla.getCharlasPorRonda(idRondaActual )
      }
+    }
 
+  private loadDatosUsuario() {
+    this._usuarioServ.getPerfil().then(usuario => {
+      if (usuario != null) {
+        this.datosUsuario = {
+          nombreUsuario: usuario.nombre,
+          cursoUsuario: usuario.curso || 'Curso',
+          rolUsuario: usuario.role || 'Rol'
+        }
+      }
+    })
   }
 
+  private redirigirALogin() {
+     if(this._loginService.getToken() === null ){
+      this._router.navigate(['/login'])
+     }
+  }
 }
+
 
