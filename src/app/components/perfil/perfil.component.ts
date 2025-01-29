@@ -8,26 +8,33 @@ import { PostFilesService } from '../../services/post-files.service';
 import { FileModel } from '../../models/FileModel';
 import { ChangepwdModalComponent } from './changepwd-modal/changepwd-modal.component';
 import { CommonModule } from '@angular/common';
+import { TarjetaCharlaComponent } from "../tarjeta-charla/tarjeta-charla.component";
+import { Charla } from '../../models/Charla';
+import { ServiceCharla } from '../../services/charla.service';
 
 @Component({
   selector: 'app-perfil',
   standalone: true,
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.css',
-  imports: [RouterModule, FormsModule, ChangepwdModalComponent, CommonModule]
+  imports: [RouterModule, FormsModule, ChangepwdModalComponent, CommonModule, TarjetaCharlaComponent]
 })
 export class PerfilComponent {
-  @ViewChild("cajafile") cajaFileRef!: ElementRef; // Referencia al input de archivo
+  @ViewChild("cajafile") cajaFileRef!: ElementRef;
   usuario: Usuario | null = null;
-  showPopup:boolean =  false;
+  showPopup: boolean = false;
+  charlasAceptadas: Charla[] = [];
+  charlasPropuestas: Charla[] = [];
+
 
 
   constructor(
     private _loginService: LoginService,
     private _router: Router,
     private _userService: UserService,
-    private _postFilesService: PostFilesService
-  ) {}
+    private _postFilesService: PostFilesService,
+    private _charlaService: ServiceCharla
+  ) { }
 
   ngOnInit(): void {
     this.redirigirALogin();
@@ -36,15 +43,41 @@ export class PerfilComponent {
         this.usuario = usuario;
       }
     });
+    this.cargarCharlas();
   }
 
-  // Método para abrir el selector de archivos
+  async cargarCharlas() {
+    this._charlaService.getCharlasUsuario().then(items => {
+      //Conversión de response.data a charlas.
+      const charlas: Charla[] = items.map(
+        (item: any) =>
+          new Charla(
+            item.charla.idCharla,
+            item.charla.titulo,
+            item.charla.descripcion,
+            item.charla.tiempo,
+            new Date(item.charla.fechaPropuesta),
+            item.charla.imagenCharla,
+            item.charla.idUsuario,
+            item.charla.usuario,
+            item.charla.idEstadoCharla,
+            item.charla.estadoCharla,
+            item.charla.idRonda,
+            item.charla.idCurso,
+            item.charla.nombreCurso
+          )
+      );
+      this.charlasAceptadas = charlas.filter(charla=> charla.idEstadoCharla == 2)
+      this.charlasPropuestas = charlas.filter(charla=> charla.idEstadoCharla == 1)
+    })
+
+  }
+
   editarFotoPerfil(): void {
     this.cajaFileRef.nativeElement.click();
   }
 
 
-  //TODO avisar con un sweetalert o lo que sea al usuario de que tiene que salir y volver a entrar de su cuenta para ver los cambios.
   subirFichero(event: any): void {
     const file = event.target.files[0];
     if (!file) return;
@@ -56,7 +89,7 @@ export class PerfilComponent {
         new Uint8Array(buffer).reduce((data, byte) => data + String.fromCharCode(byte), '')
       );
 
-      let idUsuario =   this.usuario?.idUsuario || -1;
+      let idUsuario = this.usuario?.idUsuario || -1;
       const newFileModel = new FileModel(file.name, base64);
       this._postFilesService.postFile(newFileModel, idUsuario).subscribe(response => {
         console.log("Respuesta del servidor:", response);

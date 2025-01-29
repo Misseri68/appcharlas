@@ -41,25 +41,31 @@
     <div class="col">
       <h2>Tus charlas</h2>
       <hr>
-      <div class="list-group">
-        <!-- Charla 1 -->
-        <div class="list-group-item">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">Ramas de Github</h5>
-            <small>30 min.</small>
-          </div>
-          <p class="mb-1">Aceptada</p>
-        </div>
+      @if(charlasAceptadas.length > 0 || charlasPropuestas.length > 0){
+        <div>
 
-        <!-- Charla 2 -->
-        <div class="list-group-item">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">Integrar IA en un proyecto de Angular</h5>
-            <small>45 min.</small>
-          </div>
-          <p class="mb-1">Propuesta</p>
+          @if(charlasPropuestas.length > 0){
+            <h5>Charlas Propuestas</h5>
+              <app-tarjeta-charla *ngFor="let charla of charlasPropuestas" [charla]="charla"></app-tarjeta-charla>
+          }
+          @else {
+            Todavía no has propuesto ninguna charla.
+          }
+          @if(charlasAceptadas.length > 0){
+            <h5>Charlas Aceptadas</h5>
+              <app-tarjeta-charla *ngFor="let charla of charlasAceptadas" [charla]="charla"></app-tarjeta-charla>
+          }@else{
+            <h5>Charlas Aceptadas</h5>
+
+            Todavía no tienes charlas aceptadas.
+          }
+
         </div>
-      </div>
+      }
+      @else{
+        <h5>Todavía no has creado ninguna charla.</h5>
+      }
+
     </div>
   </div>
 </div>

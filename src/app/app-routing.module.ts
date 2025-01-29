@@ -34,7 +34,11 @@ export const routes: Routes = [
   {
     path: 'detalle-charla/:id',
     component: DetalleCharlaComponent
-  }
+  },
+  {
+    path: '**',
+    redirectTo: 'dashboard'
+  },
 
 
 ];
