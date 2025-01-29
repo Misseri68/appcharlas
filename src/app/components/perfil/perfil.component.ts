@@ -9,6 +9,7 @@ import { FileModel } from '../../models/FileModel';
 import { ChangepwdModalComponent } from './changepwd-modal/changepwd-modal.component';
 import { CommonModule } from '@angular/common';
 import { TarjetaCharlaComponent } from "../tarjeta-charla/tarjeta-charla.component";
+import { AlumnosTabsComponent } from '../alumnos-tabs/alumnos-tabs.component';
 import { Charla } from '../../models/Charla';
 import { ServiceCharla } from '../../services/charla.service';
 
@@ -17,7 +18,7 @@ import { ServiceCharla } from '../../services/charla.service';
   standalone: true,
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.css',
-  imports: [RouterModule, FormsModule, ChangepwdModalComponent, CommonModule, TarjetaCharlaComponent]
+  imports: [RouterModule, FormsModule, ChangepwdModalComponent, CommonModule, TarjetaCharlaComponent, AlumnosTabsComponent]
 })
 export class PerfilComponent {
   @ViewChild("cajafile") cajaFileRef!: ElementRef;
@@ -25,6 +26,7 @@ export class PerfilComponent {
   showPopup: boolean = false;
   charlasAceptadas: Charla[] = [];
   charlasPropuestas: Charla[] = [];
+  isProfe: boolean = false;
 
 
 
@@ -41,6 +43,9 @@ export class PerfilComponent {
     this._userService.getPerfil().then(usuario => {
       if (usuario != null) {
         this.usuario = usuario;
+        if(this.usuario.role == "PROFESOR"){
+          this.isProfe = true;
+        }
       }
     });
     this.cargarCharlas();

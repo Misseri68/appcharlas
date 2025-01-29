@@ -35,39 +35,43 @@
         </div>
 
   </div>
+@if (!isProfe){
+<!-- Fila de Charlas -->
+<div class="row">
+  <div class="col">
+    <h2>Tus charlas</h2>
+    <hr>
+    @if(charlasAceptadas.length > 0 || charlasPropuestas.length > 0){
+      <div>
 
-  <!-- Fila de Charlas -->
-  <div class="row">
-    <div class="col">
-      <h2>Tus charlas</h2>
-      <hr>
-      @if(charlasAceptadas.length > 0 || charlasPropuestas.length > 0){
-        <div>
+        @if(charlasPropuestas.length > 0){
+          <h5>Charlas Propuestas</h5>
+            <app-tarjeta-charla *ngFor="let charla of charlasPropuestas" [charla]="charla"></app-tarjeta-charla>
+        }
+        @else {
+          Todavía no has propuesto ninguna charla.
+        }
+        @if(charlasAceptadas.length > 0){
+          <h5>Charlas Aceptadas</h5>
+            <app-tarjeta-charla *ngFor="let charla of charlasAceptadas" [charla]="charla"></app-tarjeta-charla>
+        }@else{
+          <h5>Charlas Aceptadas</h5>
 
-          @if(charlasPropuestas.length > 0){
-            <h5>Charlas Propuestas</h5>
-              <app-tarjeta-charla *ngFor="let charla of charlasPropuestas" [charla]="charla"></app-tarjeta-charla>
-          }
-          @else {
-            Todavía no has propuesto ninguna charla.
-          }
-          @if(charlasAceptadas.length > 0){
-            <h5>Charlas Aceptadas</h5>
-              <app-tarjeta-charla *ngFor="let charla of charlasAceptadas" [charla]="charla"></app-tarjeta-charla>
-          }@else{
-            <h5>Charlas Aceptadas</h5>
+          Todavía no tienes charlas aceptadas.
+        }
 
-            Todavía no tienes charlas aceptadas.
-          }
+      </div>
+    }
+    @else{
+      <h5>Todavía no has creado ninguna charla.</h5>
+    }
 
-        </div>
-      }
-      @else{
-        <h5>Todavía no has creado ninguna charla.</h5>
-      }
-
-    </div>
   </div>
+</div>
+}@else {
+  <app-alumnos-tabs></app-alumnos-tabs>
+}
+
 </div>
 
 

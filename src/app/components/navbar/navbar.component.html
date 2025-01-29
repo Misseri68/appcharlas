@@ -14,7 +14,13 @@
       <li><a [routerLink]="['/dashboard']" class="navbar__link" routerLinkActive="navbar__link--active"
         [routerLinkActiveOptions]="{ exact: true }">Dashboard</a></li>
       <li><a [routerLink]="['/perfil']" class="navbar__link" routerLinkActive="navbar__link--active">Mi perfil</a></li>
-      <li><a [routerLink]="['/crear-charla']" class="navbar__link" routerLinkActive="navbar__link--active">Crear charla</a></li>
+      @if(!isProfe){
+        <li><a [routerLink]="['/crear-charla']" class="navbar__link" routerLinkActive="navbar__link--active">Crear charla</a></li>
+      }
+      @else {
+        <li><a [routerLink]="['/cursos']" class="navbar__link" routerLinkActive="navbar__link--active">Cursos</a></li>
+        <li><a [routerLink]="['/rondas']" class="navbar__link" routerLinkActive="navbar__link--active">Rondas</a></li>
+      }
     </ul>
 
 
