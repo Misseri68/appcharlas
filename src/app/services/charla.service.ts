@@ -7,6 +7,7 @@ import axios from 'axios';
 import { RondaService } from './ronda.service';
 import { Comentario } from '../models/Comentario';
 
+import { Charlapost } from '../models/Charlapost';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,24 @@ export class ServiceCharla {
   // Método para agregar otras funciones relacionadas con charlas (si es necesario)
   // Método para obtener las charlas
   // Método para obtener las charlas
+
+  createCharla(charla: Charlapost): Promise<any> {
+    return axios.post(this.url, charla, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + this._loginService.getToken(),
+      }
+    })
+      .then(response => {
+        console.log('Charla creada:', response.data);
+        return response.data;
+      })
+      .catch(error => {
+        console.error('Error al crear la charla:', error);
+        throw error;
+      });
+  }
+
 
   getCharlas() {
     return axios
@@ -127,7 +146,6 @@ export class ServiceCharla {
       throw new Error('Error al cargar las exposiciones');
     }
   }
-
 
 
 

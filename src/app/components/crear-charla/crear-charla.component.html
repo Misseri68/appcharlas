@@ -1,0 +1,13 @@
+<h1>Crear charla</h1>
+<form #crearCharlaForm="ngForm">
+    <input type="text" #cajatitulo name="cajatitulo" placeholder="Titulo" class="form-control"/>
+    <!-- vale ahora necesito descripcion, tiempo e imagen -->
+        <input type="text" #cajadescripcion name="cajadescripcion" placeholder="Descripción" class="form-control"/>
+        <input type="text" #cajatiempo name="cajatiempo" placeholder="Tiempo" class="form-control"/>
+        <label>Imagen de la charla</label>
+        <br>
+        <button>Subir archivo</button>
+        <!-- <input type="text" #cajaimagen name="cajaimagen" placeholder="Imagen" class="form-control"/> -->
+         <br>
+        <button type="submit" class="btn btn-primary" (click)="crearCharla()">Crear charla</button>
+</form>

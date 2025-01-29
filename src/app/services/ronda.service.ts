@@ -9,7 +9,7 @@ import { Ronda } from '../models/Rondas';
 })
 
 export class RondaService{
-   private url = environment.apiCharlas + 'api/Rondas/';
+   private url = environment.apiCharlas + 'api/Rondas/RondasCurso';
 
     constructor(private _loginService: LoginService){}
 
