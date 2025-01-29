@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { ServiceCharla } from '../../services/charla.service';
 import { Charlapost } from '../../models/Charlapost';
 import { UserService } from '../../services/user.service';
+import { RondaService } from '../../services/ronda.service';
 
 @Component({
   selector: 'app-crear-charla',
@@ -18,15 +19,18 @@ export class CrearCharlaComponent implements OnInit{
   @ViewChild('cajatiempo') cajatiempo!: ElementRef;
   @ViewChild('cajaimagen') cajaimagen!: ElementRef;
   public usuarioId: number | null = null; // ID del usuario logueado
+  public rondaActivaId: number | null = null; // ID de la ronda activa
 
   constructor(
     private _serviceCharla: ServiceCharla,
-    private _serviceUsuario: UserService
+    private _serviceUsuario: UserService,
+    private _serviceRonda: RondaService
   ) { }
 
 
   async ngOnInit(): Promise<void> {
       await this.obtenerUsuarioLogueado();
+      await this.obtenerRondaActual();
   }
 
   crearCharla():void {
@@ -41,6 +45,14 @@ export class CrearCharlaComponent implements OnInit{
       alert('Debes estar logueado para crear una charla.');
       return;
     }
+
+    if (this.rondaActivaId === null) {
+      console.error('Error: Ronda no identificada.');
+      alert('Debes seleccionar una ronda para crear una charla.');
+      return;
+    }
+
+
     
     let nuevaCharla = new Charlapost
     (
@@ -51,7 +63,7 @@ export class CrearCharlaComponent implements OnInit{
       new Date(),
       this.usuarioId, //idUsuario (esto hay que recuperarlo dinamicamente)
       1, //idEstadoCharla
-      1, //idRonda
+      this.rondaActivaId, //idRonda
       imagen
     )
 
@@ -74,6 +86,15 @@ export class CrearCharlaComponent implements OnInit{
       this.usuarioId = perfil?.idUsuario || null;
     } catch (error) {
       console.error('Error al obtener el usuario logueado:', error);
+    }
+  }
+
+  async obtenerRondaActual(): Promise<void> {
+    try {
+      this.rondaActivaId = await this._serviceRonda.getRondaActiva();
+      console.log("👁️👁️👁️👁️ Ronda activa: ", this.rondaActivaId);
+    }catch (error) {
+      console.error('Error al obtener la ronda activa:', error);
     }
   }
 
