@@ -54,14 +54,13 @@ export class RegisterComponent {
     //TODO ALERTAR DE QUE ES INVALIDO
   }
 
-
   }
 
   crearFormGroup() {
     return this.registerForm = this.fb.group({
       nombre: ['', [Validators.required]],
       apellido: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email, this.emailDomainValidator('.tajamar365.com')]],
+      email: ['', [Validators.required, Validators.email, this.emailDomainValidator('@tajamar365.com')]],
       password: ['', [Validators.required, Validators.minLength(5)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(5)]],
       accessCode: ['', [Validators.required]]

@@ -1,4 +1,5 @@
 import { Charla } from './../models/Charla';
+
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { LoginService } from './login.service';
@@ -6,16 +7,20 @@ import axios from 'axios';
 import { RondaService } from './ronda.service';
 import { Comentario } from '../models/Comentario';
 
+
 @Injectable({
     providedIn: 'root',
 })
 export class ServiceCharla {
     private url = environment.apiCharlas + 'api/charlas/';
 
+
     constructor(private _loginService: LoginService, private _rondaService: RondaService) { }
 
     // Método para agregar otras funciones relacionadas con charlas (si es necesario)
     // Método para obtener las charlas
+    // Método para obtener las charlas
+
 getCharlas() {
     return axios
         .get(this.url + "charlascurso", {
@@ -122,6 +127,4 @@ async getCharlasPorRonda(idRonda: number): Promise<Charla[]> {
       throw new Error('Error al cargar las exposiciones');
     }
   }
-
-
 }

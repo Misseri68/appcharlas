@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { PruebaComponent } from './components/prueba/prueba.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { DetalleCharlaComponent } from './components/detalle-charla/detalle-charla.component';
 
 export const routes: Routes = [
   {
@@ -15,17 +15,13 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    data: { animation: 'DashboardPage' }
-  },
-  {
-    path: 'prueba',
-    component: PruebaComponent
+    // data: { animation: 'DashboardPage' }
   },
   {
     path: 'perfil',
     component: PerfilComponent,
-    data: { animation: 'PerfilPage' }
-    
+    // data: { animation: 'PerfilPage' }
+
   },
   {
     path: 'register',
@@ -34,6 +30,10 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'detalle-charla/:id',
+    component: DetalleCharlaComponent
   }
 
 

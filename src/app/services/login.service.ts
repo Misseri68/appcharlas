@@ -9,7 +9,7 @@ export class LoginService {
 
   private tokenKey = 'authToken';
 
-  url = environment.apiCharlas + "api/Auth/Login";
+  apiUrl = environment.apiCharlas
 
   constructor() { }
 
@@ -17,7 +17,8 @@ export class LoginService {
   //Devuelve "200" si se ha logueado correctamente, devuelve -1 si ha habido algún error.
 
   login(email: string, password: string){
-    return axios.post(this.url, {
+    let url = this.apiUrl + "api/Auth/Login";
+    return axios.post(url, {
       userName: email, //Por algún motivo se llama userName cuando hay que poner el email realmente.
       password: password
     }).then(response => {
@@ -25,11 +26,26 @@ export class LoginService {
       this.setToken(token);
       return response.status;
     }).catch(error => {
-      console.log("ha habido un error");
       console.log(error);
-      return "-1";
+      return -1
     });
   }
+
+  cambiarContraseña(newPwd: string){
+    let url = this.apiUrl + 'api/usuarios/updatepasswordusuario'
+    const pwdBody = {
+      "newPassword" : newPwd
+    }
+    return axios.put(url,  pwdBody, {
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": "Bearer " +  this.getToken()
+      }
+    }).then(response => {
+      return response.status;
+    })
+  }
+
 
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);

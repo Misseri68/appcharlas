@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { LoginService } from '../../services/login.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +12,12 @@ import { LoginService } from '../../services/login.service';
 })
 export class NavbarComponent {
 
+  imagen :string = 'assets/images/test.jpg';
+
+  constructor(private _loginService: LoginService, private _userServ: UserService, private _router: Router) { 
+    this.getImagenPerfil();
+  }
+
   showPopup: boolean = false;
 
   togglePopup(): void {
@@ -18,9 +25,21 @@ export class NavbarComponent {
     console.log('Popup visible:', this.showPopup);
   }
 
+  getImagenPerfil(){
+    console.log("Hola")
+    this._userServ.getPerfil().then(perfil => {
+      if(perfil?.imagen){
+        this.imagen = perfil.imagen;
+        console.log(this.imagen)
+      }else{
+        this.imagen = 'assets/images/userdefault.png'
+      }
+    })
+  }
+
   logout(): void {
-    console.log('Cerrar sesión');
-    // Lógica para cerrar sesión
+    this._loginService.clearToken();
+    this._router.navigate(['/login']);
   }
 
 }

@@ -1,0 +1,36 @@
+<div class="popup">
+  <h1>Cambiar Contraseña</h1>
+  <button (click)="onClose()" class="close-button">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  <form [formGroup]="changePasswordForm" (ngSubmit)="onSubmit()">
+    <!-- Contraseña Actual -->
+    <div class="mb-3">
+      <label>Contraseña Actual</label>
+      <input type="password" class="form-control" formControlName="currentPassword" required>
+    </div>
+
+    <!-- Nueva Contraseña -->
+    <div class="mb-3">
+      <label>Nueva Contraseña</label>
+      <input type="password" class="form-control" formControlName="newPassword" required>
+      <small class="text-danger" *ngIf="changePasswordForm.get('newPassword')?.hasError('minlength')">
+        La contraseña debe tener al menos 5 caracteres.
+      </small>
+    </div>
+
+    <!-- Confirmar Nueva Contraseña -->
+    <div class="mb-3">
+      <label>Confirmar Nueva Contraseña</label>
+      <input type="password" class="form-control" formControlName="confirmPassword" required>
+      <small class="text-danger" *ngIf="changePasswordForm.hasError('passwordMismatch')">
+        Las contraseñas no coinciden.
+      </small>
+    </div>
+
+    <!-- Botón de envío -->
+    <button type="submit" class="btn btn-primary" [disabled]="changePasswordForm.invalid">
+      Cambiar Contraseña
+    </button>
+  </form>
+</div>

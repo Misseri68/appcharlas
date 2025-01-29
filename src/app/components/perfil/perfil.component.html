@@ -1,60 +1,68 @@
-<div class="container mt-4">
-  <div class="row align-items-center">
-    <!-- Imagen del perfil -->
-    <div class="col-md-4 text-center">
-      <img
-        [src]="usuario?.imagen"
-        alt="perfil"
-        class="img-fluid rounded-circle border shadow"
-        style="width: 150px; height: 150px; object-fit: cover;">
-    </div>
 
-    <!-- Detalles del usuario -->
-    <div class="col-md-8">
-      <h3 class="text-primary">Perfil de Usuario</h3>
-      <ul class="list-group shadow">
-        <li class="list-group-item">
-          <strong>Nombre:</strong> {{usuario?.nombre}}
-        </li>
-        <li class="list-group-item">
-          <strong>Apellidos:</strong> {{usuario?.apellidos}}
-        </li>
-        <li class="list-group-item">
-          <strong>Email:</strong> {{usuario?.email}}
-        </li>
-        <li class="list-group-item">
-          <strong>Estado:</strong> {{usuario?.estadoUsuario}}
-        </li>
-        <li class="list-group-item">
-          <strong>Role:</strong> {{usuario?.idRole}}
-        </li>
-        <li class="list-group-item">
-          <strong>Id:</strong> {{usuario?.idUsuario}}
-        </li>
-      </ul>
-    </div>
+@if(showPopup){
+  <app-changepwd-modal [user]="usuario"  (closePopup)="togglePopup()" class="popups w-100 h-100" ></app-changepwd-modal>
+}
+
+
+<div class="container mt-5">
+  <!-- Fila de Información del Perfil -->
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <div class="ml-2 mb-4">
+        <div id="fotoperfil" class="position-relative" style="width: 150px; height: 150px;">
+          <!-- Input de archivo oculto -->
+          <input #cajafile type="file" (change)="subirFichero($event)" style="display: none;" />
+
+          <!-- Imagen de perfil -->
+          <img
+            (click)="editarFotoPerfil()"
+            alt="perfil"
+            class="img-fluid rounded-circle border shadow"
+            [src]="usuario?.imagen || 'assets/images/logotajamar.png'"
+          >
+
+          <!-- Contenedor del icono del lápiz -->
+          <div class="edit-icon position-absolute d-flex justify-content-center align-items-center">
+            <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+          <h5>{{usuario?.nombre}}</h5>
+          <p>{{usuario?.email}}</p>
+          <div class="d-grid gap-2">
+            <a class="link-info" (click)="cambiarContrasena()">Cambiar contraseña</a>
+          </div>
+        </div>
+
   </div>
 
-  <!-- Botón de cerrar sesión -->
-  <div class="row mt-4">
-    <div class="col text-center">
-      <button
-        class="btn btn-info shadow-sm px-4 py-2"
-        (click)="editarPerfil()">
-        Editar perfil
-      </button>
-      <button
-        class="btn btn-danger shadow-sm px-4 py-2"
-        (click)="cerrarSesion()">
-        Salir
-      </button>
-      <div>
-        <form #updateUserForm="ngForm">
-          <input type="text" class="form-control" id="nombre" #cajanombre [defaultValue]="usuario?.nombre">
-          <input type="text" class="form-control" id="apellidos" #cajaapellidos [defaultValue]="usuario?.apellidos">
-          <input type="text" class="form-control" id="email" #cajaemail [defaultValue]="usuario?.email">
-        </form>
+  <!-- Fila de Charlas -->
+  <div class="row">
+    <div class="col">
+      <h2>Tus charlas</h2>
+      <hr>
+      <div class="list-group">
+        <!-- Charla 1 -->
+        <div class="list-group-item">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Ramas de Github</h5>
+            <small>30 min.</small>
+          </div>
+          <p class="mb-1">Aceptada</p>
+        </div>
+
+        <!-- Charla 2 -->
+        <div class="list-group-item">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Integrar IA en un proyecto de Angular</h5>
+            <small>45 min.</small>
+          </div>
+          <p class="mb-1">Propuesta</p>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+
+
