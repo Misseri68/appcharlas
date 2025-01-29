@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
-import { routerTransition } from './animations/animations';
+// import { routerTransition } from './animations/animations';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { routerTransition } from './animations/animations';
   encapsulation: ViewEncapsulation.None, // Desactiva el encapsulamiento
   imports: [NavbarComponent, RouterModule, RouterOutlet],
   standalone: true,
-  animations: [routerTransition]
+  // animations: [routerTransition]
 })
 export class AppComponent {
 
