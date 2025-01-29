@@ -121,7 +121,7 @@ async getCharlasPorRonda(idRonda: number): Promise<Charla[]> {
         }
       });
       console.log(response.data)
-      return response.data;
+        return response.data;
     } catch (error) {
       console.error('Error obteniendo exposiciones:', error);
       throw new Error('Error al cargar las exposiciones');

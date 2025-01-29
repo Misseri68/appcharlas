@@ -8,13 +8,16 @@ import { Usuario } from '../../models/Usuario';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RondaService } from '../../services/ronda.service';
+import { ServiceVoto } from '../../services/voto.service';
+import { Votacion } from '../../models/Votacion';
 
 @Component({
   selector: 'app-detalle-charla',
   standalone: true,
   templateUrl: './detalle-charla.component.html',
   styleUrls: ['./detalle-charla.component.scss'],
-  providers: [ServiceComentario, ServiceCharla, UserService],
+  providers: [ServiceComentario, ServiceCharla, UserService, RondaService, ServiceVoto],
   imports: [CommonModule, FormsModule],
 })
 export class DetalleCharlaComponent implements OnInit {
@@ -24,19 +27,26 @@ export class DetalleCharlaComponent implements OnInit {
   public usuarioId: number | null = null; // ID del usuario logueado
   fotoPerfilUsuario: string = 'assets/images/test.jpg';
   public nombreUsuario: string = '';
-
+  public numVotos: number = 0;
+  public voto !: Votacion
 
   constructor(
     private _route: ActivatedRoute,
     private _charlaService: ServiceCharla,
     private _comentarioService: ServiceComentario,
-    private _userService: UserService
-  ) { }
+    private _userService: UserService,
+    private _rondaService : RondaService,
+    private _votoService : ServiceVoto,
+   
+  ) { 
+   
+  }
 
   async ngOnInit(): Promise<void> {
     const id = this._route.snapshot.paramMap.get('id'); // Obtener el ID de la charla
     await this.obtenerUsuarioLogueado(); // Obtener el ID del usuario logueado
     this.getImagenPerfil();
+    this.getVotos()
 
     if (id) {
       try {
@@ -99,4 +109,32 @@ export class DetalleCharlaComponent implements OnInit {
       }
     });
   }
+
+   async getVotos(){
+      const rondaActiva = await this._rondaService.getRondaActiva()
+      const id = this._route.snapshot.paramMap.get('id');
+      let idNum = 0
+      if (id!= null){
+         idNum = parseInt(id)
+      }
+      //Si ronda es nulo significa que no hay ronda activa es decir que ya ha pasado la ronda
+      //por lo cual ya podremos mostrar los votos      
+          this.numVotos = await this._votoService.getNumVotosPorCharla(idNum)
+  }
+
+    async votarCharla(){ 
+       const idCharla = await this._route.snapshot.paramMap.get('id');
+       const idRonda = await this._rondaService.getRondaActiva();
+       const usuario = await  this._userService.getPerfil()
+       const idUsuario = usuario?.idUsuario
+      this.voto.IdCharla = parseInt(idCharla!)
+      this.voto.IdRonda = idRonda!
+      this.voto.IdUsuario = idUsuario!
+        this._votoService.postVoto(this.voto)
+      
+    }
+
+
 }
+
+  

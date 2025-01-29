@@ -8,7 +8,8 @@
         <h1 class="title title--h1">{{ charla?.titulo }}</h1>
         <p class="charla-autor">
         </p>
-        <button class="btn-votar">Votar</button>
+        <p>Votos: {{numVotos}}</p>
+        <button class="btn-votar" (click)="votarCharla()">Votar</button>
     </div>
 
     <!-- Descripción de la charla -->

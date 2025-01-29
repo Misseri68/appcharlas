@@ -1,8 +1,8 @@
 export class Votacion { 
     constructor(
-        public idVoto: number ,
+        public IdVoto: number ,
         public IdCharla: number,
         public IdUsuario: number,
-        public idRonda: number, 
+        public IdRonda: number, 
     ){}
 }
