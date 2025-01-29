@@ -3,9 +3,11 @@ import { TarjetaCharlaComponent } from "../tarjeta-charla/tarjeta-charla.compone
 import { ServiceCharla } from '../../services/charla.service';
 import { Charla } from '../../models/Charla';
 import { CommonModule } from '@angular/common';
+import { RondaService } from '../../services/ronda.service';
+import { LoginService } from '../../services/login.service';
+import { Ronda } from '../../models/Rondas';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
-import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,26 +15,27 @@ import { LoginService } from '../../services/login.service';
   styleUrl: './dashboard.component.scss',
   imports: [TarjetaCharlaComponent, CommonModule],
   standalone: true,
-  providers: [ServiceCharla]
+  providers: [ServiceCharla,LoginService,RondaService]
 
 })
 export class DashboardComponent implements OnInit {
-
+  constructor(private serviceCharla: ServiceCharla, private _usuarioServ: UserService, private _router: Router, private _loginService: LoginService,private _rondaService: RondaService) {
+  }
   public charlas: Charla[] = [];
+  private rondas: Ronda[] = [];
+  private rondaActual: Ronda | undefined;  // Objeto para almacenar la ronda activa
+  private isLoading: boolean = true;
   datosUsuario = {
     nombreUsuario: '',
     cursoUsuario: '',
     rolUsuario: '',
 
   }
-
-  constructor(private serviceCharla: ServiceCharla, private _usuarioServ: UserService, private _router: Router, private _loginService: LoginService) {
-  }
-
   ngOnInit(): void {
     this.redirigirALogin();
     this.loadCharlas();
     this.loadDatosUsuario();
+    this.loadCharlasActivas()
   }
 
   private loadCharlas() {
@@ -46,6 +49,12 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+  private async  loadCharlasActivas(){
+     const idRondaActual  = await this._rondaService.getRondaActiva()
+     if(idRondaActual){
+      await  this.serviceCharla.getCharlasPorRonda(idRondaActual )
+     }
+    }
 
   private loadDatosUsuario() {
     this._usuarioServ.getPerfil().then(usuario => {
@@ -65,3 +74,5 @@ export class DashboardComponent implements OnInit {
      }
   }
 }
+
+

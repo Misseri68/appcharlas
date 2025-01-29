@@ -1,9 +1,12 @@
 import { Charla } from './../models/Charla';
+
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { LoginService } from './login.service';
 import axios from 'axios';
+import { RondaService } from './ronda.service';
 import { Comentario } from '../models/Comentario';
+
 
 @Injectable({
     providedIn: 'root',
@@ -11,10 +14,13 @@ import { Comentario } from '../models/Comentario';
 export class ServiceCharla {
     private url = environment.apiCharlas + 'api/charlas/';
 
-    constructor(private _loginService: LoginService) { }
 
+    constructor(private _loginService: LoginService, private _rondaService: RondaService) { }
+
+    // Método para agregar otras funciones relacionadas con charlas (si es necesario)
     // Método para obtener las charlas
     // Método para obtener las charlas
+
 getCharlas() {
     return axios
         .get(this.url + "charlascurso", {
@@ -102,7 +108,23 @@ getCharlaPorId(id: number) {
             console.error('Error al obtener la charla por ID:', error);
             return null;
         });
+
+        
 }
 
-
+async getCharlasPorRonda(idRonda: number): Promise<Charla[]> {
+    try {
+      const response = await axios.get(this.url+"/CharlasRonda/"+idRonda, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer "+ this._loginService.getToken()
+        }
+      });
+      console.log(response.data)
+      return response.data;
+    } catch (error) {
+      console.error('Error obteniendo exposiciones:', error);
+      throw new Error('Error al cargar las exposiciones');
+    }
+  }
 }
