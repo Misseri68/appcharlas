@@ -1,70 +1,76 @@
-<div class="contenedor">
-  <div class="centrado">
-    
-    <!-- Sección izquierda con título y botones -->
-    <div class="izquierda">
-      <h1 class="title title--h1">Registrarse</h1>
-      <p class="text text--disabled">¿Eres profesor o alumno?</p>
-      <div class="botones-switch">
-        <button class="nav-link" [class.active]="esAlumno" (click)="esAlumno = true" aria-label="Registrar como estudiante">
-          Estudiante
-        </button>
-        <button class="nav-link" [class.active]="!esAlumno" (click)="esAlumno = false" aria-label="Registrar como profesor">
-          Profesor
-        </button>
+<div class="wrapper">
+  <!-- Sección del título -->
+  <div class="titulo">
+    <h1 class="title title--h1">Registrarse</h1>
+  </div>
+
+  <!-- Contenedor principal del formulario -->
+  <div class="contenedor">
+    <div class="centrado">
+
+      <!-- Sección izquierda con opciones -->
+      <div class="izquierda">
+        <p class="text">¿Eres profesor o alumno?</p>
+        <div class="botones-switch">
+          <button class="nav-link" [class.active]="esAlumno" (click)="esAlumno = true" aria-label="Registrar como estudiante">
+            Alumno
+          </button>
+          <button class="nav-link" [class.active]="!esAlumno" (click)="esAlumno = false" aria-label="Registrar como profesor">
+            Profesor
+          </button>
+        </div>
       </div>
+
+      <!-- Sección derecha con formulario -->
+      <div class="derecha">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <fieldset class="entradas">
+            <input placeholder="Nombre" class="input" formControlName="nombre" type="text" autocomplete="given-name" />
+            <small *ngIf="formSubmitted && registerForm.get('nombre')?.invalid" class="text-danger">
+              Introduzca un nombre.
+            </small>
+
+            <input placeholder="Apellidos" class="input" formControlName="apellido" type="text" autocomplete="family-name" />
+            <small *ngIf="formSubmitted && registerForm.get('apellido')?.invalid" class="text-danger">
+              Introduzca unos apellidos.
+            </small>
+
+            <input placeholder="Correo de Tajamar" class="input" formControlName="email" type="email" autocomplete="email" />
+            <small *ngIf="formSubmitted && registerForm.get('email')?.invalid" class="text-danger">
+              <span *ngIf="registerForm.get('email')?.errors?.['required']">El correo electrónico es requerido.<br /></span>
+              <span *ngIf="registerForm.get('email')?.errors?.['email']">Por favor, introduce un correo válido.<br /></span>
+              <span *ngIf="registerForm.get('email')?.errors?.['invalidDomain']">El correo debe ser de la organización (&#64;tajamar365.com).<br /></span>
+            </small>
+
+            <input placeholder="Contraseña" class="input" formControlName="password" type="password" autocomplete="new-password" />
+            <small *ngIf="formSubmitted && registerForm.get('password')?.invalid" class="text-danger">
+              La contraseña debe tener al menos 5 caracteres.
+            </small>
+
+            <input placeholder="Confirmar Contraseña" class="input" formControlName="confirmPassword" type="password" autocomplete="new-password" />
+            <small *ngIf="formSubmitted && registerForm.hasError('mismatch')" class="text-danger">
+              Las contraseñas no coinciden.
+            </small>
+
+            <input placeholder="{{ esAlumno ? 'Código de su curso' : 'Clave de profesor' }}" class="input" formControlName="accessCode" type="text" />
+            <small *ngIf="formSubmitted && registerForm.get('accessCode')?.invalid" class="text-danger">
+              El código de acceso es requerido.
+            </small>
+
+            <button class="button" type="submit">Registrarse</button>
+          </fieldset>
+        </form>
+      </div>
+      
     </div>
+  </div>
 
-    <!-- Sección derecha con formulario -->
-    <div class="derecha">
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <fieldset class="entradas">
-          <legend class="text text--disabled">Datos Personales</legend>
-
-          <input placeholder="Nombre" class="input" formControlName="nombre" type="text" autocomplete="given-name" />
-          <small *ngIf="formSubmitted && registerForm.get('nombre')?.invalid" class="text-danger">
-            Introduzca un nombre.
-          </small>
-
-          <input placeholder="Apellidos" class="input" formControlName="apellido" type="text" autocomplete="family-name" />
-          <small *ngIf="formSubmitted && registerForm.get('apellido')?.invalid" class="text-danger">
-            Introduzca unos apellidos.
-          </small>
-
-          <label class="text text--disabled">Datos de registro</label>
-
-          <input placeholder="Correo de Tajamar" class="input" formControlName="email" type="email" autocomplete="email" />
-          <small *ngIf="formSubmitted && registerForm.get('email')?.invalid" class="text-danger">
-            <span *ngIf="registerForm.get('email')?.errors?.['required']">El correo electrónico es requerido.<br /></span>
-            <span *ngIf="registerForm.get('email')?.errors?.['email']">Por favor, introduce un correo válido.<br /></span>
-            <span *ngIf="registerForm.get('email')?.errors?.['invalidDomain']">El correo debe ser de la organización (&#64;tajamar365.com).<br /></span>
-          </small>
-
-          <input placeholder="Contraseña" class="input" formControlName="password" type="password" autocomplete="new-password" />
-          <small *ngIf="formSubmitted && registerForm.get('password')?.invalid" class="text-danger">
-            La contraseña debe tener al menos 5 caracteres.
-          </small>
-
-          <input placeholder="Confirmar Contraseña" class="input" formControlName="confirmPassword" type="password" autocomplete="new-password" />
-          <small *ngIf="formSubmitted && registerForm.hasError('mismatch')" class="text-danger">
-            Las contraseñas no coinciden.
-          </small>
-
-          <input placeholder="{{ esAlumno ? 'Código de su curso' : 'Clave de profesor' }}" class="input" formControlName="accessCode" type="text" />
-          <small *ngIf="formSubmitted && registerForm.get('accessCode')?.invalid" class="text-danger">
-            El código de acceso es requerido.
-          </small>
-
-          <button class="button" type="submit">Registrarse</button>
-        </fieldset>
-      </form>
-
-      <p class="text text--disabled">
-        ¿Ya tienes cuenta?
-        <br>
-        <a class="text-primary" [routerLink]="['/login']">Iniciar sesión</a>
-      </p>
-    </div>
-
+  <!-- Volver a login -->
+  <div class="registro mt-3" style="text-align: center;">
+    <p class="text text--disabled">
+      ¿Ya tienes cuenta?
+      <br>
+      <a [routerLink]="['/login']">Iniciar sesión</a>
+    </p>
   </div>
 </div>

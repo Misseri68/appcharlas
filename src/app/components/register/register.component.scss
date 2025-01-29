@@ -11,18 +11,49 @@
   to { transform: scale(1); }
 }
 
-/* Contenedor principal */
-.contenedor {
-  width: 100%;
-  height: 100vh;
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Contenedor general */
+.wrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  min-height: 100vh;
   color: #FFFFFF;
   animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Card centrada con separación entre izquierda y derecha */
+/* Sección del título */
+.titulo {
+  margin-bottom: 20px;
+
+  h1 {
+    font-size: 42px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+  }
+}
+
+/* Contenedor del formulario */
+.contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Card centrada */
 .centrado {
   display: flex;
   justify-content: space-between;
@@ -31,23 +62,17 @@
   padding: 40px;
   border-radius: 12px;
   animation: scaleUp 0.5s ease-in-out;
-  gap: 40px; /* SEPARACIÓN ENTRE IZQUIERDA Y DERECHA */
+  gap: 40px; /* Separación entre izquierda y derecha */
 }
 
 /* Sección izquierda */
 .izquierda {
   display: flex;
   flex-direction: column;
-  align-items: center; /* CENTRADO HORIZONTAL */
-  text-align: center; /* CENTRADO DEL TEXTO */
-  justify-content: center; /* CENTRADO VERTICAL */
+  align-items: center;
+  text-align: center;
+  justify-content: center;
   gap: 20px;
-
-  h1 {
-    font-size: 42px;
-    font-weight: bold;
-    color: white;
-  }
 }
 
 /* Botones Switch */
@@ -56,24 +81,36 @@
   gap: 10px;
 
   .nav-link {
+    background-color: $neutral-color-400; /* Color base para los botones inactivos */
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 20px;
     padding: 10px 20px;
-    border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    background-color: $neutral-color-400;
-    color: #fff;
+    animation: fadeIn 1s ease-in-out;
+    box-shadow: none;
 
     &.active {
-      background-color: $primary-color-500;
+      background-color: $primary-color-700; /* Color para el botón activo */
       transform: scale(1.08);
     }
 
     &:hover {
-      background-color: lighten($neutral-color-400, 12%);
+      background-color: lighten($neutral-color-400, 10%);
+      transform: scale(1.05);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
     }
   }
 }
+
+
 
 /* Sección derecha */
 .derecha {
@@ -88,17 +125,11 @@ form {
   width: 100%;
 }
 
-/* Inputs */
 .entradas {
-  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-
-  label {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.7);
-  }
+  text-align: center;
+  justify-content: center;
 
   .input {
     margin-bottom: 20px;
@@ -144,7 +175,7 @@ form {
 
 /* Botón */
 .button {
-  background-color: $primary-color-600;
+  background-color: $primary-color-700;
   color: white;
   border: none;  // Elimina cualquier borde predeterminado
   outline: none; // Evita el borde al hacer focus en algunos navegadores
@@ -156,12 +187,30 @@ form {
   
   &:hover {
     background-color: lighten($primary-color-600, 10%);
-    transform: scale(1.05);
   }
 
   &:focus {
     outline: none;
     box-shadow: none;
+  }
+}
+
+/* Volver a login */
+.volver-a-login {
+  margin-top: 20px;
+  text-align: center;
+
+  .text--disabled {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .text-primary {
+    color: $primary-color-500;
+    cursor: pointer;
+    font-size: 14px;
+    transition: color 0.3s ease-in-out;
+
   }
 }
 
@@ -173,8 +222,27 @@ form {
     width: 90%;
     padding: 30px;
   }
+}
 
-  .izquierda, .derecha {
-    align-items: center;
+.text-danger {
+  color: red;
+  font-size: 14px;
+  animation: slideIn 0.3s ease-in-out;
+}
+
+.registro {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+a {
+  text-decoration: none;
+  color: $primary-color-500;
+  transition: color 0.3s ease-in-out;
+  &:hover {
+    color: lighten($primary-color-500, 100%);
   }
 }
