@@ -8,6 +8,7 @@ import { LoginService } from '../../services/login.service';
 import { Ronda } from '../../models/Rondas';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { ServiceVoto } from '../../services/voto.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,11 +16,11 @@ import { Router } from '@angular/router';
   styleUrl: './dashboard.component.scss',
   imports: [TarjetaCharlaComponent, CommonModule],
   standalone: true,
-  providers: [ServiceCharla,LoginService,RondaService]
+  providers: [ServiceCharla,LoginService,RondaService, ServiceVoto]
 
 })
 export class DashboardComponent implements OnInit {
-  constructor(private serviceCharla: ServiceCharla, private _usuarioServ: UserService, private _router: Router, private _loginService: LoginService,private _rondaService: RondaService) {
+  constructor(private _votoServ:ServiceVoto   ,private serviceCharla: ServiceCharla, private _usuarioServ: UserService, private _router: Router, private _loginService: LoginService,private _rondaService: RondaService) {
   }
   public charlas: Charla[] = [];
   private rondas: Ronda[] = [];
@@ -73,6 +74,8 @@ export class DashboardComponent implements OnInit {
       this._router.navigate(['/login'])
      }
   }
+
 }
+
 
 
