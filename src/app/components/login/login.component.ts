@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';  // Necesario para usar directivas comunes como ngIf, ngFor
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';    // Necesario para usar ngForm
 import { LoginService } from '../../services/login.service'; // Importa el servicio de login
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   standalone: true,  // Hace que el componente sea standalone
-  imports: [CommonModule, ReactiveFormsModule]  // Importa los módulos necesarios dentro del componente
+  imports: [CommonModule, ReactiveFormsModule, RouterLink]  // Importa los módulos necesarios dentro del componente
 })
 export class LoginComponent {
   loginForm: FormGroup;
