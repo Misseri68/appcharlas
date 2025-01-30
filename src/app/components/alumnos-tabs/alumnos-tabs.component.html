@@ -1,38 +1,50 @@
 
+<h3> {{curso}} ({{numeroAlumnosTab}}) </h3>
 <div>
   <div class="tabs w-100 h-100">
     <!-- Botones de pestañas -->
-    <button
-      *ngFor="let tab of tabs"
-      (click)="selectTab(tab)"
-      [class.active]="tab === selectedTab"
-      class="tab-button"
-    >
+    <button *ngFor="let tab of tabs" (click)="selectTab(tab)" [class.active]="tab === selectedTab" class="tab-button">
       {{ tab }}
     </button>
   </div>
 
   <!-- Contenido de las pestañas -->
-  <div class="tab-content">
+  <div class="tab-content w-100">
     <!-- Listado de Alumnos Curso Actual -->
-    <div *ngIf="selectedTab === 'Alumnos curso actual'" class="list-container">
-      <div *ngFor="let alumno of alumnosCursoActual" class="list-item">
-        Alumno: {{ alumno }}
+    <div *ngIf="selectedTab === 'Alumnos curso actual'" class="list-container w-100">
+      <div *ngFor="let itemalumno of alumnosCursoActual.alumnos" class="list-item">
+        <span class="alumno-nombre">{{ itemalumno.alumno.usuario }}</span>
+        <div class="botones-container">
+          <span>Charlas presentadas: {{itemalumno.charlasAceptadas}} / {{itemalumno.charlasTotales}}</span>
+          <button class="btn btn-danger">Deshabilitar</button>
+          <button class="btn btn-success">Ver Detalles</button>
+          <p></p>
+        </div>
       </div>
     </div>
 
-    <!-- Listado de Historial de Alumnos -->
-    <div *ngIf="selectedTab === 'Historial de Alumnos'" class="list-container">
-      <div *ngFor="let alumno of historialAlumnos" class="list-item">
-        {{ alumno.nombre }}
-      </div>
+    <!-- Listado de Historial de Alumnos-->
+    <div *ngIf="selectedTab === 'Historial de Alumnos'" class="list-container w-100">
+      <div *ngFor="let itemalumno of alumnosCursoHistorial.alumnos" class="list-item">
+        <span class="alumno-nombre">{{ itemalumno.alumno.usuario }}</span>
+        <div class="botones-container">
+          <span>Charlas presentadas: {{itemalumno.charlasAceptadas}} / {{itemalumno.charlasTotales}}</span>
+          <button class="btn btn-danger">Deshabilitar</button>
+          <button class="btn btn-success">Ver Detalles</button>
+          <p></p>
+        </div>      </div>
     </div>
 
     <!-- Listado de Todos los Alumnos -->
-    <div *ngIf="selectedTab === 'Todos los alumnos'" class="list-container">
-      <div *ngFor="let alumno of todosLosAlumnos" class="list-item">
-        {{ alumno.nombre }}
-      </div>
+    <div *ngIf="selectedTab === 'Todos los alumnos'" class="list-container w-100">
+      <div *ngFor="let itemalumno of alumnosTodos.alumnos" class="list-item">
+        <span class="alumno-nombre">{{ itemalumno.alumno.usuario }}</span>
+        <div class="botones-container">
+          <span>Charlas presentadas: {{itemalumno.charlasAceptadas}} / {{itemalumno.charlasTotales}}</span>
+          <button class="btn btn-danger">Deshabilitar</button>
+          <button class="btn btn-success">Ver Detalles</button>
+          <p></p>
+        </div>      </div>
     </div>
   </div>
 </div>

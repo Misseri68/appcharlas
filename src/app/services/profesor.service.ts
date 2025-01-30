@@ -12,14 +12,34 @@ export class ProfesorService {
   constructor(private _loginService: LoginService) { }
 
   getAlumnosCursoActivo() :any {
-    console.log("Url:" , this.apiUrl + 'api/Profesor/AlumnosCursoActivoProfesor')
     return axios.get(this.apiUrl + 'api/Profesor/AlumnosCursoActivoProfesor', {
       headers: {
         "Content-type": "application/json",
         "Authorization": "Bearer " +  this._loginService.getToken()
       }
     }).then(response => {
-      console.log(response.data);
+      return response.data;
+    })
+  }
+
+  getAlumnosCursoHistorial() :any {
+    return axios.get(this.apiUrl + 'api/Profesor/AlumnosCursoActivoProfesor', {
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": "Bearer " +  this._loginService.getToken()
+      }
+    }).then(response => {
+      return response.data;
+    })
+  }
+
+  getAlumnosTodos() :any {
+    return axios.get(this.apiUrl + 'api/Profesor/AlumnosCursoProfesor', {
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": "Bearer " +  this._loginService.getToken()
+      }
+    }).then(response => {
       return response.data;
     })
   }

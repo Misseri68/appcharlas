@@ -35,8 +35,24 @@
 .list-item {
   padding: 8px;
   border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between; /* Distribuye el espacio entre los elementos */
+  align-items: center; /* Alinea verticalmente los elementos al centro */
+  padding: 10px; /* Añade un poco de padding para mejor visualización */
+  border-bottom: 1px solid #ccc; /* Opcional: añade una línea divisoria entre elementos */
 }
 
 .list-item:last-child {
   border-bottom: none;
+}
+
+
+
+.botones-container {
+  display: flex;
+  gap: 10px; /* Espacio entre los botones */
+}
+
+.alumno-nombre {
+  flex-grow: 1; /* Hace que el nombre del alumno ocupe el espacio disponible */
 }
