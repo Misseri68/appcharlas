@@ -8,7 +8,8 @@
         <h1 class="title title--h1">{{ charla?.titulo }}</h1>
         <p class="charla-autor">
         </p>
-        <button class="btn-votar">Votar</button>
+        <p>Votos:{{numVotos}}</p>
+        <button class="btn-votar" (click)="votarCharla()">Votar</button>
     </div>
 
     <!-- Descripción de la charla -->
@@ -32,16 +33,16 @@
         <div class="comentarios-entrada layout-vertical">
             <div class="layout-horizontal">
                 <img [src]="fotoPerfilUsuario" alt="Usuario" class="img-round img-round--small" />
-                <input 
-                    type="text" 
-                    placeholder="Añade un comentario..." 
-                    class="comentario-input" 
-                    [(ngModel)]="nuevoComentario" 
+                <input
+                    type="text"
+                    placeholder="Añade un comentario..."
+                    class="comentario-input"
+                    [(ngModel)]="nuevoComentario"
                 />
                 <button class="btn-comentar" (click)="enviarComentario()">Comentar</button>
             </div>
         </div>
-        
+
 
         <!-- Comentarios existentes -->
         <div class="comentarios-lista">
@@ -56,7 +57,7 @@
             </div>
         </div>
 
-        
+
     </div>
 
 </div>
