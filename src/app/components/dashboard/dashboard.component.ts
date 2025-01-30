@@ -9,12 +9,13 @@ import { Ronda } from '../../models/Rondas';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { ServiceVoto } from '../../services/voto.service';
+import { ControlPanelComponent } from "../control-panel/control-panel.component";
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
-  imports: [TarjetaCharlaComponent, CommonModule],
+  imports: [TarjetaCharlaComponent, CommonModule, ControlPanelComponent],
   standalone: true,
   providers: [ServiceCharla, LoginService, RondaService, ServiceVoto]
 

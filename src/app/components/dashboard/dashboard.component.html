@@ -10,8 +10,8 @@
 
     <!-- 🔥 Mostrar mensaje según el rol -->
     <!-- ___________________________________ PARA ADMIN ___________________________________-->
-    <div *ngIf="roleUsuario === 3">
-        <h1>TU ROLE es admin</h1>
+    <div class="container container--medium" *ngIf="roleUsuario === 3">
+        <app-control-panel ></app-control-panel>
     </div>
 
     <!-- ___________________________________ PARA PROFESOR ____________________________________ -->
