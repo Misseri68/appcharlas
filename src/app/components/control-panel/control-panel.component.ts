@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AdminService } from '../../services/admin.service';
 import { Profesor } from '../../models/Profesor';
 import { FormsModule } from '@angular/forms';
+import { CursoService } from '../../services/curso.service';
 
 @Component({
   selector: 'app-control-panel',
@@ -34,10 +35,12 @@ export class ControlPanelComponent implements OnInit {
   public mostrarModal: boolean = false;
 
 
-  constructor(private _adminService: AdminService) { }
+  constructor(private _adminService: AdminService,private _cursoService:CursoService) { }
 
   ngOnInit(): void {
     this.loadProfesores();
+
+
   }
 
   async loadProfesores() {

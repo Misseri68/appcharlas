@@ -10,6 +10,7 @@ import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { ServiceVoto } from '../../services/voto.service';
 import { ControlPanelComponent } from "../control-panel/control-panel.component";
+import { CursoService } from '../../services/curso.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,7 +28,9 @@ export class DashboardComponent implements OnInit {
     private _usuarioServ: UserService,
     private _router: Router,
     private _loginService: LoginService,
-    private _rondaService: RondaService) {
+    private _rondaService: RondaService,
+    private _cursoService :CursoService
+  ) {
   }
   public charlas: Charla[] = [];
   public charlasPorRonda: Charla[] = [];
