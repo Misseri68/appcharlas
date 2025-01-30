@@ -1,24 +1,24 @@
 <div class="container container--small text">
     <h1 class="title title--h1">Crear charla</h1>
-<form #crearCharlaForm="ngForm" class="form">
-    <div class="entradas">
-    <input type="text" #cajatitulo name="cajatitulo" placeholder="Titulo"  />
-    <!-- vale ahora necesito descripcion, tiempo e imagen -->
-    <textarea type="text" #cajadescripcion name="cajadescripcion" placeholder="Descripción" ></textarea>
-    <input type="text" #cajatiempo name="cajatiempo" placeholder="Tiempo (min.)"
-       (input)="validarTiempo()"
-       maxlength="3" />
+    <form #crearCharlaForm="ngForm" class="form">
+        <div class="entradas">
+            <input type="text" #cajatitulo name="cajatitulo" placeholder="Titulo" />
+            <!-- vale ahora necesito descripcion, tiempo e imagen -->
+            <textarea type="text" #cajadescripcion name="cajadescripcion" placeholder="Descripción"></textarea>
+            <input type="text" #cajatiempo name="cajatiempo" placeholder="Tiempo (min.)" (input)="validarTiempo()"
+                maxlength="3" />
 
-    <div class="file-upload">
-        <span>Seleccionar archivo</span>
-        <button type="button">Subir archivo</button>
-    </div>
-    <br>
-    <div>
-        <button class="button" type="submit" class="btn btn-primary" (click)="crearCharla()">Crear charla</button>
-    </div>
-    
-    </div>
-    
-</form>
+            <div class="file-upload">
+                <span>Seleccionar archivo</span>
+                <button type="button">Subir archivo</button>
+            </div>
+            <br>
+            <div>
+                <button class="button" type="submit" class="btn btn-primary" (click)="crearCharla()">Crear
+                    charla</button>
+            </div>
+
+        </div>
+
+    </form>
 </div>
