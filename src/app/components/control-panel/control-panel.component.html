@@ -1,26 +1,35 @@
-<p>Panel de Control - Profesores</p>
+<p>Panel de Control - ADMIN</p>
 
-<table border="1">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Estado</th>
-            <th>Curso</th>
-            <th>Fecha Inicio</th>
-            <th>Fecha Fin</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let profesor of profesores">
-            <td>{{ profesor.idUsuario }}</td>
-            <td>{{ profesor.usuario }}</td>
-            <td>{{ profesor.email }}</td>
-            <td>{{ profesor.estadoUsuario }}</td>
-            <td>{{ profesor.curso }}</td>
-            <td>{{ profesor.fechaInicioCurso }}</td>
-            <td>{{ profesor.fechaFinCurso }}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="table-container">
+    <table class="profesor-table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Estado</th>
+                <th>Curso</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let profesor of profesores" 
+                (click)="seleccionarProfesor(profesor)" 
+                class="clickable-row">
+                <td>{{ profesor.usuario }}</td>
+                <td>{{ profesor.email }}</td>
+                <td>
+                    <span class="estado" [class.activo]="profesor.estadoUsuario" [class.inactivo]="!profesor.estadoUsuario">
+                        {{ profesor.estadoUsuario ? 'Activo' : 'Inactivo' }}
+                    </span>
+                </td>
+                <td>{{ profesor.curso }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+    <div *ngIf="mostrarModal"  style="background-color: red;">
+        <h1>Este es el formulario</h1>
+        <p (click)="cerrarModal()">X</p>
+    </div>
+
