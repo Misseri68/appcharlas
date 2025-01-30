@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
       if (data) {
         this.charlas = data;
         console.log('✅Charlas cargadas:', this.charlas);
-        
+
       } else {
         console.error('No se pudieron cargar las charlas');
       }
@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit {
     }
 
   private loadDatosUsuario() {
-    this._usuarioServ.getPerfil().then(usuario => {
+    this._usuarioServ.getPerfil().then((usuario : any) => {
       if (usuario != null) {
         this.datosUsuario = {
           nombreUsuario: usuario.nombre,

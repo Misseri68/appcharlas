@@ -29,7 +29,6 @@ export class ProfesorService {
         "Authorization": "Bearer " +  this._loginService.getToken()
       }
     }).then(response => {
-      console.log(response.data);
       return response.data;
     })
   }
@@ -58,7 +57,6 @@ export class ProfesorService {
     })
   }
 
-
   deshabilitarAlumnoFetch(idUsuario: number) {
     let token = this._loginService.getToken();
     let url = this.apiUrl + 'api/Profesor/UpdateEstadoAlumno/' + idUsuario + '/false'
@@ -71,7 +69,28 @@ export class ProfesorService {
         'Accept': 'application/json'
       }
     })
+  }
 
+  asignarseCurso(idCurso: string, idUsuario: number){
+    return axios.post(this.apiUrl + 'api/CursosUsuarios/post/${idCurso}/${idUsuario}', {
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": "Bearer " +  this._loginService.getToken()
+      }
+    }).then(response => {
+      return response.data;
+    })
+  }
+
+  cambiarseCurso(idCurso: string, idUsuario: number, idCursoUsuario: number){
+    return axios.put(this.apiUrl + 'api/CursosUsuarios/update/${idCursoUsuario}/${idCurso}/${idUsuario}', {
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": "Bearer " +  this._loginService.getToken()
+      }
+    }).then(response => {
+      return response.data;
+    })
   }
 
 }

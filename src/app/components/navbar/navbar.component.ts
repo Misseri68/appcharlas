@@ -29,7 +29,7 @@ export class NavbarComponent {
 
 
   setDatosUsuario(){
-    this._userServ.getPerfil().then(perfil => {
+    this._userServ.getPerfil().then((perfil : any )=> {
       if(perfil?.imagen){
         this.imagen = perfil.imagen;
         console.log(this.imagen)

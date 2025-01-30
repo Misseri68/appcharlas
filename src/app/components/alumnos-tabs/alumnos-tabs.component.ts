@@ -23,35 +23,34 @@ export class AlumnosTabsComponent {
 
   ngOnInit(): void {
     this.cargarAlumnosCursoActual();
+    this.curso = "Tus alumnos del " + this.alumnosCursoActual.curso.nombre;
+
   }
 
   cargarAlumnosCursoActual() {
     this._profesorService.getAlumnosCursoActivo().then((response: any) => {
       this.alumnosCursoActual = response[0];
+      this.numeroAlumnosTab = response[0].numeroAlumnos;
       this.curso = "Tus alumnos del " + this.alumnosCursoActual.curso.nombre;
-      this.numeroAlumnosTab = this.alumnosCursoActual.numeroAlumnos;
+console.log(this.curso)
     })
   }
 
-  cargarAlumnosCursoHistorial(){
+  cargarAlumnosCursoHistorial() {
     this._profesorService.getAlumnosCursoHistorial().then((response: any) => {
       this.alumnosCursoHistorial = response[0];
-      this.numeroAlumnosTab = this.alumnosCursoHistorial.numeroAlumnos;
-
-
+      this.numeroAlumnosTab = response[0].numeroAlumnos;
     })
   }
 
-  cargarAlumnosTodos(){
+  cargarAlumnosTodos() {
     this._profesorService.getAlumnosTodos().then((response: any) => {
-      console.log(response[0])
       this.alumnosTodos = response[0];
-      this.numeroAlumnosTab = this.alumnosTodos.numeroAlumnos;
-
+      this.numeroAlumnosTab = response[0].numeroAlumnos;
     })
   }
 
-  cargarTodasListas(){
+  cargarTodasListas() {
     this.cargarAlumnosCursoActual();
     this.cargarAlumnosCursoHistorial();
     this.cargarAlumnosTodos();
@@ -59,91 +58,79 @@ export class AlumnosTabsComponent {
 
 
 
-    // Función que genera la estructura base
-    generarEstructuraBase() {
-      return [
-        {
-          numeroAlumnos: 0,
-          curso: {
-            idCurso: 0,
-            nombre: '',
-            fechaInicio: '',
-            fechaFin: '',
-            activo: false
-          },
-          alumnos: [
-            {
-              alumno: {
-                idUsuario: 0,
-                usuario: '',
-                estadoUsuario: false,
-                imagen: '',
-                email: '',
-                idRole: 0,
-                role: '',
-                idCurso: 0,
-                curso: '',
-                fechaInicioCurso: '',
-                fechaFinCurso: '',
-                idCursosUsuarios: 0
-              },
-              charlasTotales: 0,
-              charlasPropuestas: 0,
-              charlasAceptadas: 0,
-              charlas: []
-            }
-          ]
-        }
-      ];
-    }
+  // Función que genera la estructura base
+  generarEstructuraBase() {
+    return [
+      {
+        numeroAlumnos: 0,
+        curso: {
+          idCurso: 0,
+          nombre: '',
+          fechaInicio: '',
+          fechaFin: '',
+          activo: false
+        },
+        alumnos: [
+          {
+            alumno: {
+              idUsuario: 0,
+              usuario: '',
+              estadoUsuario: false,
+              imagen: '',
+              email: '',
+              idRole: 0,
+              role: '',
+              idCurso: 0,
+              curso: '',
+              fechaInicioCurso: '',
+              fechaFinCurso: '',
+              idCursosUsuarios: 0
+            },
+            charlasTotales: 0,
+            charlasPropuestas: 0,
+            charlasAceptadas: 0,
+            charlas: []
+          }
+        ]
+      }
+    ];
+  }
 
-    deshabilitarAlumno(idUsuario: number){
-      this._profesorService.deshabilitarAlumnoFetch(idUsuario).then((response: any) => {
-        if(response.status == 200){
-          alert("Alumno deshabilitado")
-          this.cargarTodasListas();
-        }
-      })
-    }
+  deshabilitarAlumno(idUsuario: number) {
+    this._profesorService.deshabilitarAlumnoFetch(idUsuario).then((response: any) => {
+      if (response.status == 200) {
+        alert("Alumno deshabilitado")
+        this.cargarTodasListas();
+      }
+    })
+  }
 
-    habilitarAlumno(idUsuario: number){
-      this._profesorService.habilitarAlumnoFetch(idUsuario).then((response: any) => {
-        if(response.status == 200){
-          alert("Alumno habilitado")
-          this.cargarTodasListas();
-        }
-      })
-    }
+  habilitarAlumno(idUsuario: number) {
+    this._profesorService.habilitarAlumnoFetch(idUsuario).then((response: any) => {
+      if (response.status == 200) {
+        alert("Alumno habilitado")
+        this.cargarTodasListas();
+      }
+    })
+  }
 
 
   // Método para cambiar de pestaña
   selectTab(tab: string) {
     this.selectedTab = tab;
-    if(tab == "Alumnos curso actual"){
+    if (tab == "Alumnos curso actual") {
+      this.cargarAlumnosCursoActual();
       this.curso = "Tus alumnos del " + this.alumnosCursoActual.curso.nombre;
       this.numeroAlumnosTab = this.alumnosCursoActual.numeroAlumnos;
     }
-    if(tab == "Historial de Alumnos"){
-      if (!this.alumnosCursoHistorial || this.alumnosCursoHistorial.length === 0 || this.alumnosCursoHistorial[0]?.numeroAlumnos === 0) {
-        this.cargarAlumnosCursoHistorial();
-      }
+    if (tab == "Historial de Alumnos") {
+      this.cargarAlumnosCursoHistorial();
       this.curso = "Tu historial de alumnos pasados";
       this.numeroAlumnosTab = this.alumnosCursoHistorial.numeroAlumnos;
-      let num : number = this.alumnosCursoHistorial.numeroAlumnos;
-      if(num == 0){
-        this.numeroAlumnosTab = 0
-      }
     }
-    if (!this.alumnosTodos || this.alumnosTodos.length === 0 || this.alumnosTodos[0]?.numeroAlumnos === 0) {
-      console.log(this.alumnosTodos)
-      if(this.alumnosTodos){
-        this.cargarAlumnosTodos();
-      }
+    if (tab == "Todos los alumnos") {
+      this.cargarAlumnosTodos();
       this.curso = "Todos tus alumnos";
-      let num : number = this.alumnosTodos.numeroAlumnos;
-      if(num == 0){
-        this.numeroAlumnosTab = 0
-      }
     }
   }
 }

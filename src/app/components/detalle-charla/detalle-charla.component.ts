@@ -45,7 +45,7 @@ export class DetalleCharlaComponent implements OnInit {
         if (data) {
           this.charla = data.charla || null;
           this.comentarios = data.comentarios || [];
-          
+
         }
       } catch (error) {
         console.error('Error al cargar los datos:', error);
@@ -91,7 +91,7 @@ export class DetalleCharlaComponent implements OnInit {
 
 
   getImagenPerfil() {
-    this._userService.getPerfil().then((perfil) => {
+    this._userService.getPerfil().then((perfil : any) => {
       if (perfil?.imagen) {
         this.fotoPerfilUsuario = perfil.imagen;
       } else {

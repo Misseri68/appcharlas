@@ -14,7 +14,20 @@ export class UserService {
   constructor(private _loginService: LoginService) { }
 
 
-  getPerfil(){
+  getCursoUsuario(){
+    return axios.get(this.url + 'perfil', {
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": "Bearer " +  this._loginService.getToken()
+      }
+    }).then(response=> {
+      let cursoUsuario : number = response.data.usuario.idCursoUsuario;
+      console.log(cursoUsuario)
+      return cursoUsuario;
+    })
+  }
+
+  getPerfil() : any{
     return axios.get(this.url + 'perfil', {
       headers: {
         "Content-type": "application/json",
@@ -22,21 +35,7 @@ export class UserService {
       }
     }).then(response=> {
       let datosUsuario = response.data.usuario;
-      console.log(datosUsuario)
-      let usuario = new Usuario(
-        datosUsuario.idUsuario,
-        datosUsuario.nombre,
-        datosUsuario.apellidos,
-        datosUsuario.email,
-        datosUsuario.estadoUsuario,
-        datosUsuario.imagen,
-        datosUsuario.password,
-        datosUsuario.idRole,
-        datosUsuario.role,
-        datosUsuario.curso,
-        datosUsuario.idCurso
-      );
-      return usuario;
+      return datosUsuario;
     }).catch(error => {
       console.log(error);
       return null;

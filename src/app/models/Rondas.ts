@@ -5,7 +5,7 @@ export class Ronda{
     public fechaPresentacion: string,
     public fechaCierre: string,
     public duracion: number,
-    public descrpcionModulo:string,
+    public descripcionModulo:string,
     public fechaLimitevotacion: string
-   ){} 
+   ){}
 }

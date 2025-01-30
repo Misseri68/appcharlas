@@ -12,6 +12,7 @@ import { TarjetaCharlaComponent } from "../tarjeta-charla/tarjeta-charla.compone
 import { AlumnosTabsComponent } from '../alumnos-tabs/alumnos-tabs.component';
 import { Charla } from '../../models/Charla';
 import { ServiceCharla } from '../../services/charla.service';
+import { ProfesorService } from '../../services/profesor.service';
 
 @Component({
   selector: 'app-perfil',
@@ -21,12 +22,16 @@ import { ServiceCharla } from '../../services/charla.service';
   imports: [RouterModule, FormsModule, ChangepwdModalComponent, CommonModule, TarjetaCharlaComponent, AlumnosTabsComponent]
 })
 export class PerfilComponent {
+
+
   @ViewChild("cajafile") cajaFileRef!: ElementRef;
   usuario: Usuario | null = null;
   showPopup: boolean = false;
   charlasAceptadas: Charla[] = [];
   charlasPropuestas: Charla[] = [];
   isProfe: boolean = false;
+  showUnirseCurso: boolean = false;
+  idCursoUsuario: number = 0;
 
 
 
@@ -35,15 +40,18 @@ export class PerfilComponent {
     private _router: Router,
     private _userService: UserService,
     private _postFilesService: PostFilesService,
-    private _charlaService: ServiceCharla
+    private _charlaService: ServiceCharla,
+    private _profesorService: ProfesorService
   ) { }
 
   ngOnInit(): void {
     this.redirigirALogin();
-    this._userService.getPerfil().then(usuario => {
+    this._userService.getPerfil().then((usuario : any) => {
+
       if (usuario != null) {
         this.usuario = usuario;
-        if(this.usuario.role == "PROFESOR"){
+        this.idCursoUsuario = usuario.idCursoUsuario || 0;
+        if (this.usuario?.role == "PROFESOR") {
           this.isProfe = true;
         }
       }
@@ -72,8 +80,8 @@ export class PerfilComponent {
             item.charla.nombreCurso
           )
       );
-      this.charlasAceptadas = charlas.filter(charla=> charla.idEstadoCharla == 2)
-      this.charlasPropuestas = charlas.filter(charla=> charla.idEstadoCharla == 1)
+      this.charlasAceptadas = charlas.filter(charla => charla.idEstadoCharla == 2)
+      this.charlasPropuestas = charlas.filter(charla => charla.idEstadoCharla == 1)
     })
 
   }
@@ -117,6 +125,26 @@ export class PerfilComponent {
     if (this._loginService.getToken() === null) {
       this._router.navigate(['/login']);
     }
+  }
+
+  unirseCurso(codigoCurso : string){
+    this._profesorService.asignarseCurso(codigoCurso, this.usuario?.idUsuario || -1).then(response => {
+      if(response.status == 200){
+        alert("Curso asignado correctamente")
+      }
+    })
+  }
+
+  cambiarseCurso(codigoCurso : string){
+    this._profesorService.cambiarseCurso(codigoCurso, this.usuario?.idUsuario || -1, this.idCursoUsuario || -1).then(response => {
+      if(response.status == 200){
+        alert("Curso cambiado correctamente")
+      }
+    })
+  }
+
+  toggleShowUnirseCurso() {
+    this.showUnirseCurso = !this.showUnirseCurso;
   }
 
 }
