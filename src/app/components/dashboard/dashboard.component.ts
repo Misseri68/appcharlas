@@ -29,8 +29,8 @@ export class DashboardComponent implements OnInit {
     private _loginService: LoginService,
     private _rondaService: RondaService) {
   }
-
   public charlas: Charla[] = [];
+  public charlasPorRonda: Charla[] = [];
   private rondas: Ronda[] = [];
   private rondaActual: Ronda | undefined;  // Objeto para almacenar la ronda activa
   private isLoading: boolean = true;
@@ -63,7 +63,7 @@ export class DashboardComponent implements OnInit {
   private async loadCharlasActivas() {
     const idRondaActual = await this._rondaService.getRondaActiva()
     if (idRondaActual) {
-      await this.serviceCharla.getCharlasPorRonda(idRondaActual)
+     this.charlasPorRonda = await this.serviceCharla.getCharlasPorRonda(idRondaActual)
     }
   }
 

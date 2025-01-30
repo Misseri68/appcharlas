@@ -71,7 +71,14 @@ export class ControlPanelComponent implements OnInit {
 
   // Método para eliminar un profesor
   eliminarProfesor() {
-    console.log("❌ Eliminar profesor:", this.profesorSeleccionado?.idUsuario);
+    const id = this.profesorSeleccionado.idUsuario
+    if(this.profesorSeleccionado.estadoUsuario == true){
+      this._adminService.desactivarProfesor(id,false)
+    }else{
+      this._adminService.desactivarProfesor(id,true)
+    }
+
+    this.cerrarModal()
 
 
   }

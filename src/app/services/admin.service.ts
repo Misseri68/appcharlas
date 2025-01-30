@@ -49,5 +49,27 @@ export class AdminService {
             console.error("❌ Error al obtener los profesores:", error);
             return null;
         }
+
+
     }
+
+    desactivarProfesor(id: number, estado: boolean): Promise<any> {
+      const body = {
+        id: id,
+        estado: estado
+      };
+
+      return axios.put(this.url+"UpdateEstadoProfesor/"+id+"/"+estado, body, {
+        headers: {
+          "Content-Type": "application/json",  // Asegúrate de que la API espera este tipo de contenido
+          "Authorization": "Bearer " + this._loginService.getToken()  // Si necesitas un token para autenticarte
+        }
+      })
+      .then(response => response.data)  // Devuelve la respuesta de la API
+      .catch(error => {
+        console.error("Error al actualizar estado:", error);
+        throw error;  // Lanza el error para que el componente lo pueda manejar
+      });
+    }
+
 }
