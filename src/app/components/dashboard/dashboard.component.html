@@ -1,29 +1,48 @@
 <section class="section">
 
+
     <div class="container container--medium" style="padding-top: 50px;">
-        <h1 class="title title--h1">Hola, {{datosUsuario.nombreUsuario}}...</h1> <!-- aqui debemos cambiar el nombre del alumno -->
+        <h1 class="title title--h1">Hola, {{datosUsuario.nombreUsuario}}...</h1>
+        <!-- aqui debemos cambiar el nombre del alumno -->
         <p class="text text--detail">{{datosUsuario.rolUsuario}}/{{datosUsuario.cursoUsuario}}</p>
         <!-- aqui debemos cambiar  1. si es alumno o profesor y 2. el codigo de la clase -->
     </div>
 
+    <!-- 🔥 Mostrar mensaje según el rol -->
+    <!-- ___________________________________ PARA ADMIN ___________________________________-->
+    <div *ngIf="roleUsuario === 3">
+        <h1>TU ROLE es admin</h1>
+    </div>
 
-    <!-- _____________ que cosas mostrar dependiendo de la lógica de la app ___________-->
-    <!-- 1. Cuando no hay ninguna ronda activa -->
-    <div class="container container--medium" style="padding-top: 100px; padding-bottom: 150px;">
-        <h1 class="title title--h1 ">Aún no hay ninguna<br> ronda activa. <br>
-            <span class="text--disabled">Espera a que tu profesor <br> la habilite.</span>
-            <div class="linea" style="margin-top: 80px;"></div>
-        </h1>
+    <!-- ___________________________________ PARA PROFESOR ____________________________________ -->
+    <div *ngIf="roleUsuario === 1">
+        <h1>TU ROLE es profesor</h1>
+    </div>
+
+    <!-- ___________________________________ PARA ALUMNO ____________________________________ -->
+    <div *ngIf="roleUsuario === 2">
+        <h1>TU ROLE es alumno</h1>
+
+        <!-- 1. Cuando no hay ninguna ronda activa -->
+        <div class="container container--medium" style="padding-top: 100px; padding-bottom: 150px;">
+            <h1 class="title title--h1 ">Aún no hay ninguna<br> ronda activa. <br>
+                <span class="text--disabled">Espera a que tu profesor <br> la habilite.</span>
+                <div class="linea" style="margin-top: 80px;"></div>
+            </h1>
+        </div>
+
+
+        <div class="container container--medium">
+            <h2 class="title title--h2">Charlas anteriores</h2>
+            <p style="background-color: yellow; color: red;">aqui el menu este de todas, filtrar por modulo y por rondas
+                xd</p>
+        </div>
+        <div class="dashboard-container container container--small">
+            <app-tarjeta-charla *ngFor="let charla of charlas" [charla]="charla"></app-tarjeta-charla>
+        </div>
     </div>
 
 
-    <div class="container container--medium">
-        <h2 class="title title--h2">Charlas anteriores</h2>
-        <p style="background-color: yellow; color: red;">aqui el menu este de todas, filtrar por modulo y por rondas xd</p>
-    </div>
-    <div class="dashboard-container container container--small">
-        <app-tarjeta-charla *ngFor="let charla of charlas" [charla]="charla"></app-tarjeta-charla>
-    </div>
 
 
 
