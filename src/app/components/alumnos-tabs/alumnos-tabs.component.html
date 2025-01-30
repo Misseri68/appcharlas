@@ -1,7 +1,6 @@
-
 <h3> {{curso}} ({{numeroAlumnosTab}}) </h3>
 <div>
-  <div class="tabs w-100 h-100">
+  <div class="tabs w-100 ">
     <!-- Botones de pestañas -->
     <button *ngFor="let tab of tabs" (click)="selectTab(tab)" [class.active]="tab === selectedTab" class="tab-button">
       {{ tab }}
@@ -9,16 +8,21 @@
   </div>
 
   <!-- Contenido de las pestañas -->
-  <div class="tab-content w-100">
+  <div class="tab-content w-100" >
     <!-- Listado de Alumnos Curso Actual -->
-    <div *ngIf="selectedTab === 'Alumnos curso actual'" class="list-container w-100">
+    <div *ngIf="selectedTab === 'Alumnos curso actual'" class="list-container w-100 h-25" >
       <div *ngFor="let itemalumno of alumnosCursoActual.alumnos" class="list-item">
-        <span class="alumno-nombre">{{ itemalumno.alumno.usuario }}</span>
+        <span class="alumno-nombre">{{ itemalumno.alumno.usuario }} {{itemalumno.alumno.estado}}
+        </span>
         <div class="botones-container">
-          <span>Charlas presentadas: {{itemalumno.charlasAceptadas}} / {{itemalumno.charlasTotales}}</span>
-          <button class="btn btn-danger">Deshabilitar</button>
-          <button class="btn btn-success">Ver Detalles</button>
-          <p></p>
+          <span> Charlas presentadas: {{itemalumno.charlasAceptadas}} / {{itemalumno.charlasTotales}}</span>
+
+          @if(itemalumno.alumno.estadoUsuario == true ){
+            <button class="btn btn-danger" (click)="deshabilitarAlumno(itemalumno.alumno.idUsuario)">Deshabilitar</button>
+          }
+          @else{
+          <button class="btn btn-success" (click)="habilitarAlumno(itemalumno.alumno.idUsuario)">Habilitar</button>
+          }
         </div>
       </div>
     </div>
@@ -26,25 +30,37 @@
     <!-- Listado de Historial de Alumnos-->
     <div *ngIf="selectedTab === 'Historial de Alumnos'" class="list-container w-100">
       <div *ngFor="let itemalumno of alumnosCursoHistorial.alumnos" class="list-item">
-        <span class="alumno-nombre">{{ itemalumno.alumno.usuario }}</span>
+        <span class="alumno-nombre">{{ itemalumno.alumno.usuario }}
+        </span>
+        {{itemalumno.alumno.estado}}
+
         <div class="botones-container">
           <span>Charlas presentadas: {{itemalumno.charlasAceptadas}} / {{itemalumno.charlasTotales}}</span>
-          <button class="btn btn-danger">Deshabilitar</button>
-          <button class="btn btn-success">Ver Detalles</button>
-          <p></p>
-        </div>      </div>
+          @if(itemalumno.alumno.estadoUsuario == true ){
+          <button class="btn btn-danger" (click)="deshabilitarAlumno(itemalumno.alumno.idUsuario)">Deshabilitar</button>
+          }
+          @else{
+            <button class="btn btn-success" (click)="habilitarAlumno(itemalumno.alumno.idUsuario)">Habilitar</button>
+          }
+        </div>
+      </div>
     </div>
 
     <!-- Listado de Todos los Alumnos -->
     <div *ngIf="selectedTab === 'Todos los alumnos'" class="list-container w-100">
       <div *ngFor="let itemalumno of alumnosTodos.alumnos" class="list-item">
-        <span class="alumno-nombre">{{ itemalumno.alumno.usuario }}</span>
-        <div class="botones-container">
-          <span>Charlas presentadas: {{itemalumno.charlasAceptadas}} / {{itemalumno.charlasTotales}}</span>
-          <button class="btn btn-danger">Deshabilitar</button>
-          <button class="btn btn-success">Ver Detalles</button>
-          <p></p>
-        </div>      </div>
+        <span class="alumno-nombre">{{ itemalumno.alumno.usuario }}        </span>
+
+          <div class="botones-container">
+            <span>Charlas presentadas: {{itemalumno.charlasAceptadas}} / {{itemalumno.charlasTotales}}</span>
+            @if(itemalumno.alumno.estadoUsuario == true ){
+              <button class="btn btn-danger" (click)="deshabilitarAlumno(itemalumno.alumno.idUsuario)">Deshabilitar</button>
+            }
+            @else{
+              <button class="btn btn-success" (click)="habilitarAlumno(itemalumno.alumno.idUsuario)">Habilitar</button>
+            }
+          </div>
+      </div>
     </div>
   </div>
 </div>

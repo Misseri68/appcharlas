@@ -25,8 +25,6 @@ export class AlumnosTabsComponent {
     this.cargarAlumnosCursoActual();
   }
 
-
-
   cargarAlumnosCursoActual() {
     this._profesorService.getAlumnosCursoActivo().then((response: any) => {
       this.alumnosCursoActual = response[0];
@@ -38,18 +36,27 @@ export class AlumnosTabsComponent {
   cargarAlumnosCursoHistorial(){
     this._profesorService.getAlumnosCursoHistorial().then((response: any) => {
       this.alumnosCursoHistorial = response[0];
+      this.numeroAlumnosTab = this.alumnosCursoHistorial.numeroAlumnos;
+
 
     })
   }
 
   cargarAlumnosTodos(){
     this._profesorService.getAlumnosTodos().then((response: any) => {
+      console.log(response[0])
       this.alumnosTodos = response[0];
-      console.log("Curso actual metodo",
-        this.alumnosCursoActual.alumnos
-      )
+      this.numeroAlumnosTab = this.alumnosTodos.numeroAlumnos;
+
     })
   }
+
+  cargarTodasListas(){
+    this.cargarAlumnosCursoActual();
+    this.cargarAlumnosCursoHistorial();
+    this.cargarAlumnosTodos();
+  }
+
 
 
     // Función que genera la estructura base
@@ -90,6 +97,23 @@ export class AlumnosTabsComponent {
       ];
     }
 
+    deshabilitarAlumno(idUsuario: number){
+      this._profesorService.deshabilitarAlumnoFetch(idUsuario).then((response: any) => {
+        if(response.status == 200){
+          alert("Alumno deshabilitado")
+          this.cargarTodasListas();
+        }
+      })
+    }
+
+    habilitarAlumno(idUsuario: number){
+      this._profesorService.habilitarAlumnoFetch(idUsuario).then((response: any) => {
+        if(response.status == 200){
+          alert("Alumno habilitado")
+          this.cargarTodasListas();
+        }
+      })
+    }
 
 
   // Método para cambiar de pestaña
@@ -100,7 +124,7 @@ export class AlumnosTabsComponent {
       this.numeroAlumnosTab = this.alumnosCursoActual.numeroAlumnos;
     }
     if(tab == "Historial de Alumnos"){
-      if(this.alumnosCursoHistorial.numeroAlumnos == 0){
+      if (!this.alumnosCursoHistorial || this.alumnosCursoHistorial.length === 0 || this.alumnosCursoHistorial[0]?.numeroAlumnos === 0) {
         this.cargarAlumnosCursoHistorial();
       }
       this.curso = "Tu historial de alumnos pasados";
@@ -109,10 +133,10 @@ export class AlumnosTabsComponent {
       if(num == 0){
         this.numeroAlumnosTab = 0
       }
-
     }
-    if(tab == "Todos los alumnos"){
-      if(this.alumnosTodos.numeroAlumnos == 0){
+    if (!this.alumnosTodos || this.alumnosTodos.length === 0 || this.alumnosTodos[0]?.numeroAlumnos === 0) {
+      console.log(this.alumnosTodos)
+      if(this.alumnosTodos){
         this.cargarAlumnosTodos();
       }
       this.curso = "Todos tus alumnos";
@@ -122,5 +146,4 @@ export class AlumnosTabsComponent {
       }
     }
   }
-
 }
