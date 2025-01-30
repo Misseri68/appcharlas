@@ -1,0 +1,74 @@
+<p>Panel de Control - ADMIN</p>
+
+<div class="table-container">
+    <table class="profesor-table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Estado</th>
+                <th>Curso</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let profesor of profesores" 
+                (click)="seleccionarProfesor(profesor)" 
+                class="clickable-row">
+                <td>{{ profesor.usuario }}</td>
+                <td>{{ profesor.email }}</td>
+                <td>
+                    <span class="estado" [class.activo]="profesor.estadoUsuario" [class.inactivo]="!profesor.estadoUsuario">
+                        {{ profesor.estadoUsuario ? 'Activo' : 'Inactivo' }}
+                    </span>
+                </td>
+                <td>{{ profesor.curso }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Fondo del modal con animación de fadeIn -->
+<div class="modal-overlay" *ngIf="mostrarModal" (click)="cerrarModal()"></div>
+
+<!-- Contenedor del modal con animación -->
+<div class="modal-content" *ngIf="mostrarModal" (click)="$event.stopPropagation()">
+    <!-- Botón de cierre mejorado -->
+    <p class="close-button" (click)="cerrarModal()">✖</p>
+
+    <div style="display: flex;">
+        <h1 class="title title--h1">{{profesorSeleccionado.usuario}}</h1>
+    
+    </div>
+    
+
+    <form #crearCharlaForm="ngForm" class="form">
+        <div class="entradas">
+            <!-- Campo ID deshabilitado con diseño específico -->
+            <input type="text" name="cajaid" placeholder="Id" [(ngModel)]="profesorSeleccionado.idUsuario" disabled
+            style="background: #4a4a4a;
+            color: #b3b3b3;
+            cursor: not-allowed;
+            border-bottom: 1px solid #6a6a6a;"
+            />
+            
+            <!-- Campos editables -->
+            <input type="text" name="cajausuario" placeholder="Usuario" [(ngModel)]="profesorSeleccionado.usuario" />
+            <input type="text" name="cajaemail" placeholder="Email" [(ngModel)]="profesorSeleccionado.email" />
+            <input type="text" name="cajaestado" placeholder="Estado (Activo/Inactivo)" [(ngModel)]="profesorSeleccionado.estadoUsuario"/>
+            <input type="text" name="cajarole" placeholder="Rol" [(ngModel)]="profesorSeleccionado.role"/>
+            <input type="text" name="cajacurso" placeholder="Curso" [(ngModel)]="profesorSeleccionado.curso"/>
+            <input type="text" name="cajafechainicio" placeholder="Fecha Inicio" [(ngModel)]="profesorSeleccionado.fechaInicioCurso"/>
+            <input type="text" name="cajafechafin" placeholder="Fecha Fin" [(ngModel)]="profesorSeleccionado.fechaFinCurso"/>
+
+            <!-- Botones con estilos mejorados -->
+            <div class="buttons-container">
+                <button class="button update" type="submit" (click)="actualizarProfesor()">Actualizar</button>
+                <button class="button delete" type="button" (click)="eliminarProfesor()">Eliminar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
