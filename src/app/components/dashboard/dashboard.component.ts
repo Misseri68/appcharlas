@@ -16,22 +16,31 @@ import { ServiceVoto } from '../../services/voto.service';
   styleUrl: './dashboard.component.scss',
   imports: [TarjetaCharlaComponent, CommonModule],
   standalone: true,
-  providers: [ServiceCharla,LoginService,RondaService, ServiceVoto]
+  providers: [ServiceCharla, LoginService, RondaService, ServiceVoto]
 
 })
 export class DashboardComponent implements OnInit {
-  constructor(private _votoServ:ServiceVoto   ,private serviceCharla: ServiceCharla, private _usuarioServ: UserService, private _router: Router, private _loginService: LoginService,private _rondaService: RondaService) {
+
+  constructor(private _votoServ: ServiceVoto
+    , private serviceCharla: ServiceCharla,
+    private _usuarioServ: UserService,
+    private _router: Router,
+    private _loginService: LoginService,
+    private _rondaService: RondaService) {
   }
+
   public charlas: Charla[] = [];
   private rondas: Ronda[] = [];
   private rondaActual: Ronda | undefined;  // Objeto para almacenar la ronda activa
   private isLoading: boolean = true;
+  public roleUsuario: number | null = null; // Variable pública para el role
   datosUsuario = {
     nombreUsuario: '',
     cursoUsuario: '',
     rolUsuario: '',
-
   }
+
+
   ngOnInit(): void {
     this.redirigirALogin();
     this.loadCharlas();
@@ -44,22 +53,24 @@ export class DashboardComponent implements OnInit {
       if (data) {
         this.charlas = data;
         console.log('✅Charlas cargadas:', this.charlas);
-        
+
       } else {
         console.error('No se pudieron cargar las charlas');
       }
     });
   }
-  private async  loadCharlasActivas(){
-     const idRondaActual  = await this._rondaService.getRondaActiva()
-     if(idRondaActual){
-      await  this.serviceCharla.getCharlasPorRonda(idRondaActual )
-     }
+  private async loadCharlasActivas() {
+    const idRondaActual = await this._rondaService.getRondaActiva()
+    if (idRondaActual) {
+      await this.serviceCharla.getCharlasPorRonda(idRondaActual)
     }
+  }
 
   private loadDatosUsuario() {
     this._usuarioServ.getPerfil().then(usuario => {
       if (usuario != null) {
+        this.roleUsuario = usuario.idRole ? Number(usuario.idRole) : null; // Convertimos a número
+        console.log("role usuario: ", this.roleUsuario)
         this.datosUsuario = {
           nombreUsuario: usuario.nombre,
           cursoUsuario: usuario.curso || 'Curso',
@@ -70,10 +81,12 @@ export class DashboardComponent implements OnInit {
   }
 
   private redirigirALogin() {
-     if(this._loginService.getToken() === null ){
+    if (this._loginService.getToken() === null) {
       this._router.navigate(['/login'])
-     }
+    }
   }
+
+
 
 }
 
