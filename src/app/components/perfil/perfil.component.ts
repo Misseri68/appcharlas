@@ -25,6 +25,7 @@ export class PerfilComponent {
 
 
   @ViewChild("cajafile") cajaFileRef!: ElementRef;
+  @ViewChild("cajafilecharla") cajaFileCharlaRef!: ElementRef
   usuario: Usuario | null = null;
   showPopup: boolean = false;
   charlasAceptadas: Charla[] = [];
@@ -90,6 +91,30 @@ export class PerfilComponent {
   editarFotoPerfil(): void {
     this.cajaFileRef.nativeElement.click();
   }
+
+  editarImagenCharla() {
+    this.cajaFileCharlaRef.nativeElement.click();
+    }
+
+    subirFicheroCharla(event: any, idCharla: number): void{
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.readAsArrayBuffer(file);
+      reader.onloadend = () => {
+        const buffer = reader.result as ArrayBuffer;
+        const base64 = btoa(
+          new Uint8Array(buffer).reduce((data, byte) => data + String.fromCharCode(byte), '')
+        );
+
+        const newFileModel = new FileModel(file.name, base64);
+        this._postFilesService.postFileCharla(newFileModel, idCharla ).subscribe(response => {
+          console.log("Respuesta del servidor:", response);
+        });
+      };
+      alert("El archivo ha sido subido correctamente. Cierra sesión y vuelve a entrar para visualizar los cambios.");
+    }
+
 
 
   subirFichero(event: any): void {
