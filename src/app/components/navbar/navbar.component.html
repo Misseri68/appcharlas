@@ -15,8 +15,7 @@
         [routerLinkActiveOptions]="{ exact: true }">Dashboard</a></li>
       <li><a [routerLink]="['/perfil']" class="navbar__link" routerLinkActive="navbar__link--active">Mi perfil</a></li>
       @if(!isProfe){
-        <li
-        *ngIf="roleUsuario != 3 || roleUsuario != 1"><a [routerLink]="['/crear-charla']" class="navbar__link" routerLinkActive="navbar__link--active">Crear charla</a></li>
+        <li><a [routerLink]="['/crear-charla']" class="navbar__link" routerLinkActive="navbar__link--active">Crear charla</a></li>
       }
       @else {
         <!-- <li><a [routerLink]="['/cursos']" class="navbar__link" routerLinkActive="navbar__link--active">Cursos</a></li> -->
