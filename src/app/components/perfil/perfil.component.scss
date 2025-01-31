@@ -1,0 +1,119 @@
+@import "./../../../styles/variables.scss";
+
+#fotoperfil {
+  width: 150px;
+  height: 150px;
+}
+
+#fotoperfil img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+#fotoperfil:hover img {
+  border: 3px solid aqua !important;
+  filter: brightness(50%);
+}
+
+#fotoperfil .edit-icon {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+#fotoperfil:hover .edit-icon {
+  opacity: 1;
+}
+
+.popups{
+  background: linear-gradient(159deg, rgba(32, 32, 32, 0.5) 0%, rgba(32, 32, 32, 0.5) 40%, rgba(33, 34, 34, 0.5) 75%, rgba(22, 22, 22, 0.43) 100%);
+  display:block!important;
+  position: fixed!important;
+  z-index: 10!important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.button {
+  background-color: $primary-color-700;
+  color: white;
+  border: none; // Elimina cualquier borde predeterminado
+  outline: none; // Evita el borde al hacer focus en algunos navegadores
+  border-radius: 20px;
+  padding: 10px 20px;
+  transition: all 0.3s ease-in-out;
+  animation: fadeIn 1s ease-in-out;
+  box-shadow: none; // Elimina sombras raras
+
+  &:hover {
+      background-color: lighten($primary-color-600, 10%);
+  }
+
+  &:focus {
+      outline: none;
+      box-shadow: none;
+  }
+}
+
+.input {
+  margin-bottom: 20px;
+  border: none;
+  color: $neutral-color-400;
+  border-bottom: 1px solid $neutral-color-400;
+  padding: 10px 0px;
+  background: none;
+  box-shadow: none;
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+  animation: fadeIn 0.6s ease-in-out;
+
+  &::placeholder {
+      color: rgba(128, 128, 128, 0.8);
+      transition: all 0.3s ease-in-out;
+  }
+
+  &:focus {
+      outline: none;
+      color: white;
+      border-bottom: 1px solid white;
+      box-shadow: none;
+      transform: translateY(-2px);
+      transition: all 0.3s ease-in-out;
+
+      &::placeholder {
+          opacity: 0.3;
+      }
+  }
+
+  &:hover {
+      color: white;
+      border-bottom: 1px solid white;
+      box-shadow: none;
+      transform: translateY(-2px);
+      transition: all 0.3s ease-in-out;
+
+      &::placeholder {
+          opacity: 0.5;
+      }
+  }
+
+  /* Cuando el input tiene texto, el color se mantiene en blanco */
+  &:not(:placeholder-shown) {
+      color: white;
+  }
+}

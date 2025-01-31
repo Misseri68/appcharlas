@@ -67,14 +67,17 @@
   <h5>No tienes ningún curso activo</h5>
   <a class="link-info" (click)="toggleShowUnirseCurso()">Únete con el código de tu curso</a><br>
   @if(showUnirseCurso){
-    <input type="text" placeholder="Código del curso" #codigoCurso  >
-    <button (click)="unirseCurso(codigoCurso.value)" >Unirse</button>
+    <div style="gap: 50px">
+      <input class="input" type="text" placeholder="Código del curso" #codigoCurso  >
+    <button class="button" (click)="unirseCurso(codigoCurso.value)" >Unirse</button>
+    </div>
+    
   }
   }@else {
     <a class="link-info" (click)="toggleShowUnirseCurso()">Cambiar curso</a><br>
       @if(showUnirseCurso){
-        <input type="text" placeholder="Código del curso" #codigoCurso >
-        <button (click)="unirseCurso(codigoCurso.value)">Cambiarse de curso</button>
+        <input class="input" type="text" placeholder="Código del curso" #codigoCurso >
+        <button class="button" (click)="unirseCurso(codigoCurso.value)">Cambiarse de curso</button>
       }
 
   <app-alumnos-tabs class="w-100"></app-alumnos-tabs>
