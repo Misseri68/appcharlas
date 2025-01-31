@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   selector: 'app-changepwd-modal',
   templateUrl: './changepwd-modal.component.html',
-  styleUrls: ['./changepwd-modal.component.css'],
+  styleUrls: ['./changepwd-modal.component.scss'],
   imports: [ReactiveFormsModule, CommonModule]
 })
 export class ChangepwdModalComponent {

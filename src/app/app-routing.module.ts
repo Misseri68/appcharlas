@@ -18,12 +18,10 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    // data: { animation: 'DashboardPage' }
   },
   {
     path: 'perfil',
     component: PerfilComponent,
-    // data: { animation: 'PerfilPage' }
 
   },
   {

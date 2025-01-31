@@ -36,6 +36,22 @@ export class CrearCharlaComponent implements OnInit{
       this.redirigirALogin();
       await this.obtenerUsuarioLogueado();
       await this.obtenerRondaActual();
+
+  }
+
+  validarTiempo() {
+    let valor = this.cajatiempo.nativeElement.value;
+
+    // Eliminar cualquier carácter que no sea un número
+    valor = valor.replace(/[^0-9]/g, '');
+
+    // Convertir a número y limitar a 120
+    if (valor !== '' && parseInt(valor, 10) > 120) {
+      valor = '120';
+    }
+
+    // Asignar el valor limpio de nuevo al input
+    this.cajatiempo.nativeElement.value = valor;
   }
 
   crearCharla():void {

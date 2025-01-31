@@ -1,36 +1,45 @@
+<!-- Fondo oscuro de la ventana emergente -->
+<div class="popup-overlay" (click)="onClose()"></div>
+
+<!-- Contenedor del pop-up con animaciones -->
 <div class="popup">
-  <h1>Cambiar Contraseña</h1>
+  <h1 class="popup-title">Cambiar Contraseña</h1>
+
+  <!-- Botón de cierre mejorado -->
   <button (click)="onClose()" class="close-button">
-    <i class="fa-solid fa-xmark"></i>
+    ✖
   </button>
+
   <form [formGroup]="changePasswordForm" (ngSubmit)="onSubmit()">
     <!-- Contraseña Actual -->
-    <div class="mb-3">
+    <div class="form-group">
       <label>Contraseña Actual</label>
-      <input type="password" class="form-control" formControlName="currentPassword" required>
+      <input type="password" class="form-input" formControlName="currentPassword" required>
     </div>
 
     <!-- Nueva Contraseña -->
-    <div class="mb-3">
+    <div class="form-group">
       <label>Nueva Contraseña</label>
-      <input type="password" class="form-control" formControlName="newPassword" required>
-      <small class="text-danger" *ngIf="changePasswordForm.get('newPassword')?.hasError('minlength')">
+      <input type="password" class="form-input" formControlName="newPassword" required>
+      <small *ngIf="changePasswordForm.get('newPassword')?.hasError('minlength')">
         La contraseña debe tener al menos 5 caracteres.
       </small>
     </div>
 
     <!-- Confirmar Nueva Contraseña -->
-    <div class="mb-3">
+    <div class="form-group">
       <label>Confirmar Nueva Contraseña</label>
-      <input type="password" class="form-control" formControlName="confirmPassword" required>
-      <small class="text-danger" *ngIf="changePasswordForm.hasError('passwordMismatch')">
+      <input type="password" class="form-input" formControlName="confirmPassword" required>
+      <small *ngIf="changePasswordForm.hasError('passwordMismatch')">
         Las contraseñas no coinciden.
       </small>
     </div>
 
     <!-- Botón de envío -->
-    <button type="submit" class="btn btn-primary" [disabled]="changePasswordForm.invalid">
-      Cambiar Contraseña
-    </button>
+    <div class="buttons-container">
+      <button type="submit" class="button update" [disabled]="changePasswordForm.invalid">
+        Cambiar Contraseña
+      </button>
+    </div>
   </form>
 </div>
