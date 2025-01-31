@@ -18,7 +18,7 @@ import { ProfesorService } from '../../services/profesor.service';
   selector: 'app-perfil',
   standalone: true,
   templateUrl: './perfil.component.html',
-  styleUrl: './perfil.component.css',
+  styleUrl: './perfil.component.scss',
   imports: [RouterModule, FormsModule, ChangepwdModalComponent, CommonModule, TarjetaCharlaComponent, AlumnosTabsComponent]
 })
 export class PerfilComponent {

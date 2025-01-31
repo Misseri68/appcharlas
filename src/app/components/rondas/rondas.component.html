@@ -1,51 +1,64 @@
-<h1 class="m-5">Rondas</h1>
-  <div class="m-5">
+<div class="container container--small">
+  <h1 class="title title--h1">Rondas</h1>
+
+<div class="container-rondas">
     <a class="link-info" (click)="toggleShowRondaForm()">Crear/Editar ronda</a>
-    <!-- Mostrar el formulario solo si 'showRondaForm' es verdadero -->
-  <div *ngIf="showRondaForm">
-    <form [formGroup]="rondaForm" (ngSubmit)="onSubmit()">
-      <div>
-        <label for="fechaPresentacion">Fecha de Presentación:</label>
-        <input id="fechaPresentacion" type="datetime-local" formControlName="fechaPresentacion">
-      </div>
-      <div>
-        <label for="fechaCierre">Fecha de Cierre:</label>
-        <input id="fechaCierre" type="datetime-local" formControlName="fechaCierre">
-      </div>
-      <div>
-        <label for="duracion">Duración:</label>
-        <input id="duracion" type="number" formControlName="duracion">
-      </div>
-      <div>
-        <label for="descripcionModulo">Descripción del Módulo:</label>
-        <input id="descripcionModulo" type="text" formControlName="descripcionModulo">
-      </div>
-      <div>
-        <label for="fechaLimiteVotacion">Fecha Límite de Votación:</label>
-        <input id="fechaLimiteVotacion" type="datetime-local" formControlName="fechaLimiteVotacion">
-      </div>
-      <button type="submit" [disabled]="!rondaForm.valid">Enviar</button>
-    </form>
-  </div>
-    <div>
-      <h2 class="mt-5">Tus rondas</h2>
-      <div class="rondas-container ">
-        <div *ngFor="let ronda of rondas" class="ronda-card">
-          <div class="ronda-card-header">
-            <h3>{{ ronda.descripcionModulo }}</h3>
+    
+    <div *ngIf="showRondaForm" class="form-container">
+      <!-- como hago para que este centrado en el medio y pequeño?  -->
+      <div class="form-wrapper">
+        <form [formGroup]="rondaForm" (ngSubmit)="onSubmit()">
+          <div class="entradas">
+              <label for="fechaPresentacion">Fecha de Presentación:</label>
+              <input id="fechaPresentacion" type="datetime-local" formControlName="fechaPresentacion">
           </div>
-          <div class="ronda-card-body">
-            <p><strong>ID Ronda:</strong> {{ ronda.idRonda }}</p>
-            <p><strong>Fecha de Presentación:</strong> {{ ronda.fechaPresentacion |date: 'dd-MM-yyyy' }}</p>
-            <p><strong>Fecha de Cierre:</strong> {{ ronda.fechaCierre |date: 'dd-MM-yyyy' }}</p>
-            <p><strong>Duración:</strong> {{ ronda.duracion }} minutos</p>
-            <p><strong>Fecha Límite Votación:</strong> {{ ronda.fechaLimiteVotacion | date: 'dd-MM-yyyy'}}</p>
+
+          <div class="entradas">
+              <label for="fechaCierre">Fecha de Cierre:</label>
+              <input id="fechaCierre" type="datetime-local" formControlName="fechaCierre">
           </div>
-          <div class="ronda-card-actions">
-            <button (click)="editarRonda(ronda)" class="btn-editar">Editar</button>
-            <button (click)="eliminarRonda(ronda.idRonda)" class="btn-eliminar">Eliminar</button>
+
+          <div class="entradas">
+              <label for="duracion">Duración (minutos):</label>
+              <input placeholder="duracion" type="number" formControlName="duracion">
           </div>
-        </div>
+
+          <div class="entradas">
+              
+              <textarea placeholder="Descripcion del Modulo" id="descripcionModulo" formControlName="descripcionModulo"></textarea>
+          </div>
+
+          <div class="entradas">
+              <label for="fechaLimiteVotacion">Fecha Límite de Votación:</label>
+              <input id="fechaLimiteVotacion" type="datetime-local" formControlName="fechaLimiteVotacion">
+          </div>
+
+          <button type="submit" class="button" >Enviar</button>
+      </form>
       </div>
-      </div>
+        
     </div>
+
+    <h2 style="padding: 20px;" class="title title--h1">Tus rondas</h2>
+    <div class="rondas-container">
+        <div *ngFor="let ronda of rondas" class="ronda-card">
+            <div class="ronda-card-header">
+                <h3>{{ ronda.descripcionModulo }}</h3>
+            </div>
+            <div class="ronda-card-body">
+                <p><strong>ID Ronda:</strong> {{ ronda.idRonda }}</p>
+                <p><strong>Fecha de Presentación:</strong> {{ ronda.fechaPresentacion | date: 'dd-MM-yyyy' }}</p>
+                <p><strong>Fecha de Cierre:</strong> {{ ronda.fechaCierre | date: 'dd-MM-yyyy' }}</p>
+                <p><strong>Duración:</strong> {{ ronda.duracion }} minutos</p>
+                <p><strong>Fecha Límite Votación:</strong> {{ ronda.fechaLimiteVotacion | date: 'dd-MM-yyyy'}}</p>
+            </div>
+            <div class="ronda-card-actions">
+                <button (click)="editarRonda(ronda)" class="button">Editar</button>
+                <button (click)="eliminarRonda(ronda.idRonda)" class="button">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
