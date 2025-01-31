@@ -71,14 +71,18 @@ export class ProfesorService {
     })
   }
 
-  asignarseCurso(idCurso: string, idUsuario: number){
-    return axios.post(this.apiUrl + 'api/CursosUsuarios/post/${idCurso}/${idUsuario}', {
+  asignarseCurso(idCurso: number, idUsuario: number){
+    console.log(this._loginService.getToken())
+    return axios.post(this.apiUrl + 'api/CursosUsuarios/post/' + idUsuario + '/' + idCurso, null,  {
       headers: {
         "Content-type": "application/json",
         "Authorization": "Bearer " +  this._loginService.getToken()
       }
     }).then(response => {
       return response.data;
+    }).catch(error => {
+      console.log(error);
+      alert("Error al asignar curso")
     })
   }
 
@@ -90,6 +94,9 @@ export class ProfesorService {
       }
     }).then(response => {
       return response.data;
+    }).catch(error => {
+      console.log(error);
+      alert("Error al asignar curso")
     })
   }
 

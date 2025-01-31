@@ -9,7 +9,7 @@
                 maxlength="3" />
 
             <div class="file-upload">
-                <span>Seleccionar archivo</span>
+                <input #cajaFile type="file" (change)="subirFichero($event)">
                 <button type="button">Subir archivo</button>
             </div>
             <br>

@@ -6,6 +6,8 @@ import { UserService } from '../../services/user.service';
 import { RondaService } from '../../services/ronda.service';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
+import { PostFilesService } from '../../services/post-files.service';
+import { FileModel } from '../../models/FileModel';
 
 @Component({
   selector: 'app-crear-charla',
@@ -28,7 +30,8 @@ export class CrearCharlaComponent implements OnInit{
     private _serviceUsuario: UserService,
     private _serviceRonda: RondaService,
     private _loginService: LoginService,
-    private _router: Router
+    private _router: Router,
+    private _postFilesService: PostFilesService
   ) { }
 
 
@@ -39,6 +42,28 @@ export class CrearCharlaComponent implements OnInit{
 
   }
 
+subirFichero(event: any): void {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.readAsArrayBuffer(file);
+    reader.onloadend = () => {
+      const buffer = reader.result as ArrayBuffer;
+      const base64 = btoa(
+        new Uint8Array(buffer).reduce((data, byte) => data + String.fromCharCode(byte), '')
+      );
+
+      const newFileModel = new FileModel(file.name, base64);
+      if (this.usuarioId) {
+        this._postFilesService.postFile(newFileModel, this.usuarioId).subscribe(response => {
+          console.log("Respuesta del servidor:", response);
+        });
+        alert("El archivo ha sido subido correctamente.");
+
+      }
+
+    };
+  }
   validarTiempo() {
     let valor = this.cajatiempo.nativeElement.value;
 
@@ -59,7 +84,6 @@ export class CrearCharlaComponent implements OnInit{
     let titulo = this.cajatitulo.nativeElement.value;
     let descripcion = this.cajadescripcion.nativeElement.value;
     let tiempo = this.cajatiempo.nativeElement.value;
-    let imagen = this.cajaimagen.nativeElement.value;
 
     if (this.usuarioId === null) {
       console.error('Error: Usuario no identificado.');
@@ -85,7 +109,6 @@ export class CrearCharlaComponent implements OnInit{
       this.usuarioId, //idUsuario (esto hay que recuperarlo dinamicamente)
       1, //idEstadoCharla
       this.rondaActivaId, //idRonda
-      imagen
     )
 
     //enviar datos a servicio
