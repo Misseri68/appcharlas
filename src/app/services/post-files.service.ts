@@ -24,4 +24,16 @@ export class PostFilesService {
           }
         });
     }
+
+    postFileCharla(fileModel: FileModel, idCharla : number){
+      let json = JSON.stringify(fileModel);
+      let request = "api/files/uploadimagencharla/" + idCharla;
+      let peticion = this.url  + request;
+      return this._http.post(peticion, json, {
+        headers: {
+          "Content-type": "application/json",
+          "Authorization": "Bearer " +  this._loginService.getToken()
+        }
+      });
+    }
   }

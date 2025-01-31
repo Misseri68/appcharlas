@@ -8,6 +8,6 @@ export class Charlapost {
         public idUsuario: number,
         public idEstadoCharla: number,
         public idRonda: number,
-        public imagenCharla: string
+
     ) { }
 }

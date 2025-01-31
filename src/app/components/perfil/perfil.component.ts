@@ -46,10 +46,11 @@ export class PerfilComponent {
 
   ngOnInit(): void {
     this.redirigirALogin();
-    this._userService.getPerfil().then((usuario : any) => {
+    this._userService.getPerfil().then((usuario: any) => {
 
       if (usuario != null) {
         this.usuario = usuario;
+        console.log(usuario)
         this.idCursoUsuario = usuario.idCursoUsuario || 0;
         if (this.usuario?.role == "PROFESOR") {
           this.isProfe = true;
@@ -127,19 +128,21 @@ export class PerfilComponent {
     }
   }
 
-  unirseCurso(codigoCurso : string){
-    this._profesorService.asignarseCurso(codigoCurso, this.usuario?.idUsuario || -1).then(response => {
-      if(response.status == 200){
+  unirseCurso(codigoCurso: string) {
+    let numero :number = parseInt(codigoCurso);
+    this._profesorService.asignarseCurso(numero, this.usuario?.idUsuario || -1).then(response => {
+      if (response.status == 201 || response.status == 200) {
         alert("Curso asignado correctamente")
-      }
+      } else { alert("Error al asignar curso") }
     })
   }
 
-  cambiarseCurso(codigoCurso : string){
+  cambiarseCurso(codigoCurso: string) {
     this._profesorService.cambiarseCurso(codigoCurso, this.usuario?.idUsuario || -1, this.idCursoUsuario || -1).then(response => {
-      if(response.status == 200){
+      if (response.status == 201 || response.status == 200) {
         alert("Curso cambiado correctamente")
-      }
+      } else { alert("Error al asignar curso") }
+
     })
   }
 
