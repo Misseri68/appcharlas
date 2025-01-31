@@ -1,0 +1,58 @@
+/* Estilos para las pestañas */
+.tabs {
+  display: flex;
+  border-bottom: 2px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  background-color: #f1f1f1;
+  margin-right: 5px;
+  transition: background-color 0.3s;
+}
+
+.tab-button.active {
+  background-color: #ccc;
+  font-weight: bold;
+}
+
+.tab-button:hover {
+  background-color: #ddd;
+}
+
+/* Estilos para los contenedores de listas */
+.list-container {
+  width: 300px;
+  height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.list-item {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between; /* Distribuye el espacio entre los elementos */
+  align-items: center; /* Alinea verticalmente los elementos al centro */
+  padding: 10px; /* Añade un poco de padding para mejor visualización */
+  border-bottom: 1px solid #ccc; /* Opcional: añade una línea divisoria entre elementos */
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+
+
+.botones-container {
+  display: flex;
+  gap: 10px; /* Espacio entre los botones */
+}
+
+.alumno-nombre {
+  flex-grow: 1; /* Hace que el nombre del alumno ocupe el espacio disponible */
+}

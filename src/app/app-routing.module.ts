@@ -6,6 +6,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { DetalleCharlaComponent } from './components/detalle-charla/detalle-charla.component';
 import { CrearCharlaComponent } from './components/crear-charla/crear-charla.component';
+import { CursosComponent } from './components/cursos/cursos.component';
+import { RondasComponent } from './components/rondas/rondas.component';
 
 export const routes: Routes = [
   {
@@ -37,6 +39,14 @@ export const routes: Routes = [
   {
     path: 'crear-charla',
     component: CrearCharlaComponent
+  },
+  {
+    path: 'cursos',
+    component: CursosComponent
+  },
+  {
+    path: 'rondas',
+    component: RondasComponent
   },
   {
     path: '**',

@@ -4,6 +4,8 @@ import { ServiceCharla } from '../../services/charla.service';
 import { Charlapost } from '../../models/Charlapost';
 import { UserService } from '../../services/user.service';
 import { RondaService } from '../../services/ronda.service';
+import { LoginService } from '../../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-charla',
@@ -24,11 +26,14 @@ export class CrearCharlaComponent implements OnInit{
   constructor(
     private _serviceCharla: ServiceCharla,
     private _serviceUsuario: UserService,
-    private _serviceRonda: RondaService
+    private _serviceRonda: RondaService,
+    private _loginService: LoginService,
+    private _router: Router
   ) { }
 
 
   async ngOnInit(): Promise<void> {
+      this.redirigirALogin();
       await this.obtenerUsuarioLogueado();
       await this.obtenerRondaActual();
 
@@ -69,7 +74,7 @@ export class CrearCharlaComponent implements OnInit{
     }
 
 
-    
+
     let nuevaCharla = new Charlapost
     (
       0,
@@ -113,5 +118,11 @@ export class CrearCharlaComponent implements OnInit{
       console.error('Error al obtener la ronda activa:', error);
     }
   }
+
+  private redirigirALogin() {
+    if(this._loginService.getToken() === null ){
+     this._router.navigate(['/login'])
+    }
+ }
 
 }

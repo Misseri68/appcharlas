@@ -1,6 +1,5 @@
-
 @if(showPopup){
-  <app-changepwd-modal [user]="usuario"  (closePopup)="togglePopup()" class="popups w-100 h-100" ></app-changepwd-modal>
+<app-changepwd-modal [user]="usuario" (closePopup)="togglePopup()" class="popups w-100 h-100"></app-changepwd-modal>
 }
 
 
@@ -14,12 +13,8 @@
           <input #cajafile type="file" (change)="subirFichero($event)" style="display: none;" />
 
           <!-- Imagen de perfil -->
-          <img
-            (click)="editarFotoPerfil()"
-            alt="perfil"
-            class="img-fluid rounded-circle border shadow"
-            [src]="usuario?.imagen || 'assets/images/logotajamar.png'"
-          >
+          <img (click)="editarFotoPerfil()" alt="perfil" class="img-fluid rounded-circle border shadow"
+            [src]="usuario?.imagen || 'assets/images/logotajamar.png'">
 
           <!-- Contenedor del icono del lápiz -->
           <div class="edit-icon position-absolute d-flex justify-content-center align-items-center">
@@ -27,48 +22,63 @@
           </div>
         </div>
       </div>
-          <h5>{{usuario?.nombre}}</h5>
-          <p>{{usuario?.email}}</p>
-          <div class="d-grid gap-2">
-            <a class="link-info" (click)="cambiarContrasena()">Cambiar contraseña</a>
-          </div>
-        </div>
+      <h5>{{usuario?.nombre}}</h5>
+      <p>{{usuario?.email}}</p>
+      <div class="d-grid gap-2">
+        <a class="link-info" (click)="cambiarContrasena()">Cambiar contraseña</a>
+      </div>
+    </div>
 
   </div>
-
+  @if (!isProfe){
   <!-- Fila de Charlas -->
   <div class="row">
     <div class="col">
       <h2>Tus charlas</h2>
       <hr>
       @if(charlasAceptadas.length > 0 || charlasPropuestas.length > 0){
-        <div>
+      <div>
 
-          @if(charlasPropuestas.length > 0){
-            <h5>Charlas Propuestas</h5>
-              <app-tarjeta-charla *ngFor="let charla of charlasPropuestas" [charla]="charla"></app-tarjeta-charla>
-          }
-          @else {
-            Todavía no has propuesto ninguna charla.
-          }
-          @if(charlasAceptadas.length > 0){
-            <h5>Charlas Aceptadas</h5>
-              <app-tarjeta-charla *ngFor="let charla of charlasAceptadas" [charla]="charla"></app-tarjeta-charla>
-          }@else{
-            <h5>Charlas Aceptadas</h5>
+        @if(charlasPropuestas.length > 0){
+        <h5>Charlas Propuestas</h5>
+        <app-tarjeta-charla *ngFor="let charla of charlasPropuestas" [charla]="charla"></app-tarjeta-charla>
+        }
+        @else {
+        Todavía no has propuesto ninguna charla.
+        }
+        @if(charlasAceptadas.length > 0){
+        <h5>Charlas Aceptadas</h5>
+        <app-tarjeta-charla *ngFor="let charla of charlasAceptadas" [charla]="charla"></app-tarjeta-charla>
+        }@else{
+        <h5>Charlas Aceptadas</h5>
 
-            Todavía no tienes charlas aceptadas.
-          }
+        Todavía no tienes charlas aceptadas.
+        }
 
-        </div>
+      </div>
       }
       @else{
-        <h5>Todavía no has creado ninguna charla.</h5>
+      <h5>Todavía no has creado ninguna charla.</h5>
       }
-
     </div>
   </div>
+  }@else {
+  @if(usuario?.idCurso == 0){
+  <h5>No tienes ningún curso activo</h5>
+  <a class="link-info" (click)="toggleShowUnirseCurso()">Únete con el código de tu curso</a><br>
+  @if(showUnirseCurso){
+    <input type="text" placeholder="Código del curso" #codigoCurso  >
+    <button (click)="unirseCurso(codigoCurso.value)" >Unirse</button>
+  }
+  }@else {
+    <a class="link-info" (click)="toggleShowUnirseCurso()">Cambiar curso</a><br>
+      @if(showUnirseCurso){
+        <input type="text" placeholder="Código del curso" #codigoCurso >
+        <button (click)="unirseCurso(codigoCurso.value)">Cambiarse de curso</button>
+      }
+
+  <app-alumnos-tabs class="w-100"></app-alumnos-tabs>
+  }
+  }
+
 </div>
-
-
-

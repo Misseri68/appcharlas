@@ -103,7 +103,7 @@ export class DetalleCharlaComponent implements OnInit {
 
 
   getImagenPerfil() {
-    this._userService.getPerfil().then((perfil) => {
+    this._userService.getPerfil().then((perfil : any) => {
       if (perfil?.imagen) {
         this.fotoPerfilUsuario = perfil.imagen;
       } else {

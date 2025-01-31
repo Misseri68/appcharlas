@@ -13,26 +13,31 @@ import { UserService } from '../../services/user.service';
 export class NavbarComponent {
 
   imagen :string = 'assets/images/test.jpg';
-
-  constructor(private _loginService: LoginService, private _userServ: UserService, private _router: Router) { 
-    this.getImagenPerfil();
-  }
+  isProfe : boolean = false;
 
   showPopup: boolean = false;
+
+  constructor(private _loginService: LoginService, private _userServ: UserService, private _router: Router) {
+    this.setDatosUsuario();
+  }
+
 
   togglePopup(): void {
     this.showPopup = !this.showPopup; // Alterna la visibilidad del pop-up
     console.log('Popup visible:', this.showPopup);
   }
 
-  getImagenPerfil(){
-    console.log("Hola")
-    this._userServ.getPerfil().then(perfil => {
+
+  setDatosUsuario(){
+    this._userServ.getPerfil().then((perfil : any )=> {
       if(perfil?.imagen){
         this.imagen = perfil.imagen;
         console.log(this.imagen)
       }else{
         this.imagen = 'assets/images/userdefault.png'
+      }
+      if(perfil?.role == "PROFESOR"){
+        this.isProfe = true;
       }
     })
   }

@@ -60,4 +60,64 @@ export class RondaService{
       }
     }
 
+
+
+    //Profesor CRUD rondas
+
+
+    getRondasProfesor(): any {
+      let urlRondasProfe = environment.apiCharlas + 'api/Profesor/RondasProfesor';
+      return axios.get(urlRondasProfe, {
+        headers: {
+          "Content-type": "application/json",
+          "Authorization": "Bearer " +  this._loginService.getToken()
+        }
+      }).then(response => {
+        return response.data;
+      })
+    }
+
+    createRonda(ronda: Ronda) : any{
+      let urlRondasProfe = environment.apiCharlas + 'api/Profesor/CreateRonda';
+      return axios.post(urlRondasProfe, ronda, {
+        headers: {
+          "Content-type": "application/json",
+          "Authorization": "Bearer " +  this._loginService.getToken()
+        }
+      }).then(response => {
+        return response.data;
+      }).catch(error => {
+        console.error("Error en la solicitud:", error); // Captura errores
+        throw error; // Propaga el error para manejarlo en el componente
+      });
+    }
+
+    updateRonda(ronda: Ronda) : any{
+      let urlRondasProfe = environment.apiCharlas + 'api/Profesor/UpdateRonda';
+      return axios.put(urlRondasProfe, ronda, {
+        headers: {
+          "Content-type": "application/json",
+          "Authorization": "Bearer " +  this._loginService.getToken()
+        }
+      }).then(response => {
+        return response.data;
+      }).catch(error => {
+        console.error("Error en la solicitud:", error);
+      });
+    }
+
+    deleteRonda(idRonda: number) : any{
+      let urlRondasProfe = environment.apiCharlas + 'api/Profesor/DeleteRonda/' + idRonda;
+      return axios.delete(urlRondasProfe, {
+        headers: {
+          "Content-type": "application/json",
+          "Authorization": "Bearer " +  this._loginService.getToken()
+        },
+      }).then(response => {
+        return response.data;
+      }).catch(error => {
+        console.error("Error en la solicitud:", error); // Captura errores
+      });
+    }
+
 }

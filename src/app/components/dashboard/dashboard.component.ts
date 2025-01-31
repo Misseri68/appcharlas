@@ -71,7 +71,7 @@ export class DashboardComponent implements OnInit {
   }
 
   private loadDatosUsuario() {
-    this._usuarioServ.getPerfil().then(usuario => {
+    this._usuarioServ.getPerfil().then((usuario : any) => {
       if (usuario != null) {
         this.roleUsuario = usuario.idRole ? Number(usuario.idRole) : null; // Convertimos a número
         console.log("role usuario: ", this.roleUsuario)
