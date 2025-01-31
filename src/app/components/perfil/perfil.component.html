@@ -42,8 +42,8 @@
         @if(charlasPropuestas.length > 0){
         <h5>Charlas Propuestas</h5>
           @for(charla of charlasPropuestas; track charla.idCharla){
-            <small (click)="editarImagenCharla()">Subir imagen</small>
-            <input #cajafilecharla type="file" (change)="subirFichero($event, charla.idCharla)" style="display: none;" />
+            <!-- <small (click)="editarImagenCharla()">Subir imagen</small>
+            <input #cajafilecharla type="file" (change)="subirFichero($event, charla.idCharla)" style="display: none;" /> -->
             <app-tarjeta-charla [charla]="charla"></app-tarjeta-charla>
           }
         }
