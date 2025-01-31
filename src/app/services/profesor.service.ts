@@ -87,7 +87,7 @@ export class ProfesorService {
   }
 
   cambiarseCurso(idCurso: string, idUsuario: number, idCursoUsuario: number){
-    return axios.put(this.apiUrl + 'api/CursosUsuarios/update/${idCursoUsuario}/${idCurso}/${idUsuario}', {
+    return axios.put(this.apiUrl + 'api/CursosUsuarios/update/' + idCursoUsuario + '/' + idCurso + '/' + idUsuario, null, {
       headers: {
         "Content-type": "application/json",
         "Authorization": "Bearer " +  this._loginService.getToken()

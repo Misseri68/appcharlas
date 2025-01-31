@@ -131,7 +131,7 @@ export class PerfilComponent {
   unirseCurso(codigoCurso: string) {
     let numero :number = parseInt(codigoCurso);
     this._profesorService.asignarseCurso(numero, this.usuario?.idUsuario || -1).then(response => {
-      if (response.status == 200) {
+      if (response.status == 201 || response.status == 200) {
         alert("Curso asignado correctamente")
       } else { alert("Error al asignar curso") }
     })
@@ -139,7 +139,7 @@ export class PerfilComponent {
 
   cambiarseCurso(codigoCurso: string) {
     this._profesorService.cambiarseCurso(codigoCurso, this.usuario?.idUsuario || -1, this.idCursoUsuario || -1).then(response => {
-      if (response.status == 200) {
+      if (response.status == 201 || response.status == 200) {
         alert("Curso cambiado correctamente")
       } else { alert("Error al asignar curso") }
 
