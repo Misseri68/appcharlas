@@ -3,13 +3,14 @@ import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { UserService } from '../../services/user.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
   standalone: true,
-  imports: [RouterModule, FormsModule]
+  imports: [RouterModule, FormsModule, CommonModule]
 })
 export class NavbarComponent {
 
