@@ -8,10 +8,11 @@
             <input type="text" #cajatiempo name="cajatiempo" placeholder="Tiempo (min.)" (input)="validarTiempo()"
                 maxlength="3" />
 
-            <div class="file-upload">
+            <!-- <div class="file-upload">
                 <span>Seleccionar archivo</span>
                 <button type="button">Subir archivo</button>
-            </div>
+            </div> -->
+            <input type="text" #cajaimagen name="cajaimagen" placeholder="Imagen" />
             <br>
             <div>
                 <button class="button" type="submit" class="btn btn-primary" (click)="crearCharla()">Crear
