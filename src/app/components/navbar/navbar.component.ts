@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { LoginService } from '../../services/login.service';
@@ -8,7 +9,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
   standalone: true,
-  imports: [RouterModule]
+  imports: [RouterModule, FormsModule]
 })
 export class NavbarComponent {
 
