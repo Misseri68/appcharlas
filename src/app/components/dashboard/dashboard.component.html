@@ -1,4 +1,4 @@
-<section class="section">
+
 
 
     <div class="container container--medium" style="padding-top: 50px;">
@@ -14,16 +14,22 @@
         <app-control-panel></app-control-panel>
     </div>
 
+
     <!-- ___________________________________ PARA PROFESOR ____________________________________ -->
-    <div *ngIf="roleUsuario === 1">
+    <div class="container container--medium" *ngIf="roleUsuario === 1">
+
+        <h1 *ngIf="charlasPorRonda.length==0" class="title title--h1 ">Aún no hay ninguna<br> ronda activa. <br>
+            <span class="text--disabled">Espera a que tu profesor <br> la habilite.</span>
+        </h1>
+
+        <div *ngIf="charlasPorRonda.length>=1" class="dashboard-container container container--small">
+            <app-tarjeta-charla *ngFor="let charla of charlasPorRonda" [charla]="charla"></app-tarjeta-charla>
+        </div>
+
+
     </div>
-    <h1 *ngIf="charlasPorRonda.length==0" class="title title--h1 ">Aún no hay ninguna<br> ronda activa. <br>
-      <span class="text--disabled">Espera a que tu profesor <br> la habilite.</span>
-  </h1>
-  <div *ngIf="charlasPorRonda.length>=1" class="dashboard-container container container--small">
-      <app-tarjeta-charla *ngFor="let charla of charlasPorRonda" [charla]="charla"></app-tarjeta-charla>
-  </div>
-  <div class="linea" style="margin-top: 80px;"></div>
+
+
 
     <!-- ___________________________________ PARA ALUMNO ____________________________________ -->
     <div *ngIf="roleUsuario === 2">
@@ -41,9 +47,3 @@
         </div>
     </div>
 
-
-
-
-
-
-</section>
