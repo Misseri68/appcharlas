@@ -41,7 +41,11 @@
 
         @if(charlasPropuestas.length > 0){
         <h5>Charlas Propuestas</h5>
-        <app-tarjeta-charla *ngFor="let charla of charlasPropuestas" [charla]="charla"></app-tarjeta-charla>
+          @for(charla of charlasPropuestas; track charla.idCharla){
+            <small (click)="editarImagenCharla()">Subir imagen</small>
+            <input #cajafilecharla type="file" (change)="subirFichero($event, charla.idCharla)" style="display: none;" />
+            <app-tarjeta-charla [charla]="charla"></app-tarjeta-charla>
+          }
         }
         @else {
         Todavía no has propuesto ninguna charla.
@@ -67,18 +71,18 @@
   <h5>No tienes ningún curso activo</h5>
   <a class="link-info" (click)="toggleShowUnirseCurso()">Únete con el código de tu curso</a><br>
   @if(showUnirseCurso){
-    <div style="gap: 50px">
-      <input class="input" type="text" placeholder="Código del curso" #codigoCurso  >
-    <button class="button" (click)="unirseCurso(codigoCurso.value)" >Unirse</button>
-    </div>
-    
+  <div style="gap: 50px">
+    <input class="input" type="text" placeholder="Código del curso" #codigoCurso>
+    <button class="button" (click)="unirseCurso(codigoCurso.value)">Unirse</button>
+  </div>
+
   }
   }@else {
-    <a class="link-info" (click)="toggleShowUnirseCurso()">Cambiar curso</a><br>
-      @if(showUnirseCurso){
-        <input class="input" type="text" placeholder="Código del curso" #codigoCurso >
-        <button class="button" (click)="unirseCurso(codigoCurso.value)">Cambiarse de curso</button>
-      }
+  <a class="link-info" (click)="toggleShowUnirseCurso()">Cambiar curso</a><br>
+  @if(showUnirseCurso){
+  <input class="input" type="text" placeholder="Código del curso" #codigoCurso>
+  <button class="button" (click)="unirseCurso(codigoCurso.value)">Cambiarse de curso</button>
+  }
 
   <app-alumnos-tabs class="w-100"></app-alumnos-tabs>
   }
