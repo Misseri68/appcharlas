@@ -8,10 +8,13 @@
             <input type="text" #cajatiempo name="cajatiempo" placeholder="Tiempo (min.)" (input)="validarTiempo()"
                 maxlength="3" />
 
+            <!-- <div class="file-upload">
+                <span>Seleccionar archivo</span>
             <div class="file-upload">
                 <input #cajaFile type="file" (change)="subirFichero($event)">
                 <button type="button">Subir archivo</button>
-            </div>
+            </div> -->
+            <input type="text" #cajaimagen name="cajaimagen" placeholder="Ingrese URL imagen" />
             <br>
             <div>
                 <button class="button" type="submit" class="btn btn-primary" (click)="crearCharla()">Crear

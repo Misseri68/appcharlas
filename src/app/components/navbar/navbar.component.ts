@@ -17,6 +17,14 @@ export class NavbarComponent {
 
   showPopup: boolean = false;
 
+  public roleUsuario: number | null = null; // Variable pública para el role
+
+  datosUsuario = {
+    nombreUsuario: '',
+    cursoUsuario: '',
+    rolUsuario: '',
+  }
+
   constructor(private _loginService: LoginService, private _userServ: UserService, private _router: Router) {
     this.setDatosUsuario();
   }
@@ -45,6 +53,20 @@ export class NavbarComponent {
   logout(): void {
     this._loginService.clearToken();
     this._router.navigate(['/login']);
+  }
+
+  private loadDatosUsuario() {
+    this._userServ.getPerfil().then((usuario : any) => {
+      if (usuario != null) {
+        this.roleUsuario = usuario.idRole ? Number(usuario.idRole) : null; // Convertimos a número
+        console.log("role usuario: ", this.roleUsuario)
+        this.datosUsuario = {
+          nombreUsuario: usuario.nombre,
+          cursoUsuario: usuario.curso || 'Curso',
+          rolUsuario: usuario.role || 'Rol'
+        }
+      }
+    })
   }
 
 }
